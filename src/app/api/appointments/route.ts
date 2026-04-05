@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(resendKey);
 
-    await resend.emails.send({
+    const adminEmailResult = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
       subject: `New Engineering Appointment - ${fullName}`,
@@ -116,7 +116,19 @@ export async function POST(req: NextRequest) {
       `,
     });
 
-    await resend.emails.send({
+    if (adminEmailResult.error) {
+      console.error("Admin email send failed:", adminEmailResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Appointment saved, but failed to send admin notification email.",
+          resendError: adminEmailResult.error,
+        },
+        { status: 500 }
+      );
+    }
+
+    const userEmailResult = await resend.emails.send({
       from: fromEmail,
       to: [email],
       subject: "Your engineering appointment request was received",
@@ -132,10 +144,24 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    if (userEmailResult.error) {
+      console.error("User email send failed:", userEmailResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Appointment saved, but failed to send confirmation email to user.",
+          resendError: userEmailResult.error,
+        },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: "Appointment submitted successfully",
       id: inserted.id,
+      adminEmailId: adminEmailResult.data?.id,
+      userEmailId: userEmailResult.data?.id,
     });
   } catch (error) {
     console.error("Appointment submit error:", error);
