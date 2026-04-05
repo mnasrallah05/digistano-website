@@ -1,26 +1,50 @@
-import { Pool } from "pg";
+import { Pool, type QueryResult, type QueryResultRow } from "pg";
 
 declare global {
   // eslint-disable-next-line no-var
   var __pgPool: Pool | undefined;
 }
 
-const connectionString = process.env.DATABASE_URL;
+function getConnectionString(): string {
+  const connectionString = process.env.DATABASE_URL;
 
-if (!connectionString) {
-  throw new Error("DATABASE_URL is not set in .env.local");
+  if (!connectionString) {
+    throw new Error("DATABASE_URL is not set");
+  }
+
+  return connectionString;
 }
 
-export const pool =
-  global.__pgPool ||
-  new Pool({
+function createPool(): Pool {
+  const connectionString = getConnectionString();
+
+  return new Pool({
     connectionString,
     ssl:
-      connectionString.includes("localhost") || connectionString.includes("127.0.0.1")
+      connectionString.includes("localhost") ||
+      connectionString.includes("127.0.0.1")
         ? false
         : { rejectUnauthorized: false },
   });
-
-if (process.env.NODE_ENV !== "production") {
-  global.__pgPool = pool;
 }
+
+function getPool(): Pool {
+  if (process.env.NODE_ENV === "production") {
+    return createPool();
+  }
+
+  if (!global.__pgPool) {
+    global.__pgPool = createPool();
+  }
+
+  return global.__pgPool;
+}
+
+export const pool = {
+  query: <T extends QueryResultRow = QueryResultRow>(
+    text: string,
+    params?: unknown[]
+  ): Promise<QueryResult<T>> => {
+    return getPool().query<T>(text, params);
+  },
+};
