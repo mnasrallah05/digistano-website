@@ -13,8 +13,15 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value:
-      "default-src 'self'; img-src 'self' https: data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
+    value: [
+      "default-src 'self'",
+      "img-src 'self' https: data: blob:",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com data:",
+      "connect-src 'self' https://maps.googleapis.com https://maps.gstatic.com",
+      "frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps",
+    ].join("; "),
   },
 ];
 
