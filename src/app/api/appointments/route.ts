@@ -226,7 +226,7 @@ export async function POST(req: NextRequest) {
                   />
                   <div>
                     <p style="margin:0;font-size:15px;font-weight:bold;color:#0f172a;">
-                      Digistano Energy L.L.C.
+                      DigiStano Energy Trading & Services LLC
                     </p>
                     <p style="margin:4px 0 0;font-size:13px;color:#64748b;">
                       Professional Testing, Engineering & Technical Solutions
@@ -237,7 +237,7 @@ export async function POST(req: NextRequest) {
 
               <div style="padding:18px 32px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;">
                 <p style="margin:0;font-size:12px;line-height:1.7;color:#64748b;">
-                  This is an automated confirmation email from Digistano Energy L.L.C.
+                  This is an automated confirmation email from DigiStano Energy Trading & Services LLC.
                 </p>
               </div>
             </div>
