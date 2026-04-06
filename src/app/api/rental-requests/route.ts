@@ -107,20 +107,46 @@ export async function POST(req: NextRequest) {
       from: fromEmail,
       to: [salesEmail, rentalEmail],
       subject: `New Rental Request - ${fullName}`,
-      html: `
-        <h2>New Rental Request</h2>
-        <p><strong>Submission ID:</strong> ${inserted.id}</p>
-        <p><strong>Full Name:</strong> ${fullName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Company:</strong> ${company || "N/A"}</p>
-        <p><strong>Rental Start Date:</strong> ${rentalStartDate}</p>
-        <p><strong>Rental End Date:</strong> ${rentalEndDate}</p>
-        <p><strong>Purpose:</strong> ${purpose || "N/A"}</p>
-        <p><strong>Selected Equipment:</strong></p>
-        <ul>${equipmentHtml}</ul>
-        <p><strong>Created At:</strong> ${inserted.created_at}</p>
-      `,
+     html: `
+  <div style="margin:0;padding:0;background-color:#f8fafc;font-family:Arial,sans-serif;color:#0f172a;">
+    <div style="max-width:640px;margin:0 auto;padding:32px 16px;">
+      <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
+
+        <div style="background:#0f172a;padding:24px;text-align:center;">
+          <img src="https://digistano-website.vercel.app/images/logo.png"
+               style="height:50px;" />
+        </div>
+
+        <div style="padding:28px;">
+          <h2 style="margin:0 0 16px;font-size:22px;color:#0f172a;">
+            New Rental Request
+          </h2>
+
+          <div style="background:#f8fafc;padding:18px;border-radius:12px;border:1px solid #e2e8f0;">
+            <p><strong>Submission ID:</strong> ${inserted.id}</p>
+            <p><strong>Name:</strong> ${fullName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Company:</strong> ${company || "N/A"}</p>
+            <p><strong>Start Date:</strong> ${rentalStartDate}</p>
+            <p><strong>End Date:</strong> ${rentalEndDate}</p>
+            <p><strong>Purpose:</strong> ${purpose || "N/A"}</p>
+
+            <p><strong>Equipment:</strong></p>
+            <ul style="margin-top:6px;">
+              ${equipmentHtml}
+            </ul>
+          </div>
+
+          <p style="margin-top:20px;color:#64748b;font-size:13px;">
+            Submitted at: ${inserted.created_at}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+`
     });
 
     if (adminEmailResult.error) {
@@ -141,16 +167,90 @@ export async function POST(req: NextRequest) {
       to: [email],
       subject: "Your rental request was received",
       html: `
-        <h2>Thank you, ${fullName}</h2>
-        <p>We have received your rental request.</p>
-        <p><strong>Rental Start Date:</strong> ${rentalStartDate}</p>
-        <p><strong>Rental End Date:</strong> ${rentalEndDate}</p>
-        <p><strong>Selected Equipment:</strong></p>
-        <ul>${equipmentHtml}</ul>
-        <p>Our team will contact you shortly regarding availability and next steps.</p>
-        <p>DigiStano</p>
-      `,
-    });
+  <div style="margin:0;padding:0;background-color:#f8fafc;font-family:Arial,sans-serif;color:#0f172a;">
+    <div style="max-width:640px;margin:0 auto;padding:32px 16px;">
+      <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
+        
+        <div style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);padding:28px 32px;text-align:center;">
+          <img
+            src="https://digistano-website.vercel.app/images/logo.png"
+            alt="DigiStano"
+            style="height:56px;max-width:220px;object-fit:contain;"
+          />
+        </div>
+
+        <div style="padding:32px;">
+          <h2 style="margin:0 0 16px;font-size:28px;line-height:1.3;color:#0f172a;">
+            Thank you, ${fullName}
+          </h2>
+
+          <p style="margin:0 0 20px;font-size:16px;line-height:1.8;color:#334155;">
+            We have received your rental request successfully.
+            Our team will review availability and contact you shortly with the next steps.
+          </p>
+
+          <div style="margin:24px 0;padding:20px;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc;">
+            <h3 style="margin:0 0 14px;font-size:18px;color:#0f172a;">Rental Request Details</h3>
+
+            <p style="margin:0 0 8px;font-size:15px;color:#334155;">
+              <strong>Rental Start Date:</strong> ${rentalStartDate}
+            </p>
+
+            <p style="margin:0 0 8px;font-size:15px;color:#334155;">
+              <strong>Rental End Date:</strong> ${rentalEndDate}
+            </p>
+
+            <p style="margin:0 0 8px;font-size:15px;color:#334155;">
+              <strong>Company:</strong> ${company || "N/A"}
+            </p>
+
+            <p style="margin:0 0 8px;font-size:15px;color:#334155;">
+              <strong>Purpose:</strong> ${purpose || "N/A"}
+            </p>
+
+            <div style="margin-top:14px;">
+              <p style="margin:0 0 8px;font-size:15px;color:#334155;">
+                <strong>Selected Equipment:</strong>
+              </p>
+              <ul style="margin:0;padding-left:20px;color:#334155;font-size:15px;line-height:1.8;">
+                ${equipmentHtml}
+              </ul>
+            </div>
+          </div>
+
+          <p style="margin:0 0 24px;font-size:15px;line-height:1.8;color:#475569;">
+            If you need to update your rental request, simply reply to this email and our team will assist you.
+          </p>
+
+          <hr style="border:none;border-top:1px solid #e2e8f0;margin:28px 0;" />
+
+          <div style="display:flex;align-items:center;gap:14px;">
+            <img
+              src="https://digistano-website.vercel.app/images/logo.png"
+              alt="DigiStano"
+              style="height:40px;max-width:140px;object-fit:contain;"
+            />
+            <div>
+              <p style="margin:0;font-size:15px;font-weight:bold;color:#0f172a;">
+                Digistano Energy L.L.C.
+              </p>
+              <p style="margin:4px 0 0;font-size:13px;color:#64748b;">
+                Professional Testing, Engineering & Technical Solutions
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:18px 32px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;">
+          <p style="margin:0;font-size:12px;line-height:1.7;color:#64748b;">
+            This is an automated confirmation email from Digistano Energy L.L.C.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+`
+   });
 
     if (userEmailResult.error) {
       console.error("Rental user email send failed:", userEmailResult.error);
