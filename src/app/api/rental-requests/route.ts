@@ -32,13 +32,7 @@ export async function POST(req: NextRequest) {
       ? body.selectedEquipment.map((x) => String(x).trim()).filter(Boolean)
       : [];
 
-    if (
-      !fullName ||
-      !email ||
-      !phone ||
-      !rentalStartDate ||
-      !rentalEndDate
-    ) {
+    if (!fullName || !email || !phone || !rentalStartDate || !rentalEndDate) {
       return NextResponse.json(
         { success: false, message: "Missing required fields" },
         { status: 400 }
@@ -89,10 +83,11 @@ export async function POST(req: NextRequest) {
     const inserted = dbResult.rows[0];
 
     const resendKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.APPOINTMENT_TO_EMAIL;
+    const salesEmail = process.env.APPOINTMENT_TO_EMAIL;
+    const rentalEmail = process.env.RENTAL_TO_EMAIL;
     const fromEmail = process.env.APPOINTMENT_FROM_EMAIL;
 
-    if (!resendKey || !toEmail || !fromEmail) {
+    if (!resendKey || !salesEmail || !rentalEmail || !fromEmail) {
       return NextResponse.json(
         {
           success: false,
@@ -104,11 +99,13 @@ export async function POST(req: NextRequest) {
     }
 
     const resend = new Resend(resendKey);
-    const equipmentHtml = selectedEquipment.map((item) => `<li>${item}</li>`).join("");
+    const equipmentHtml = selectedEquipment
+      .map((item) => `<li>${item}</li>`)
+      .join("");
 
-    await resend.emails.send({
+    const adminEmailResult = await resend.emails.send({
       from: fromEmail,
-      to: [toEmail],
+      to: [salesEmail, rentalEmail],
       subject: `New Rental Request - ${fullName}`,
       html: `
         <h2>New Rental Request</h2>
@@ -126,7 +123,20 @@ export async function POST(req: NextRequest) {
       `,
     });
 
-    await resend.emails.send({
+    if (adminEmailResult.error) {
+      console.error("Rental admin email send failed:", adminEmailResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Rental request saved, but failed to send admin notification email.",
+          resendError: adminEmailResult.error,
+        },
+        { status: 500 }
+      );
+    }
+
+    const userEmailResult = await resend.emails.send({
       from: fromEmail,
       to: [email],
       subject: "Your rental request was received",
@@ -142,10 +152,25 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    if (userEmailResult.error) {
+      console.error("Rental user email send failed:", userEmailResult.error);
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Rental request saved, but failed to send confirmation email to user.",
+          resendError: userEmailResult.error,
+        },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: "Rental request submitted successfully",
       id: inserted.id,
+      adminEmailId: adminEmailResult.data?.id,
+      userEmailId: userEmailResult.data?.id,
     });
   } catch (error) {
     console.error("Rental submit error:", error);
