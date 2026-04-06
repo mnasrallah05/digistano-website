@@ -7,17 +7,20 @@ const allowedOrigins = [
   "https://www.digistano.com",
 ];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const origin = request.headers.get("origin");
-  const isAllowedOrigin = origin && allowedOrigins.includes(origin);
+  const isAllowedOrigin = !!origin && allowedOrigins.includes(origin);
 
   if (request.method === "OPTIONS") {
     const response = new NextResponse(null, { status: 204 });
 
-    if (isAllowedOrigin) {
+    if (isAllowedOrigin && origin) {
       response.headers.set("Access-Control-Allow-Origin", origin);
       response.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-      response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+      response.headers.set(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+      );
     }
 
     return response;
@@ -25,10 +28,13 @@ export function middleware(request: NextRequest) {
 
   const response = NextResponse.next();
 
-  if (isAllowedOrigin) {
+  if (isAllowedOrigin && origin) {
     response.headers.set("Access-Control-Allow-Origin", origin);
     response.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-    response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    response.headers.set(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
   }
 
   return response;
