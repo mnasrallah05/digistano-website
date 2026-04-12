@@ -1,3 +1,47 @@
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Training Services | Electrical & Energy Training Programs | DigiStano",
+  description:
+    "DigiStano provides professional training programs for electrical and energy sectors, covering testing, commissioning, asset management, protection systems, and real-world technical applications across the UAE and GCC.",
+  keywords: [
+    "Electrical Training UAE",
+    "Power System Training",
+    "Energy Sector Training",
+    "Technical Training GCC",
+    "Partial Discharge Training",
+    "Substation Training",
+    "DigiStano Training Services",
+  ],
+  openGraph: {
+    title:
+      "Training Services | Electrical & Energy Training Programs | DigiStano",
+    description:
+      "Professional training solutions for engineers and technicians in the electrical and energy sectors across the GCC.",
+    url: "https://www.digistano.com/services/training",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/training-services.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Training Services",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Training Services",
+    description:
+      "Professional electrical and energy training programs across the GCC.",
+    images: ["https://www.digistano.com/images/training-services.jpg"],
+  },
+};
+
 export default function TrainingPage() {
   const topCards = [
     {
