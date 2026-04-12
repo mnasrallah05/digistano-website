@@ -1,3 +1,46 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Rotating Machines Testing Solutions | Motor & Generator Diagnostics | DigiStano",
+  description:
+    "Explore DigiStano’s rotating machines testing solutions including insulation diagnostics, partial discharge analysis, dielectric testing, frequency response analysis, and condition monitoring for motors and generators.",
+  keywords: [
+    "Rotating Machines Testing",
+    "Motor Testing Equipment",
+    "Generator Diagnostics",
+    "Insulation Testing Motors",
+    "Partial Discharge Machines",
+    "Frequency Response Analysis",
+    "DigiStano Rotating Machines",
+  ],
+  openGraph: {
+    title:
+      "Rotating Machines Testing Solutions | Motor & Generator Diagnostics | DigiStano",
+    description:
+      "Advanced diagnostic and testing solutions for rotating electrical machines including motors and generators.",
+    url: "https://www.digistano.com/products/rotating-machines",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/rotating-machines.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Rotating Machines Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Rotating Machines Testing Solutions",
+    description:
+      "Testing and diagnostic solutions for motors, generators, and rotating electrical equipment.",
+    images: ["https://www.digistano.com/images/rotating-machines.jpg"],
+  },
+};
+
 export default function RotatingMachinesPage() {
   const products = [
     {
