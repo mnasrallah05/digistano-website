@@ -6,36 +6,28 @@ import { useEffect, useState } from "react";
 export default function Navbar() {
   const [productsOpen, setProductsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 12);
-    };
-
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
 
-  const closeMobileMenu = () => {
+  const closeAllMenus = () => {
+    setProductsOpen(false);
+    setServicesOpen(false);
     setMobileMenuOpen(false);
     setMobileProductsOpen(false);
     setMobileServicesOpen(false);
@@ -45,30 +37,30 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-[100] w-full border-b transition-all duration-300 ${
         scrolled
-          ? "border-slate-200/80 bg-white/90 shadow-md backdrop-blur-xl"
-          : "border-slate-200 bg-white/95 shadow-sm backdrop-blur-md"
+          ? "border-white/10 bg-slate-950/90 shadow-xl backdrop-blur-xl"
+          : "border-white/10 bg-slate-950/70 backdrop-blur-lg"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <Link href="/" className="flex items-center" onClick={closeAllMenus}>
           <img
             src="/images/logo.png"
             alt="DigiStano"
-            className="h-12 w-auto object-contain sm:h-14"
+            className="h-11 w-auto object-contain sm:h-12"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="relative hidden items-center gap-8 font-medium text-slate-700 md:flex">
-          <Link href="/" className="transition hover:text-blue-600">
+        <nav className="relative hidden items-center gap-8 text-sm font-medium text-white/90 md:flex">
+          <Link href="/" className="transition hover:text-blue-400">
             Home
           </Link>
 
-          <Link href="/about" className="transition hover:text-blue-600">
-            About us
+          <Link href="/about" className="transition hover:text-blue-400">
+            About Us
           </Link>
 
-          {/* Services Dropdown */}
+          {/* Services */}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -76,10 +68,10 @@ export default function Navbar() {
           >
             <Link
               href="/services"
-              className="inline-flex items-center gap-1 py-2 transition hover:text-blue-600"
+              className="inline-flex items-center gap-2 py-2 transition hover:text-blue-400"
             >
               Services
-              <span className="text-xs">▾</span>
+              <span className="text-[10px]">▾</span>
             </Link>
 
             <div
@@ -89,12 +81,12 @@ export default function Navbar() {
                   : "invisible -translate-y-1 opacity-0"
               }`}
             >
-              <div className="w-[290px] rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
-                <ul className="space-y-3 text-sm text-slate-700">
+              <div className="w-[300px] rounded-2xl border border-white/10 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-xl">
+                <ul className="space-y-1 text-sm text-white/85">
                   <li>
                     <Link
                       href="/services/engineering-services"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Engineering Services
                     </Link>
@@ -102,7 +94,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/services/rental"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Rental
                     </Link>
@@ -110,7 +102,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/services/training"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Training
                     </Link>
@@ -118,9 +110,9 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/services/repair-calibration"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
-                      Repair And Calibration
+                      Repair & Calibration
                     </Link>
                   </li>
                 </ul>
@@ -128,7 +120,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Products Dropdown */}
+          {/* Products */}
           <div
             className="relative"
             onMouseEnter={() => setProductsOpen(true)}
@@ -136,10 +128,10 @@ export default function Navbar() {
           >
             <Link
               href="/products"
-              className="inline-flex items-center gap-1 py-2 transition hover:text-blue-600"
+              className="inline-flex items-center gap-2 py-2 transition hover:text-blue-400"
             >
               Products
-              <span className="text-xs">▾</span>
+              <span className="text-[10px]">▾</span>
             </Link>
 
             <div
@@ -149,12 +141,12 @@ export default function Navbar() {
                   : "invisible -translate-y-1 opacity-0"
               }`}
             >
-              <div className="w-[340px] rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
-                <ul className="space-y-3 text-sm text-slate-700">
+              <div className="w-[340px] rounded-2xl border border-white/10 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-xl">
+                <ul className="space-y-1 text-sm text-white/85">
                   <li>
                     <Link
                       href="/products/iec-testing"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       IEC Testing & SCADA
                     </Link>
@@ -162,7 +154,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/products/hv-cables"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       MV & HV Cables
                     </Link>
@@ -170,7 +162,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/products/relays"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Relays & Meters
                     </Link>
@@ -178,7 +170,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/products/rotating-machines"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Rotating Machines
                     </Link>
@@ -186,7 +178,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/products/switchgear"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Switchgear
                     </Link>
@@ -194,7 +186,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/products/transformers"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       Transformer Testing
                     </Link>
@@ -202,7 +194,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/products/ct-vt"
-                      className="block rounded-lg px-3 py-2 transition hover:bg-slate-50 hover:text-blue-600"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
                       CT / VT Testing
                     </Link>
@@ -212,65 +204,77 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Link href="/contact" className="transition hover:text-blue-600">
-            Contact us
+          <Link href="/contact" className="transition hover:text-blue-400">
+            Contact Us
           </Link>
         </nav>
 
         {/* Desktop CTA */}
         <Link
           href="/contact"
-          className="hidden rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 md:block"
+          className="hidden rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 md:inline-flex"
         >
           Contact Us
         </Link>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
           type="button"
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen((prev) => !prev)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:bg-white/10 md:hidden"
         >
-          <span className="text-2xl leading-none">
-            {mobileMenuOpen ? "×" : "☰"}
-          </span>
+          <div className="flex flex-col gap-1.5">
+            <span
+              className={`block h-0.5 w-5 bg-white transition ${
+                mobileMenuOpen ? "translate-y-2 rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-white transition ${
+                mobileMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-white transition ${
+                mobileMenuOpen ? "-translate-y-2 -rotate-45" : ""
+              }`}
+            />
+          </div>
         </button>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ${
-          mobileMenuOpen
-            ? "max-h-[85vh] border-t border-slate-200 opacity-100"
-            : "max-h-0 overflow-hidden opacity-0"
+        className={`overflow-hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
+          mobileMenuOpen ? "max-h-[85vh] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="space-y-3 bg-white px-4 py-4 shadow-lg">
+        <div className="space-y-3 px-4 py-4">
           <Link
             href="/"
-            onClick={closeMobileMenu}
-            className="block rounded-xl px-3 py-3 font-medium text-slate-700 transition hover:bg-slate-50 hover:text-blue-600"
+            onClick={closeAllMenus}
+            className="block rounded-xl px-4 py-3 font-medium text-white/90 transition hover:bg-white/5 hover:text-blue-400"
           >
             Home
           </Link>
 
           <Link
             href="/about"
-            onClick={closeMobileMenu}
-            className="block rounded-xl px-3 py-3 font-medium text-slate-700 transition hover:bg-slate-50 hover:text-blue-600"
+            onClick={closeAllMenus}
+            className="block rounded-xl px-4 py-3 font-medium text-white/90 transition hover:bg-white/5 hover:text-blue-400"
           >
-            About us
+            About Us
           </Link>
 
           {/* Mobile Services */}
-          <div className="rounded-2xl border border-slate-200">
-            <div className="flex items-center justify-between px-3 py-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03]">
+            <div className="flex items-center justify-between px-4 py-3">
               <Link
                 href="/services"
-                onClick={closeMobileMenu}
-                className="font-medium text-slate-700 transition hover:text-blue-600"
+                onClick={closeAllMenus}
+                className="font-medium text-white/90 transition hover:text-blue-400"
               >
                 Services
               </Link>
@@ -279,53 +283,53 @@ export default function Navbar() {
                 type="button"
                 aria-label="Toggle services menu"
                 onClick={() => setMobileServicesOpen((prev) => !prev)}
-                className="rounded-lg px-2 py-1 text-slate-600"
+                className="rounded-lg px-2 py-1 text-white/70"
               >
                 {mobileServicesOpen ? "−" : "+"}
               </button>
             </div>
 
             {mobileServicesOpen && (
-              <div className="space-y-1 border-t border-slate-200 px-3 py-3">
+              <div className="space-y-1 border-t border-white/10 px-3 py-3">
                 <Link
                   href="/services/engineering-services"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Engineering Services
                 </Link>
                 <Link
                   href="/services/rental"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Rental
                 </Link>
                 <Link
                   href="/services/training"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Training
                 </Link>
                 <Link
                   href="/services/repair-calibration"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
-                  Repair And Calibration
+                  Repair & Calibration
                 </Link>
               </div>
             )}
           </div>
 
           {/* Mobile Products */}
-          <div className="rounded-2xl border border-slate-200">
-            <div className="flex items-center justify-between px-3 py-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03]">
+            <div className="flex items-center justify-between px-4 py-3">
               <Link
                 href="/products"
-                onClick={closeMobileMenu}
-                className="font-medium text-slate-700 transition hover:text-blue-600"
+                onClick={closeAllMenus}
+                className="font-medium text-white/90 transition hover:text-blue-400"
               >
                 Products
               </Link>
@@ -334,60 +338,60 @@ export default function Navbar() {
                 type="button"
                 aria-label="Toggle products menu"
                 onClick={() => setMobileProductsOpen((prev) => !prev)}
-                className="rounded-lg px-2 py-1 text-slate-600"
+                className="rounded-lg px-2 py-1 text-white/70"
               >
                 {mobileProductsOpen ? "−" : "+"}
               </button>
             </div>
 
             {mobileProductsOpen && (
-              <div className="space-y-1 border-t border-slate-200 px-3 py-3">
+              <div className="space-y-1 border-t border-white/10 px-3 py-3">
                 <Link
                   href="/products/iec-testing"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   IEC Testing & SCADA
                 </Link>
                 <Link
                   href="/products/hv-cables"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   MV & HV Cables
                 </Link>
                 <Link
                   href="/products/relays"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Relays & Meters
                 </Link>
                 <Link
                   href="/products/rotating-machines"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Rotating Machines
                 </Link>
                 <Link
                   href="/products/switchgear"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Switchgear
                 </Link>
                 <Link
                   href="/products/transformers"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Transformer Testing
                 </Link>
                 <Link
                   href="/products/ct-vt"
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   CT / VT Testing
                 </Link>
@@ -397,16 +401,16 @@ export default function Navbar() {
 
           <Link
             href="/contact"
-            onClick={closeMobileMenu}
-            className="block rounded-xl px-3 py-3 font-medium text-slate-700 transition hover:bg-slate-50 hover:text-blue-600"
+            onClick={closeAllMenus}
+            className="block rounded-xl px-4 py-3 font-medium text-white/90 transition hover:bg-white/5 hover:text-blue-400"
           >
-            Contact us
+            Contact Us
           </Link>
 
           <Link
             href="/contact"
-            onClick={closeMobileMenu}
-            className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+            onClick={closeAllMenus}
+            className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-5 py-3.5 font-semibold text-white transition hover:bg-blue-700"
           >
             Contact Us
           </Link>
