@@ -85,9 +85,10 @@ export default function Footer() {
             </h3>
 
             <ul className="space-y-3 text-sm text-gray-400">
-              <li>United Arab Emirates</li>
-              <li>Saudi Arabia</li>
-              <li>Bahrain</li>
+              <li>Gcc Countries</li>
+              <li>Middle East Countries</li>
+              <li>North Africa</li>
+              <li>Europe</li>
             </ul>
           </div>
 
