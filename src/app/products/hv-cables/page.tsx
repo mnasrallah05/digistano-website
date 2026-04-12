@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "MV & HV Cables Testing Solutions | Cable Diagnostics Equipment | DigiStano",
+  description:
+    "Explore DigiStano’s MV & HV cable testing solutions including VLF testing, tan delta diagnostics, partial discharge measurement, insulation assessment, and monitoring systems for medium- and high-voltage cable applications.",
+  keywords: [
+    "MV Cable Testing",
+    "HV Cable Testing",
+    "Cable Diagnostics Equipment",
+    "VLF Testing Systems",
+    "Tan Delta Testing",
+    "Partial Discharge Cable Testing",
+    "Insulation Assessment",
+    "DigiStano Cable Testing Solutions",
+  ],
+  openGraph: {
+    title:
+      "MV & HV Cables Testing Solutions | Cable Diagnostics Equipment | DigiStano",
+    description:
+      "Advanced cable testing and diagnostic solutions for medium- and high-voltage networks across the UAE and GCC.",
+    url: "https://www.digistano.com/products/hv-cables",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/cables-testing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano MV & HV Cables Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano MV & HV Cables Testing Solutions",
+    description:
+      "Cable testing, diagnostics, VLF testing, tan delta, and partial discharge solutions.",
+    images: ["https://www.digistano.com/images/cables-testing.jpg"],
+  },
+};
+
 export default function MVHVCablesPage() {
   const products = [
     {
