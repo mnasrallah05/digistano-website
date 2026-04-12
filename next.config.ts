@@ -27,11 +27,68 @@ const securityHeaders = [
 
 const nextConfig = {
   poweredByHeader: false,
+
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/home-2",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/contact-us",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/product/:slug*",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/product-category/:path*",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/category/:path*",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/tag/:path*",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/feed",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/index.php",
+        has: [
+          {
+            type: "query",
+            key: "sitemap",
+          },
+        ],
+        destination: "/sitemap.xml",
+        permanent: true,
       },
     ];
   },
