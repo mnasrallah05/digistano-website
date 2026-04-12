@@ -74,7 +74,7 @@ export default function ProductsLandingPage() {
   {
     title: "Instrument Transformers (CT/VT) Testing",
     image: "/images/ct-vt-testing.jpg",
-    href: "/products/ct-vt-testing",
+    href: "/products/ct-vt",
   },
 ];
 

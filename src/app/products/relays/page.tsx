@@ -1,3 +1,46 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Relays, Meters & Secondary Injection Testing | DigiStano",
+  description:
+    "Explore DigiStano’s relay, meter, power quality, and secondary injection testing solutions, including protection relay testing, IEC 61850 validation, and substation automation support.",
+  keywords: [
+    "Relay Testing",
+    "Meter Testing",
+    "Secondary Injection Testing",
+    "Power Quality Testing",
+    "IEC 61850 Testing",
+    "Protection Relay Test Set",
+    "DigiStano Relays",
+  ],
+  openGraph: {
+    title:
+      "Relays, Meters & Secondary Injection Testing | DigiStano",
+    description:
+      "Professional testing solutions for protection relays, meters, power quality, and IEC 61850 applications.",
+    url: "https://www.digistano.com/products/relays",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/relay-testing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Relay and Meter Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Relay & Meter Testing Solutions",
+    description:
+      "Protection relay, meter, secondary injection, and IEC 61850 testing solutions.",
+    images: ["https://www.digistano.com/images/relay-testing.jpg"],
+  },
+};
+
 export default function RelayMetersPage() {
   const products = [
     {
