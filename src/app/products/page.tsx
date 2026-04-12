@@ -1,3 +1,49 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Products | Electrical Testing Equipment & Solutions | DigiStano",
+  description:
+    "Explore DigiStano’s product categories for electrical power system testing, including transformer testing, switchgear testing, rotating machines, relays, meters, MV/HV cables, and CT/VT testing solutions across the UAE and GCC.",
+  keywords: [
+    "Electrical Testing Equipment",
+    "Power System Testing Solutions",
+    "Transformer Testing Equipment",
+    "Switchgear Testing Equipment",
+    "Rotating Machines Testing",
+    "Relays and Meters Testing",
+    "MV HV Cable Testing",
+    "CT VT Testing Equipment",
+    "DigiStano Products",
+  ],
+  openGraph: {
+    title:
+      "Products | Electrical Testing Equipment & Solutions | DigiStano",
+    description:
+      "Advanced electrical testing equipment and product categories for power system applications across the GCC.",
+    url: "https://www.digistano.com/products",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Products",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Products",
+    description:
+      "Electrical testing equipment and high-end solutions for power systems.",
+    images: ["https://www.digistano.com/images/hero.jpg"],
+  },
+};
+
+
 export default function ProductsLandingPage() {
   const products = [
   {
