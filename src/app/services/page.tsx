@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Services | Engineering, Rental, Training & Calibration | DigiStano",
   description:
     "Explore DigiStano’s comprehensive services including engineering support, equipment rental, technical training, and repair & calibration solutions for the electrical power industry across the UAE and GCC.",
+  alternates: {
+    canonical: "https://www.digistano.com/services",
+  },
   keywords: [
     "DigiStano Services",
     "Engineering Services UAE",
@@ -40,6 +43,7 @@ export const metadata: Metadata = {
     images: ["https://www.digistano.com/images/hero.jpg"],
   },
 };
+
 
 export default function ServicesLandingPage() {
   const services = [
