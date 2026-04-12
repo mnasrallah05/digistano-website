@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "CT & VT Testing Solutions | Instrument Transformer Diagnostics | DigiStano",
+  description:
+    "Explore DigiStano’s CT and VT testing solutions including current transformer analysis, voltage transformer verification, ratio testing, insulation diagnostics, and partial discharge assessment for accurate instrument transformer evaluation.",
+  keywords: [
+    "CT Testing",
+    "VT Testing",
+    "Instrument Transformer Testing",
+    "Current Transformer Analysis",
+    "Voltage Transformer Testing",
+    "CT Analyzer",
+    "Transformer Ratio Testing",
+    "DigiStano CT VT",
+  ],
+  openGraph: {
+    title:
+      "CT & VT Testing Solutions | Instrument Transformer Diagnostics | DigiStano",
+    description:
+      "Professional CT and VT testing solutions for diagnostics, commissioning, and accurate performance evaluation.",
+    url: "https://www.digistano.com/products/ct-vt",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/ct-vt-testing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano CT VT Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano CT & VT Testing Solutions",
+    description:
+      "Accurate testing and diagnostics for current and voltage transformers.",
+    images: ["https://www.digistano.com/images/ct-vt-testing.jpg"],
+  },
+};
+
 export default function CtVtPage() {
   const products = [
     {
