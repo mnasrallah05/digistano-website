@@ -1,3 +1,48 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Transformer Testing Solutions | Diagnostics & Insulation Analysis | DigiStano",
+  description:
+    "Explore DigiStano’s transformer testing solutions including insulation diagnostics, tan delta measurement, dielectric response analysis, partial discharge testing, and frequency response analysis for reliable asset evaluation.",
+  keywords: [
+    "Transformer Testing",
+    "Transformer Diagnostics",
+    "Tan Delta Testing",
+    "Dielectric Response Analysis",
+    "Partial Discharge Transformer",
+    "FRA Transformer Testing",
+    "Insulation Testing Transformers",
+    "DigiStano Transformers",
+  ],
+  openGraph: {
+    title:
+      "Transformer Testing Solutions | Diagnostics & Insulation Analysis | DigiStano",
+    description:
+      "Advanced transformer testing and diagnostic solutions for insulation assessment, commissioning, and maintenance.",
+    url: "https://www.digistano.com/products/transformers",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/transformer-testing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Transformer Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Transformer Testing Solutions",
+    description:
+      "Transformer diagnostics, insulation testing, and advanced condition assessment solutions.",
+    images: ["https://www.digistano.com/images/transformer-testing.jpg"],
+  },
+};
+
+
 export default function TransformersPage() {
   const products = [
     {
