@@ -1,3 +1,46 @@
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services | Engineering, Rental, Training & Calibration | DigiStano",
+  description:
+    "Explore DigiStano’s comprehensive services including engineering support, equipment rental, technical training, and repair & calibration solutions for the electrical power industry across the UAE and GCC.",
+  keywords: [
+    "DigiStano Services",
+    "Engineering Services UAE",
+    "Equipment Rental Power Industry",
+    "Electrical Testing Services",
+    "Training Power Systems",
+    "Calibration Services UAE",
+    "High Voltage Testing Services",
+  ],
+  openGraph: {
+    title:
+      "DigiStano Services | Engineering, Rental, Training & Calibration Solutions",
+    description:
+      "Professional engineering services, rental solutions, training, and calibration support for the electrical power sector across the GCC.",
+    url: "https://www.digistano.com/services",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Services",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Services",
+    description:
+      "Engineering, rental, training, and calibration services for the power industry.",
+    images: ["https://www.digistano.com/images/hero.jpg"],
+  },
+};
+
 export default function ServicesLandingPage() {
   const services = [
     {
