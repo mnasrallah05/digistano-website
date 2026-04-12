@@ -1,3 +1,46 @@
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Repair & Calibration Services | Equipment Accuracy & Performance | DigiStano",
+  description:
+    "DigiStano provides reliable repair and calibration services to improve equipment accuracy, reduce downtime, and maintain performance across industrial and electrical power applications in the UAE and GCC.",
+  keywords: [
+    "Repair Services UAE",
+    "Calibration Services UAE",
+    "Equipment Calibration GCC",
+    "Electrical Testing Equipment Repair",
+    "Measurement Accuracy Services",
+    "DigiStano Repair Calibration",
+  ],
+  openGraph: {
+    title:
+      "Repair & Calibration Services | Equipment Accuracy & Performance | DigiStano",
+    description:
+      "Reliable repair and calibration services for industrial and electrical testing equipment across the GCC.",
+    url: "https://www.digistano.com/services/repair-calibration",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/repair-calibration.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Repair and Calibration Services",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Repair & Calibration Services",
+    description:
+      "Reliable repair and calibration support for industrial and electrical equipment.",
+    images: ["https://www.digistano.com/images/repair-calibration.jpg"],
+  },
+};
+
 export default function RepairAndCalibrationPage() {
   return (
     <main className="bg-white text-slate-900">
