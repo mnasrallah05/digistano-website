@@ -1,3 +1,48 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Switchgear Testing Solutions | Circuit Breaker & CT/VT Diagnostics | DigiStano",
+  description:
+    "Explore DigiStano’s switchgear testing solutions including circuit breaker testing, CT and VT diagnostics, primary injection, partial discharge monitoring, and commissioning tools for substations and electrical networks.",
+  keywords: [
+    "Switchgear Testing",
+    "Circuit Breaker Testing",
+    "Primary Injection Testing",
+    "CT Analyzer",
+    "VT Testing",
+    "Partial Discharge Monitoring",
+    "Substation Commissioning",
+    "DigiStano Switchgear",
+  ],
+  openGraph: {
+    title:
+      "Switchgear Testing Solutions | Circuit Breaker & CT/VT Diagnostics | DigiStano",
+    description:
+      "Professional switchgear testing solutions for diagnostics, commissioning, maintenance, and asset reliability.",
+    url: "https://www.digistano.com/products/switchgear",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/switchgear-testing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano Switchgear Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano Switchgear Testing Solutions",
+    description:
+      "Circuit breaker, CT/VT, primary injection, and switchgear diagnostic solutions.",
+    images: ["https://www.digistano.com/images/switchgear-testing.jpg"],
+  },
+};
+
+
 export default function SwitchgearPage() {
   const products = [
     {
