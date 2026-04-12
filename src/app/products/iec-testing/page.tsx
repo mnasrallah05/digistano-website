@@ -1,3 +1,48 @@
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "IEC 61850 & SCADA Testing Solutions | Digital Substation Tools | DigiStano",
+  description:
+    "Explore DigiStano’s IEC 61850 and SCADA testing solutions including engineering tools, communication validation, IED testing, and digital substation simulation for commissioning and troubleshooting across the GCC.",
+  keywords: [
+    "IEC 61850 Testing",
+    "SCADA Testing",
+    "Digital Substation Testing",
+    "IED Testing Tools",
+    "Substation Automation Testing",
+    "IEC 61850 Engineering Tools",
+    "DigiStano IEC Testing",
+  ],
+  openGraph: {
+    title:
+      "IEC 61850 & SCADA Testing Solutions | Digital Substation Tools | DigiStano",
+    description:
+      "Advanced IEC 61850 engineering, testing, and SCADA validation tools for modern digital substations.",
+    url: "https://www.digistano.com/products/iec-testing",
+    siteName: "DigiStano",
+    images: [
+      {
+        url: "https://www.digistano.com/images/relay-testing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DigiStano IEC 61850 Testing Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DigiStano IEC 61850 & SCADA Testing Solutions",
+    description:
+      "Engineering and testing tools for IEC 61850, SCADA systems, and digital substations.",
+    images: ["https://www.digistano.com/images/relay-testing.jpg"],
+  },
+};
+
+
 export default function IEC61850TestingAndSCADATestingPage() {
   const products = [
     {
