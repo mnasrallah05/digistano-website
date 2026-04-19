@@ -1,6 +1,15 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
 
 type FormState = {
   name: string;
@@ -8,6 +17,8 @@ type FormState = {
   phone: string;
   subject: string;
   message: string;
+  website: string;
+  formStartedAt: string;
 };
 
 const initialForm: FormState = {
@@ -16,7 +27,11 @@ const initialForm: FormState = {
   phone: "",
   subject: "",
   message: "",
+  website: "",
+  formStartedAt: "",
 };
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
 export default function ContactClient() {
   const [form, setForm] = useState<FormState>(initialForm);
@@ -29,6 +44,33 @@ export default function ContactClient() {
     message: "",
   });
 
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      formStartedAt: String(Date.now()),
+    }));
+  }, []);
+
+  useEffect(() => {
+    if (!RECAPTCHA_SITE_KEY) return;
+
+    const existingScript = document.querySelector(
+      `script[src^="https://www.google.com/recaptcha/api.js?render="]`
+    );
+
+    if (existingScript) return;
+
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // keep script loaded for future page visits
+    };
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -38,24 +80,65 @@ export default function ContactClient() {
     }));
   };
 
+  const resetForm = () => {
+    setForm({
+      ...initialForm,
+      formStartedAt: String(Date.now()),
+    });
+  };
+
+  async function getRecaptchaToken(): Promise<string> {
+    if (!RECAPTCHA_SITE_KEY) {
+      throw new Error("reCAPTCHA site key is missing.");
+    }
+
+    if (!window.grecaptcha) {
+      throw new Error("reCAPTCHA is not ready yet. Please try again.");
+    }
+
+    return await new Promise<string>((resolve, reject) => {
+      window.grecaptcha?.ready(async () => {
+        try {
+          const token = await window.grecaptcha?.execute(RECAPTCHA_SITE_KEY, {
+            action: "contact_form_submit",
+          });
+
+          if (!token) {
+            reject(new Error("Failed to get reCAPTCHA token."));
+            return;
+          }
+
+          resolve(token);
+        } catch {
+          reject(new Error("Failed to verify reCAPTCHA. Please try again."));
+        }
+      });
+    });
+  }
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: "", message: "" });
 
     try {
+      const recaptchaToken = await getRecaptchaToken();
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          recaptchaToken,
+        }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data?.error || "Something went wrong.");
+        throw new Error(data?.message || "Something went wrong.");
       }
 
       setStatus({
@@ -63,7 +146,8 @@ export default function ContactClient() {
         message:
           "Your message has been sent successfully. Our team will contact you soon.",
       });
-      setForm(initialForm);
+
+      resetForm();
     } catch (error) {
       setStatus({
         type: "error",
@@ -91,7 +175,7 @@ export default function ContactClient() {
               </p>
 
               <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
-                Let’s discuss your
+                Let&apos;s discuss your
                 <br />
                 project requirements
               </h1>
@@ -216,6 +300,28 @@ export default function ContactClient() {
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot */}
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input
+                      id="website"
+                      name="website"
+                      type="text"
+                      value={form.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Timing */}
+                  <input
+                    type="hidden"
+                    name="formStartedAt"
+                    value={form.formStartedAt}
+                    readOnly
+                  />
+
                   <div>
                     <label
                       htmlFor="name"
@@ -230,6 +336,7 @@ export default function ContactClient() {
                       value={form.name}
                       onChange={handleChange}
                       required
+                      maxLength={120}
                       className="w-full rounded-xl border border-slate-300 px-4 py-4 outline-none transition focus:border-blue-600"
                     />
                   </div>
@@ -248,6 +355,7 @@ export default function ContactClient() {
                       value={form.email}
                       onChange={handleChange}
                       required
+                      maxLength={160}
                       className="w-full rounded-xl border border-slate-300 px-4 py-4 outline-none transition focus:border-blue-600"
                     />
                   </div>
@@ -266,6 +374,7 @@ export default function ContactClient() {
                       value={form.phone}
                       onChange={handleChange}
                       required
+                      maxLength={40}
                       placeholder="Enter your phone number"
                       className="w-full rounded-xl border border-slate-300 px-4 py-4 outline-none transition focus:border-blue-600"
                     />
@@ -285,6 +394,7 @@ export default function ContactClient() {
                       value={form.subject}
                       onChange={handleChange}
                       required
+                      maxLength={160}
                       className="w-full rounded-xl border border-slate-300 px-4 py-4 outline-none transition focus:border-blue-600"
                     />
                   </div>
@@ -294,7 +404,7 @@ export default function ContactClient() {
                       htmlFor="message"
                       className="mb-2 block text-sm font-semibold text-slate-700"
                     >
-                      Your message (optional)
+                      Your message
                     </label>
                     <textarea
                       id="message"
@@ -302,9 +412,16 @@ export default function ContactClient() {
                       value={form.message}
                       onChange={handleChange}
                       rows={8}
+                      required
+                      maxLength={3000}
                       className="w-full rounded-xl border border-slate-300 px-4 py-4 outline-none transition focus:border-blue-600"
                     />
                   </div>
+
+                  <p className="text-xs leading-6 text-slate-500">
+                    This site is protected by reCAPTCHA and the Google Privacy
+                    Policy and Terms of Service apply.
+                  </p>
 
                   {status.message ? (
                     <div
