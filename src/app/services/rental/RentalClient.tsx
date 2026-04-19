@@ -1,18 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+type RentalFormState = {
+  full_name: string;
+  email: string;
+  phone: string;
+  company: string;
+  rental_start_date: string;
+  rental_end_date: string;
+  purpose: string;
+  selected_equipment: string[];
+  website: string;
+  formStartedAt: string;
+};
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+const initialForm: RentalFormState = {
+  full_name: "",
+  email: "",
+  phone: "",
+  company: "",
+  rental_start_date: "",
+  rental_end_date: "",
+  purpose: "",
+  selected_equipment: [],
+  website: "",
+  formStartedAt: "",
+};
 
 export default function RentalClient() {
-  const [form, setForm] = useState({
-    full_name: "",
-    email: "",
-    phone: "",
-    company: "",
-    rental_start_date: "",
-    rental_end_date: "",
-    purpose: "",
-    selected_equipment: [] as string[],
-  });
+  const [form, setForm] = useState<RentalFormState>(initialForm);
 
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{
@@ -64,6 +92,29 @@ export default function RentalClient() {
     "Other",
   ];
 
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      formStartedAt: String(Date.now()),
+    }));
+  }, []);
+
+  useEffect(() => {
+    if (!RECAPTCHA_SITE_KEY) return;
+
+    const existingScript = document.querySelector(
+      `script[src^="https://www.google.com/recaptcha/api.js?render="]`
+    );
+
+    if (existingScript) return;
+
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, []);
+
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
@@ -89,12 +140,50 @@ export default function RentalClient() {
     });
   }
 
+  function resetForm() {
+    setForm({
+      ...initialForm,
+      formStartedAt: String(Date.now()),
+    });
+  }
+
+  async function getRecaptchaToken(): Promise<string> {
+    if (!RECAPTCHA_SITE_KEY) {
+      throw new Error("reCAPTCHA site key is missing.");
+    }
+
+    if (!window.grecaptcha) {
+      throw new Error("reCAPTCHA is not ready yet. Please try again.");
+    }
+
+    return await new Promise<string>((resolve, reject) => {
+      window.grecaptcha?.ready(async () => {
+        try {
+          const token = await window.grecaptcha?.execute(RECAPTCHA_SITE_KEY, {
+            action: "rental_form_submit",
+          });
+
+          if (!token) {
+            reject(new Error("Failed to get reCAPTCHA token."));
+            return;
+          }
+
+          resolve(token);
+        } catch {
+          reject(new Error("Failed to verify reCAPTCHA. Please try again."));
+        }
+      });
+    });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
     setMessage({ type: "", text: "" });
 
     try {
+      const recaptchaToken = await getRecaptchaToken();
+
       const res = await fetch("/api/rental-requests", {
         method: "POST",
         headers: {
@@ -109,6 +198,9 @@ export default function RentalClient() {
           rentalEndDate: form.rental_end_date,
           purpose: form.purpose,
           selectedEquipment: form.selected_equipment,
+          website: form.website,
+          formStartedAt: form.formStartedAt,
+          recaptchaToken,
         }),
       });
 
@@ -123,16 +215,7 @@ export default function RentalClient() {
         text: "Your rental request has been submitted successfully.",
       });
 
-      setForm({
-        full_name: "",
-        email: "",
-        phone: "",
-        company: "",
-        rental_start_date: "",
-        rental_end_date: "",
-        purpose: "",
-        selected_equipment: [],
-      });
+      resetForm();
     } catch (error) {
       const err = error as Error;
       setMessage({
@@ -335,6 +418,28 @@ export default function RentalClient() {
               onSubmit={handleSubmit}
               className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10"
             >
+              {/* Honeypot */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  value={form.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* Timing */}
+              <input
+                type="hidden"
+                name="formStartedAt"
+                value={form.formStartedAt}
+                readOnly
+              />
+
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-slate-900">
@@ -346,6 +451,7 @@ export default function RentalClient() {
                     value={form.full_name}
                     onChange={handleChange}
                     required
+                    maxLength={120}
                     placeholder="Your full name"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -360,6 +466,7 @@ export default function RentalClient() {
                     type="text"
                     value={form.company}
                     onChange={handleChange}
+                    maxLength={160}
                     placeholder="Company name"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -375,6 +482,7 @@ export default function RentalClient() {
                     value={form.email}
                     onChange={handleChange}
                     required
+                    maxLength={160}
                     placeholder="Your email"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -390,6 +498,7 @@ export default function RentalClient() {
                     value={form.phone}
                     onChange={handleChange}
                     required
+                    maxLength={40}
                     placeholder="Your phone number"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -425,13 +534,15 @@ export default function RentalClient() {
 
                 <div className="md:col-span-2">
                   <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Purpose of rental
+                    Purpose of rental *
                   </label>
                   <textarea
                     name="purpose"
                     rows={5}
                     value={form.purpose}
                     onChange={handleChange}
+                    required
+                    maxLength={3000}
                     placeholder="Please tell us what the equipment is needed for"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -466,6 +577,13 @@ export default function RentalClient() {
                       );
                     })}
                   </div>
+                </div>
+
+                <div className="md:col-span-2">
+                  <p className="text-xs leading-6 text-slate-500">
+                    This site is protected by reCAPTCHA and the Google Privacy
+                    Policy and Terms of Service apply.
+                  </p>
                 </div>
 
                 {message.text ? (

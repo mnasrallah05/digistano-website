@@ -11,7 +11,50 @@ type RentalRequestPayload = {
   rentalEndDate: string;
   purpose?: string;
   selectedEquipment: string[];
+  website?: string;
+  formStartedAt?: string;
+  recaptchaToken?: string;
 };
+
+type RecaptchaResponse = {
+  success: boolean;
+  score?: number;
+  action?: string;
+  hostname?: string;
+  challenge_ts?: string;
+  "error-codes"?: string[];
+};
+
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function getClientIp(req: NextRequest): string {
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  if (forwardedFor) return forwardedFor.split(",")[0].trim();
+  return "unknown";
+}
+
+function rateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitStore.get(ip);
+
+  if (!record || now > record.resetAt) {
+    rateLimitStore.set(ip, {
+      count: 1,
+      resetAt: now + RATE_LIMIT_WINDOW_MS,
+    });
+    return true;
+  }
+
+  if (record.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  record.count += 1;
+  rateLimitStore.set(ip, record);
+  return true;
+}
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -26,38 +69,246 @@ function escapeHtml(str: string) {
     .replace(/'/g, "&#039;");
 }
 
+function looksLikeRandomString(value: string): boolean {
+  const trimmed = value.trim();
+
+  if (trimmed.length < 10) return false;
+
+  const noSpaces = !/\s/.test(trimmed);
+  const alphaNumOnly = /^[A-Za-z0-9]+$/.test(trimmed);
+  const hasMixedCase = /[a-z]/.test(trimmed) && /[A-Z]/.test(trimmed);
+  const longToken = trimmed.length >= 14;
+
+  return noSpaces && alphaNumOnly && hasMixedCase && longToken;
+}
+
+function countUrls(value: string): number {
+  const matches = value.match(/https?:\/\/|www\./gi);
+  return matches ? matches.length : 0;
+}
+
+function isValidDateString(value: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value);
+}
+
+function validatePayload(data: {
+  fullName: string;
+  email: string;
+  phone: string;
+  company: string;
+  rentalStartDate: string;
+  rentalEndDate: string;
+  purpose: string;
+  selectedEquipment: string[];
+}) {
+  const {
+    fullName,
+    email,
+    phone,
+    company,
+    rentalStartDate,
+    rentalEndDate,
+    purpose,
+    selectedEquipment,
+  } = data;
+
+  if (
+    !fullName ||
+    !email ||
+    !phone ||
+    !rentalStartDate ||
+    !rentalEndDate ||
+    !purpose
+  ) {
+    return "Missing required fields.";
+  }
+
+  if (!isValidEmail(email)) {
+    return "Invalid email address.";
+  }
+
+  if (fullName.length < 2 || fullName.length > 120) {
+    return "Please enter a valid full name.";
+  }
+
+  if (phone.length < 6 || phone.length > 40) {
+    return "Please enter a valid phone number.";
+  }
+
+  if (company.length > 160) {
+    return "Company name is too long.";
+  }
+
+  if (purpose.length < 10 || purpose.length > 3000) {
+    return "Please enter a valid purpose of rental.";
+  }
+
+  if (!isValidDateString(rentalStartDate) || !isValidDateString(rentalEndDate)) {
+    return "Invalid rental dates.";
+  }
+
+  if (selectedEquipment.length === 0) {
+    return "Please select at least one equipment item.";
+  }
+
+  if (selectedEquipment.length > 20) {
+    return "Too many equipment items selected.";
+  }
+
+  if (countUrls(purpose) > 2 || countUrls(company) > 0) {
+    return "Suspicious content detected.";
+  }
+
+  if (looksLikeRandomString(fullName) || looksLikeRandomString(company)) {
+    return "Suspicious content detected.";
+  }
+
+  if (looksLikeRandomString(purpose) && purpose.length < 40) {
+    return "Suspicious content detected.";
+  }
+
+  const start = new Date(rentalStartDate);
+  const end = new Date(rentalEndDate);
+
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    return "Invalid rental dates.";
+  }
+
+  if (end < start) {
+    return "Rental end date cannot be earlier than start date.";
+  }
+
+  return null;
+}
+
+async function verifyRecaptcha(
+  token: string,
+  ip: string
+): Promise<{ ok: boolean; message?: string }> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!secret) {
+    return { ok: false, message: "reCAPTCHA secret key is missing." };
+  }
+
+  const params = new URLSearchParams();
+  params.append("secret", secret);
+  params.append("response", token);
+  params.append("remoteip", ip);
+
+  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString(),
+    cache: "no-store",
+  });
+
+  const data = (await response.json()) as RecaptchaResponse;
+
+  if (!data.success) {
+    return { ok: false, message: "reCAPTCHA verification failed." };
+  }
+
+  if (data.action !== "rental_form_submit") {
+    return { ok: false, message: "Invalid reCAPTCHA action." };
+  }
+
+  if ((data.score ?? 0) < 0.5) {
+    return { ok: false, message: "Suspicious activity detected." };
+  }
+
+  return { ok: true };
+}
+
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+
+    if (!rateLimit(ip)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many requests. Please try again later.",
+        },
+        { status: 429 }
+      );
+    }
+
     const body = (await req.json()) as RentalRequestPayload;
 
-    const fullName = body.fullName?.trim();
-    const email = body.email?.trim();
-    const phone = body.phone?.trim();
+    // Honeypot
+    if (body.website && body.website.trim() !== "") {
+      return NextResponse.json({
+        success: true,
+        message: "Rental request submitted successfully",
+      });
+    }
+
+    // Timing check
+    const startedAt = Number(body.formStartedAt || "0");
+    const now = Date.now();
+    const elapsedMs = now - startedAt;
+
+    if (!startedAt || Number.isNaN(startedAt) || elapsedMs < 3000) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Submission blocked. Please try again.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // reCAPTCHA
+    const recaptchaToken = body.recaptchaToken?.trim() || "";
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "reCAPTCHA verification is required.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const recaptchaCheck = await verifyRecaptcha(recaptchaToken, ip);
+    if (!recaptchaCheck.ok) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: recaptchaCheck.message || "reCAPTCHA verification failed.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const fullName = body.fullName?.trim() || "";
+    const email = body.email?.trim() || "";
+    const phone = body.phone?.trim() || "";
     const company = body.company?.trim() || "";
-    const rentalStartDate = body.rentalStartDate?.trim();
-    const rentalEndDate = body.rentalEndDate?.trim();
+    const rentalStartDate = body.rentalStartDate?.trim() || "";
+    const rentalEndDate = body.rentalEndDate?.trim() || "";
     const purpose = body.purpose?.trim() || "";
     const selectedEquipment = Array.isArray(body.selectedEquipment)
       ? body.selectedEquipment.map((x) => String(x).trim()).filter(Boolean)
       : [];
 
-    if (!fullName || !email || !phone || !rentalStartDate || !rentalEndDate) {
-      return NextResponse.json(
-        { success: false, message: "Missing required fields" },
-        { status: 400 }
-      );
-    }
+    const validationError = validatePayload({
+      fullName,
+      email,
+      phone,
+      company,
+      rentalStartDate,
+      rentalEndDate,
+      purpose,
+      selectedEquipment,
+    });
 
-    if (!isValidEmail(email)) {
+    if (validationError) {
       return NextResponse.json(
-        { success: false, message: "Invalid email address" },
-        { status: 400 }
-      );
-    }
-
-    if (selectedEquipment.length === 0) {
-      return NextResponse.json(
-        { success: false, message: "Please select at least one equipment item" },
+        { success: false, message: validationError },
         { status: 400 }
       );
     }
@@ -122,7 +373,7 @@ export async function POST(req: NextRequest) {
             <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
               <div style="background:#0f172a;padding:24px;text-align:center;">
                 <img
-                  src="https://digistano-website.vercel.app/images/logo.png"
+                  src="https://www.digistano.com/images/logo.png"
                   alt="DigiStano"
                   style="height:50px;max-width:180px;object-fit:contain;"
                 />
@@ -182,7 +433,7 @@ export async function POST(req: NextRequest) {
             <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
               <div style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);padding:28px 32px;text-align:center;">
                 <img
-                  src="https://digistano-website.vercel.app/images/logo.png"
+                  src="https://www.digistano.com/images/logo.png"
                   alt="DigiStano"
                   style="height:56px;max-width:220px;object-fit:contain;"
                 />
@@ -235,7 +486,7 @@ export async function POST(req: NextRequest) {
 
                 <div style="display:flex;align-items:center;gap:14px;">
                   <img
-                    src="https://digistano-website.vercel.app/images/logo.png"
+                    src="https://www.digistano.com/images/logo.png"
                     alt="DigiStano"
                     style="height:40px;max-width:140px;object-fit:contain;"
                   />
