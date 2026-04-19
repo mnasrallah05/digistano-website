@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "DigiStano",
     images: [
       {
-        url: "https://www.digistano.com/images/engineering-services.jpg",
+        url: "https://www.digistano.com/images/EngineerinServices.jpeg",
         width: 1200,
         height: 630,
         alt: "DigiStano Engineering Services",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Onsite electrical testing, commissioning, and engineering support across the GCC.",
     images: [
-      "https://www.digistano.com/images/engineering-services.jpg",
+      "https://www.digistano.com/images/EngineerinServices.jpeg",
     ],
   },
 };
