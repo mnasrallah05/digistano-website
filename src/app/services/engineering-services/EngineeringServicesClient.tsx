@@ -1,17 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+type AppointmentFormState = {
+  full_name: string;
+  email: string;
+  appointment_date: string;
+  time_slot: string;
+  purpose: string;
+  meeting_type: string;
+  phone: string;
+  website: string;
+  formStartedAt: string;
+};
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+const initialForm: AppointmentFormState = {
+  full_name: "",
+  email: "",
+  appointment_date: "",
+  time_slot: "9 am - 11 am",
+  purpose: "",
+  meeting_type: "Online",
+  phone: "",
+  website: "",
+  formStartedAt: "",
+};
 
 export default function EngineeringServicesClient() {
-  const [form, setForm] = useState({
-    full_name: "",
-    email: "",
-    appointment_date: "",
-    time_slot: "9 am - 11 am",
-    purpose: "",
-    meeting_type: "Online",
-    phone: "",
-  });
+  const [form, setForm] = useState<AppointmentFormState>(initialForm);
 
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{
@@ -54,11 +81,70 @@ export default function EngineeringServicesClient() {
     "Other",
   ];
 
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      formStartedAt: String(Date.now()),
+    }));
+  }, []);
+
+  useEffect(() => {
+    if (!RECAPTCHA_SITE_KEY) return;
+
+    const existingScript = document.querySelector(
+      `script[src^="https://www.google.com/recaptcha/api.js?render="]`
+    );
+
+    if (existingScript) return;
+
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, []);
+
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function resetForm() {
+    setForm({
+      ...initialForm,
+      formStartedAt: String(Date.now()),
+    });
+  }
+
+  async function getRecaptchaToken(): Promise<string> {
+    if (!RECAPTCHA_SITE_KEY) {
+      throw new Error("reCAPTCHA site key is missing.");
+    }
+
+    if (!window.grecaptcha) {
+      throw new Error("reCAPTCHA is not ready yet. Please try again.");
+    }
+
+    return await new Promise<string>((resolve, reject) => {
+      window.grecaptcha?.ready(async () => {
+        try {
+          const token = await window.grecaptcha?.execute(RECAPTCHA_SITE_KEY, {
+            action: "appointment_form_submit",
+          });
+
+          if (!token) {
+            reject(new Error("Failed to get reCAPTCHA token."));
+            return;
+          }
+
+          resolve(token);
+        } catch {
+          reject(new Error("Failed to verify reCAPTCHA. Please try again."));
+        }
+      });
+    });
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -67,6 +153,8 @@ export default function EngineeringServicesClient() {
     setMessage({ type: "", text: "" });
 
     try {
+      const recaptchaToken = await getRecaptchaToken();
+
       const res = await fetch("/api/appointments", {
         method: "POST",
         headers: {
@@ -81,6 +169,9 @@ export default function EngineeringServicesClient() {
           meetingType: form.meeting_type,
           phone: form.phone,
           serviceName: "Engineering Services",
+          website: form.website,
+          formStartedAt: form.formStartedAt,
+          recaptchaToken,
         }),
       });
 
@@ -95,15 +186,7 @@ export default function EngineeringServicesClient() {
         text: "Your appointment request has been submitted successfully.",
       });
 
-      setForm({
-        full_name: "",
-        email: "",
-        appointment_date: "",
-        time_slot: "9 am - 11 am",
-        purpose: "",
-        meeting_type: "Online",
-        phone: "",
-      });
+      resetForm();
     } catch (error) {
       const err = error as Error;
       setMessage({
@@ -358,6 +441,28 @@ export default function EngineeringServicesClient() {
               onSubmit={handleSubmit}
               className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10"
             >
+              {/* Honeypot */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  value={form.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* Timing */}
+              <input
+                type="hidden"
+                name="formStartedAt"
+                value={form.formStartedAt}
+                readOnly
+              />
+
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="md:col-span-1">
                   <label className="mb-2 block text-sm font-semibold text-slate-900">
@@ -369,6 +474,7 @@ export default function EngineeringServicesClient() {
                     value={form.full_name}
                     onChange={handleChange}
                     required
+                    maxLength={120}
                     placeholder="Your full name"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -384,6 +490,7 @@ export default function EngineeringServicesClient() {
                     value={form.email}
                     onChange={handleChange}
                     required
+                    maxLength={160}
                     placeholder="Your email"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -413,6 +520,7 @@ export default function EngineeringServicesClient() {
                     value={form.phone}
                     onChange={handleChange}
                     required
+                    maxLength={40}
                     placeholder="Your phone number"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
@@ -453,16 +561,25 @@ export default function EngineeringServicesClient() {
 
                 <div className="md:col-span-2">
                   <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Purpose of appointment
+                    Purpose of appointment *
                   </label>
                   <textarea
                     name="purpose"
                     rows={6}
                     value={form.purpose}
                     onChange={handleChange}
+                    required
+                    maxLength={3000}
                     placeholder="Tell us what you need regarding engineering services"
                     className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
                   />
+                </div>
+
+                <div className="md:col-span-2">
+                  <p className="text-xs leading-6 text-slate-500">
+                    This site is protected by reCAPTCHA and the Google Privacy
+                    Policy and Terms of Service apply.
+                  </p>
                 </div>
 
                 {message.text ? (

@@ -11,7 +11,50 @@ type AppointmentPayload = {
   meetingType: string;
   phone: string;
   serviceName?: string;
+  website?: string;
+  formStartedAt?: string;
+  recaptchaToken?: string;
 };
+
+type RecaptchaResponse = {
+  success: boolean;
+  score?: number;
+  action?: string;
+  hostname?: string;
+  challenge_ts?: string;
+  "error-codes"?: string[];
+};
+
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function getClientIp(req: NextRequest): string {
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  if (forwardedFor) return forwardedFor.split(",")[0].trim();
+  return "unknown";
+}
+
+function rateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitStore.get(ip);
+
+  if (!record || now > record.resetAt) {
+    rateLimitStore.set(ip, {
+      count: 1,
+      resetAt: now + RATE_LIMIT_WINDOW_MS,
+    });
+    return true;
+  }
+
+  if (record.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  record.count += 1;
+  rateLimitStore.set(ip, record);
+  return true;
+}
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -26,36 +69,235 @@ function escapeHtml(str: string) {
     .replace(/'/g, "&#039;");
 }
 
+function looksLikeRandomString(value: string): boolean {
+  const trimmed = value.trim();
+
+  if (trimmed.length < 10) return false;
+
+  const noSpaces = !/\s/.test(trimmed);
+  const alphaNumOnly = /^[A-Za-z0-9]+$/.test(trimmed);
+  const hasMixedCase = /[a-z]/.test(trimmed) && /[A-Z]/.test(trimmed);
+  const longToken = trimmed.length >= 14;
+
+  return noSpaces && alphaNumOnly && hasMixedCase && longToken;
+}
+
+function countUrls(value: string): number {
+  const matches = value.match(/https?:\/\/|www\./gi);
+  return matches ? matches.length : 0;
+}
+
+function isValidDateString(value: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value);
+}
+
+function validatePayload(data: {
+  fullName: string;
+  email: string;
+  appointmentDate: string;
+  timeSlot: string;
+  purpose: string;
+  meetingType: string;
+  phone: string;
+  serviceName: string;
+}) {
+  const {
+    fullName,
+    email,
+    appointmentDate,
+    timeSlot,
+    purpose,
+    meetingType,
+    phone,
+    serviceName,
+  } = data;
+
+  if (
+    !fullName ||
+    !email ||
+    !appointmentDate ||
+    !timeSlot ||
+    !meetingType ||
+    !phone ||
+    !purpose
+  ) {
+    return "Missing required fields.";
+  }
+
+  if (!isValidEmail(email)) {
+    return "Invalid email address.";
+  }
+
+  if (fullName.length < 2 || fullName.length > 120) {
+    return "Please enter a valid full name.";
+  }
+
+  if (phone.length < 6 || phone.length > 40) {
+    return "Please enter a valid phone number.";
+  }
+
+  if (purpose.length < 10 || purpose.length > 3000) {
+    return "Please enter a valid purpose of appointment.";
+  }
+
+  if (serviceName.length > 160) {
+    return "Invalid service name.";
+  }
+
+  if (!isValidDateString(appointmentDate)) {
+    return "Invalid appointment date.";
+  }
+
+  if (timeSlot.length < 3 || timeSlot.length > 60) {
+    return "Invalid time slot.";
+  }
+
+  if (meetingType.length < 3 || meetingType.length > 40) {
+    return "Invalid meeting type.";
+  }
+
+  if (countUrls(purpose) > 2) {
+    return "Suspicious content detected.";
+  }
+
+  if (looksLikeRandomString(fullName) || looksLikeRandomString(purpose)) {
+    return "Suspicious content detected.";
+  }
+
+  const appointment = new Date(appointmentDate);
+  if (Number.isNaN(appointment.getTime())) {
+    return "Invalid appointment date.";
+  }
+
+  return null;
+}
+
+async function verifyRecaptcha(
+  token: string,
+  ip: string
+): Promise<{ ok: boolean; message?: string }> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!secret) {
+    return { ok: false, message: "reCAPTCHA secret key is missing." };
+  }
+
+  const params = new URLSearchParams();
+  params.append("secret", secret);
+  params.append("response", token);
+  params.append("remoteip", ip);
+
+  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString(),
+    cache: "no-store",
+  });
+
+  const data = (await response.json()) as RecaptchaResponse;
+
+  if (!data.success) {
+    return { ok: false, message: "reCAPTCHA verification failed." };
+  }
+
+  if (data.action !== "appointment_form_submit") {
+    return { ok: false, message: "Invalid reCAPTCHA action." };
+  }
+
+  if ((data.score ?? 0) < 0.5) {
+    return { ok: false, message: "Suspicious activity detected." };
+  }
+
+  return { ok: true };
+}
+
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+
+    if (!rateLimit(ip)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many requests. Please try again later.",
+        },
+        { status: 429 }
+      );
+    }
+
     const body = (await req.json()) as AppointmentPayload;
 
-    const fullName = body.fullName?.trim();
-    const email = body.email?.trim();
-    const appointmentDate = body.appointmentDate?.trim();
-    const timeSlot = body.timeSlot?.trim();
-    const purpose = body.purpose?.trim() || "";
-    const meetingType = body.meetingType?.trim();
-    const phone = body.phone?.trim();
-    const serviceName = body.serviceName?.trim() || "Engineering Services";
+    // Honeypot
+    if (body.website && body.website.trim() !== "") {
+      return NextResponse.json({
+        success: true,
+        message: "Appointment submitted successfully",
+      });
+    }
 
-    if (
-      !fullName ||
-      !email ||
-      !appointmentDate ||
-      !timeSlot ||
-      !meetingType ||
-      !phone
-    ) {
+    // Timing check
+    const startedAt = Number(body.formStartedAt || "0");
+    const now = Date.now();
+    const elapsedMs = now - startedAt;
+
+    if (!startedAt || Number.isNaN(startedAt) || elapsedMs < 3000) {
       return NextResponse.json(
-        { success: false, message: "Missing required fields" },
+        {
+          success: false,
+          message: "Submission blocked. Please try again.",
+        },
         { status: 400 }
       );
     }
 
-    if (!isValidEmail(email)) {
+    // reCAPTCHA
+    const recaptchaToken = body.recaptchaToken?.trim() || "";
+    if (!recaptchaToken) {
       return NextResponse.json(
-        { success: false, message: "Invalid email address" },
+        {
+          success: false,
+          message: "reCAPTCHA verification is required.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const recaptchaCheck = await verifyRecaptcha(recaptchaToken, ip);
+    if (!recaptchaCheck.ok) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: recaptchaCheck.message || "reCAPTCHA verification failed.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const fullName = body.fullName?.trim() || "";
+    const email = body.email?.trim() || "";
+    const appointmentDate = body.appointmentDate?.trim() || "";
+    const timeSlot = body.timeSlot?.trim() || "";
+    const purpose = body.purpose?.trim() || "";
+    const meetingType = body.meetingType?.trim() || "";
+    const phone = body.phone?.trim() || "";
+    const serviceName = body.serviceName?.trim() || "Engineering Services";
+
+    const validationError = validatePayload({
+      fullName,
+      email,
+      appointmentDate,
+      timeSlot,
+      purpose,
+      meetingType,
+      phone,
+      serviceName,
+    });
+
+    if (validationError) {
+      return NextResponse.json(
+        { success: false, message: validationError },
         { status: 400 }
       );
     }
@@ -116,7 +358,7 @@ export async function POST(req: NextRequest) {
             <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
               <div style="background:#0f172a;padding:24px;text-align:center;">
                 <img
-                  src="https://digistano-website.vercel.app/images/logo.png"
+                  src="https://www.digistano.com/images/logo.png"
                   alt="DigiStano"
                   style="height:50px;max-width:180px;object-fit:contain;"
                 />
@@ -172,7 +414,7 @@ export async function POST(req: NextRequest) {
             <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.06);">
               <div style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);padding:28px 32px;text-align:center;">
                 <img
-                  src="https://digistano-website.vercel.app/images/logo.png"
+                  src="https://www.digistano.com/images/logo.png"
                   alt="DigiStano"
                   style="height:56px;max-width:220px;object-fit:contain;"
                 />
@@ -220,7 +462,7 @@ export async function POST(req: NextRequest) {
 
                 <div style="display:flex;align-items:center;gap:14px;">
                   <img
-                    src="https://digistano-website.vercel.app/images/logo.png"
+                    src="https://www.digistano.com/images/logo.png"
                     alt="DigiStano"
                     style="height:40px;max-width:140px;object-fit:contain;"
                   />
