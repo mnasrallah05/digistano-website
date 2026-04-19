@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/icon7.png", // change if you have custom logo
+    icon: "/icon8.png", // change if you have custom logo
   },
 };
 
