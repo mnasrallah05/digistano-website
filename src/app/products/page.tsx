@@ -80,7 +80,7 @@ export default function ProductsLandingPage() {
   },
   {
     title: "Transformer Testing",
-    image: "/images/transformers.png",
+    image: "/images/transformers1.jpg",
     href: "/products/transformers",
     wrapperClassName:
       "h-64 flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200",
