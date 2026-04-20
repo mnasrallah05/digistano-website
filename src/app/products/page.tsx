@@ -68,7 +68,7 @@ export default function ProductsLandingPage() {
   },
   {
     title: "Transformer Testing",
-    image: "/images/transformer-testing.jpg",
+    image: "/images/transformers.png",
     href: "/products/transformers",
   },
   {
