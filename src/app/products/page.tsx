@@ -43,59 +43,66 @@ export const metadata: Metadata = {
   },
 };
 
+type ProductCard = {
+  title: string;
+  image: string;
+  href: string;
+  imageHeight: string;
+  objectPosition: string;
+  zoomClass?: string;
+};
+
 export default function ProductsLandingPage() {
-  const products = [
-  {
-    title: "MV & HV Cables Testing",
-    image: "/images/cables.jpg",
-    href: "/products/hv-cables",
-    wrapperClassName:
-      "h-64 flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200",
-    imageClassName:
-      "max-h-full max-w-full object-contain transition duration-500 group-hover:scale-105",
-  },
-  {
-    title: "Relays & Meters Testing",
-    image: "/images/relay-testing.jpg",
-    href: "/products/relays",
-    wrapperClassName: "h-56 overflow-hidden",
-    imageClassName:
-      "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
-  },
-  {
-    title: "Rotating Machines Testing",
-    image: "/images/rotating-machines.jpg",
-    href: "/products/rotating-machines",
-    wrapperClassName: "h-56 overflow-hidden",
-    imageClassName:
-      "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
-  },
-  {
-    title: "Switchgear Testing",
-    image: "/images/switchgear-testing.jpg",
-    href: "/products/switchgear",
-    wrapperClassName: "h-56 overflow-hidden",
-    imageClassName:
-      "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
-  },
-  {
-    title: "Transformer Testing",
-    image: "/images/transformers1.jpg",
-    href: "/products/transformers",
-    wrapperClassName:
-      "h-64 flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200",
-    imageClassName:
-      "max-h-full max-w-full object-contain transition duration-500 group-hover:scale-105",
-  },
-  {
-    title: "Instrument Transformers (CT/VT) Testing",
-    image: "/images/ct-vt-testing.jpg",
-    href: "/products/ct-vt",
-    wrapperClassName: "h-56 overflow-hidden",
-    imageClassName:
-      "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
-  },
-];
+  const products: ProductCard[] = [
+    {
+      title: "MV & HV Cables Testing",
+      image: "/images/cables-testing.png",
+      href: "/products/hv-cables",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
+      zoomClass: "group-hover:scale-105",
+    },
+    {
+      title: "Relays & Meters Testing",
+      image: "/images/relay-testing.jpg",
+      href: "/products/relays",
+      imageHeight: "h-56",
+      objectPosition: "50% 50%",
+      zoomClass: "group-hover:scale-110",
+    },
+    {
+      title: "Rotating Machines Testing",
+      image: "/images/rotating-machines.jpg",
+      href: "/products/rotating-machines",
+      imageHeight: "h-56",
+      objectPosition: "50% 50%",
+      zoomClass: "group-hover:scale-110",
+    },
+    {
+      title: "Switchgear Testing",
+      image: "/images/switchgear-testing.jpg",
+      href: "/products/switchgear",
+      imageHeight: "h-56",
+      objectPosition: "50% 50%",
+      zoomClass: "group-hover:scale-110",
+    },
+    {
+      title: "Transformer Testing",
+      image: "/images/transformers.png",
+      href: "/products/transformers",
+      imageHeight: "h-72",
+      objectPosition: "50% 58%",
+      zoomClass: "group-hover:scale-105",
+    },
+    {
+      title: "Instrument Transformers (CT/VT) Testing",
+      image: "/images/ct-vt-testing.jpg",
+      href: "/products/ct-vt",
+      imageHeight: "h-56",
+      objectPosition: "50% 50%",
+      zoomClass: "group-hover:scale-110",
+    },
+  ];
 
   return (
     <main className="bg-white text-slate-900">
@@ -153,11 +160,12 @@ export default function ProductsLandingPage() {
                 key={product.title}
                 className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className={product.wrapperClassName}>
+                <div className={`${product.imageHeight} overflow-hidden bg-slate-100`}>
                   <img
                     src={product.image}
                     alt={product.title}
-                    className={product.imageClassName}
+                    className={`h-full w-full object-cover transition duration-500 ${product.zoomClass ?? "group-hover:scale-105"}`}
+                    style={{ objectPosition: product.objectPosition }}
                   />
                 </div>
 
