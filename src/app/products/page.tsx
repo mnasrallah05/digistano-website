@@ -43,40 +43,57 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function ProductsLandingPage() {
   const products = [
-  {
-    title: "MV & HV Cables Testing",
-    image: "/images/cables-testing.jpg",
-    href: "/products/hv-cables",
-  },
-  {
-    title: "Relays & Meters Testing",
-    image: "/images/relay-testing.jpg",
-    href: "/products/relays",
-  },
-  {
-    title: "Rotating Machines Testing",
-    image: "/images/rotating-machines.jpg",
-    href: "/products/rotating-machines",
-  },
-  {
-    title: "Switchgear Testing",
-    image: "/images/switchgear-testing.jpg",
-    href: "/products/switchgear",
-  },
-  {
-    title: "Transformer Testing",
-    image: "/images/transformers.png",
-    href: "/products/transformers",
-  },
-  {
-    title: "Instrument Transformers (CT/VT) Testing",
-    image: "/images/ct-vt-testing.jpg",
-    href: "/products/ct-vt",
-  },
-];
+    {
+      title: "MV & HV Cables Testing",
+      image: "/images/cables-testing.jpg",
+      href: "/products/hv-cables",
+      wrapperClassName: "h-56 overflow-hidden",
+      imageClassName:
+        "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
+    },
+    {
+      title: "Relays & Meters Testing",
+      image: "/images/relay-testing.jpg",
+      href: "/products/relays",
+      wrapperClassName: "h-56 overflow-hidden",
+      imageClassName:
+        "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
+    },
+    {
+      title: "Rotating Machines Testing",
+      image: "/images/rotating-machines.jpg",
+      href: "/products/rotating-machines",
+      wrapperClassName: "h-56 overflow-hidden",
+      imageClassName:
+        "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
+    },
+    {
+      title: "Switchgear Testing",
+      image: "/images/switchgear-testing.jpg",
+      href: "/products/switchgear",
+      wrapperClassName: "h-56 overflow-hidden",
+      imageClassName:
+        "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
+    },
+    {
+      title: "Transformer Testing",
+      image: "/images/transformers.png",
+      href: "/products/transformers",
+      wrapperClassName: "h-64 overflow-hidden",
+      imageClassName:
+        "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
+    },
+    {
+      title: "Instrument Transformers (CT/VT) Testing",
+      image: "/images/ct-vt-testing.jpg",
+      href: "/products/ct-vt",
+      wrapperClassName: "h-56 overflow-hidden",
+      imageClassName:
+        "h-full w-full object-cover object-center transition duration-500 group-hover:scale-110",
+    },
+  ];
 
   return (
     <main className="bg-white text-slate-900">
@@ -134,11 +151,11 @@ export default function ProductsLandingPage() {
                 key={product.title}
                 className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="h-56 overflow-hidden">
+                <div className={product.wrapperClassName}>
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    className={product.imageClassName}
                   />
                 </div>
 
