@@ -56,7 +56,7 @@ export default function ProductsLandingPage() {
   const products: ProductCard[] = [
     {
       title: "MV & HV Cables Testing",
-      image: "/images/cables.jpg",
+      image: "/images/cables1.jpg",
       href: "/products/hv-cables",
       imageHeight: "h-72",
       objectPosition: "50% 18%",
