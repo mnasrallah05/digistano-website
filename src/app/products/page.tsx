@@ -79,7 +79,7 @@ export default function ProductsLandingPage() {
     },
     {
       title: "Transformer Testing",
-      image: "/images/transformers.png",
+      image: "/images/transformers1.png",
       href: "/products/transformers",
       wrapperClassName: "h-64 overflow-hidden",
       imageClassName:
