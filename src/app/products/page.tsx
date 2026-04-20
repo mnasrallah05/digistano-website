@@ -47,7 +47,7 @@ export default function ProductsLandingPage() {
   const products = [
     {
       title: "MV & HV Cables Testing",
-      image: "/images/cables-testing.jpg",
+      image: "/images/cables.jpg",
       href: "/products/hv-cables",
       wrapperClassName: "h-56 overflow-hidden",
       imageClassName:
