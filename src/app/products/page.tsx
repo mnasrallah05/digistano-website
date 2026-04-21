@@ -72,7 +72,7 @@ export default function ProductsLandingPage() {
     },
     {
       title: "Rotating Machines Testing",
-      image: "/images/rotating-machines.jpg",
+      image: "/images/RotatingMachines.jpg",
       href: "/products/rotating-machines",
       imageHeight: "h-56",
       objectPosition: "50% 50%",
