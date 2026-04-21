@@ -369,7 +369,7 @@ export default function EngineeringServicesClient() {
           <div className="rounded-2xl bg-slate-50 p-6">
             <p className="text-sm text-slate-500">Regional Presence</p>
             <p className="mt-2 text-xl font-semibold text-slate-900">
-              UAE, Bahrain, Saudi Arabia, Oman
+              UAE, Bahrain, Saudi Arabia, Oman, Qatar
             </p>
           </div>
 
