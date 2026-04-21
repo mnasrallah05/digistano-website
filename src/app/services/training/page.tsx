@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "DigiStano",
     images: [
       {
-        url: "https://www.digistano.com/images/training-services.jpg",
+        url: "https://www.digistano.com/images/training.jpg",
         width: 1200,
         height: 630,
         alt: "DigiStano Training Services",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "DigiStano Training Services",
     description:
       "Professional electrical and energy training programs across the GCC.",
-    images: ["https://www.digistano.com/images/training-services.jpg"],
+    images: ["https://www.digistano.com/images/training.jpg"],
   },
 };
 
@@ -91,7 +91,7 @@ export default function TrainingPage() {
       <section className="relative overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
           <img
-            src="/images/training-services.jpg"
+            src="/images/training.jpg"
             alt="Training Services"
             className="h-full w-full object-cover opacity-20"
           />
