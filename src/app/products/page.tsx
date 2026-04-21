@@ -64,10 +64,10 @@ export default function ProductsLandingPage() {
     },
     {
       title: "Relays & Meters Testing",
-      image: "/images/relay-testing.jpg",
+      image: "/images/Relays.jpg",
       href: "/products/relays",
-      imageHeight: "h-56",
-      objectPosition: "50% 50%",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
       zoomClass: "group-hover:scale-110",
     },
     {
