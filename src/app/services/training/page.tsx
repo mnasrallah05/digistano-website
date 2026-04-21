@@ -236,7 +236,7 @@ export default function TrainingPage() {
 
               <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                 <img
-                  src="/images/training-services.jpg"
+                  src="/images/training.jpg"
                   alt="DigiStano training session"
                   className="h-[520px] w-full object-cover object-center transition duration-700 group-hover:scale-105"
                 />
