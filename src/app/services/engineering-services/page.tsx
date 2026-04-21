@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Onsite electrical testing, commissioning, and engineering support across the GCC.",
     images: [
-      "https://www.digistano.com/images/EngineerinServices.jpeg",
+      "https://www.digistano.com/images/EngineerinServices.jpg",
     ],
   },
 };
