@@ -300,7 +300,7 @@ export default function RentalClient() {
 
                 <div className="relative w-full overflow-hidden rounded-3xl shadow-2xl">
                   <img
-                    src="/images/rental-equipment.jpg"
+                    src="/images/rental.jpg"
                     alt="Rental equipment"
                     className="block h-[520px] w-full object-cover object-center transition duration-700 group-hover:scale-105 xl:h-[580px]"
                   />
