@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import IsoSlider from "@/components/sections/IsoSlider";
 import ClientsSlider from "@/components/sections/ClientsSlider";
 
-
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -60,6 +59,15 @@ function FadeUpSection({
   );
 }
 
+type SolutionCard = {
+  title: string;
+  image: string;
+  href: string;
+  imageHeight: string;
+  objectPosition: string;
+  zoomClass?: string;
+};
+
 export default function Home() {
   const services = [
     {
@@ -92,36 +100,54 @@ export default function Home() {
     },
   ];
 
-  const solutions = [
+  const solutions: SolutionCard[] = [
     {
-      title: "Transformer Testing Solutions",
-      image: "/images/transformer-testing.jpg",
-      href: "/products/transformers",
-    },
-    {
-      title: "Switchgear Testing Solutions",
-      image: "/images/switchgear-testing.jpg",
-      href: "/products/switchgear",
-    },
-    {
-      title: "Rotating Machines Testing Solutions",
-      image: "/images/rotating-machines.jpg",
-      href: "/products/rotating-machines",
-    },
-    {
-      title: "Relays, Meters, Power Quality and Secondary Injection",
-      image: "/images/relay-testing.jpg",
-      href: "/products/relays",
-    },
-    {
-      title: "MV and HV Cables Testing Solutions",
-      image: "/images/cables-testing.jpg",
+      title: "MV & HV Cables Testing",
+      image: "/images/cables1.jpg",
       href: "/products/hv-cables",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
+      zoomClass: "group-hover:scale-105",
     },
     {
-      title: "Instrument Transformers (CT/VT) Testing Solutions",
-      image: "/images/ct-vt-testing.jpg",
-      href: "/products/ct-vt-testing",
+      title: "Relays & Meters Testing",
+      image: "/images/Relays.jpg",
+      href: "/products/relays",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
+      zoomClass: "group-hover:scale-110",
+    },
+    {
+      title: "Rotating Machines Testing",
+      image: "/images/RotatingMachines.jpg",
+      href: "/products/rotating-machines",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
+      zoomClass: "group-hover:scale-110",
+    },
+    {
+      title: "Switchgear Testing",
+      image: "/images/Switchgear.jpg",
+      href: "/products/switchgear",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
+      zoomClass: "group-hover:scale-110",
+    },
+    {
+      title: "Transformer Testing",
+      image: "/images/transformers1.jpg",
+      href: "/products/transformers",
+      imageHeight: "h-72",
+      objectPosition: "50% 58%",
+      zoomClass: "group-hover:scale-105",
+    },
+    {
+      title: "Instrument Transformers (CT/VT) Testing",
+      image: "/images/ct-vt.png",
+      href: "/products/ct-vt",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
+      zoomClass: "group-hover:scale-110",
     },
   ];
 
@@ -275,17 +301,22 @@ export default function Home() {
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {solutions.map((solution, index) => (
               <FadeUpSection key={solution.title} delay={index * 120}>
-                <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                  <div className="h-56 overflow-hidden">
+                <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div
+                    className={`${solution.imageHeight} overflow-hidden bg-slate-100`}
+                  >
                     <img
                       src={solution.image}
                       alt={solution.title}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                      className={`h-full w-full object-cover transition duration-500 ${
+                        solution.zoomClass ?? "group-hover:scale-105"
+                      }`}
+                      style={{ objectPosition: solution.objectPosition }}
                     />
                   </div>
 
                   <div className="p-6">
-                    <h3 className="mb-4 text-xl font-semibold text-gray-900">
+                    <h3 className="mb-4 text-xl font-semibold text-slate-900">
                       {solution.title}
                     </h3>
 
@@ -477,8 +508,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      
     </main>
   );
 }
