@@ -266,7 +266,7 @@ export default function EngineeringServicesClient() {
         <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="overflow-hidden rounded-3xl border border-slate-200 shadow-sm">
             <img
-              src="/images/EngineerinServices.jpeg"
+              src="/images/EngineerinServices.jpg"
               alt="DigiStano engineering team"
               className="h-full w-full object-cover"
             />
