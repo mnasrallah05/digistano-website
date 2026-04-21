@@ -96,10 +96,10 @@ export default function ProductsLandingPage() {
     },
     {
       title: "Instrument Transformers (CT/VT) Testing",
-      image: "/images/ct-vt-testing.jpg",
+      image: "/images/ct-vt.png",
       href: "/products/ct-vt",
-      imageHeight: "h-56",
-      objectPosition: "50% 50%",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
       zoomClass: "group-hover:scale-110",
     },
   ];
