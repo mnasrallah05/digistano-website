@@ -75,7 +75,7 @@ export default function ProductsLandingPage() {
       image: "/images/RotatingMachines.jpg",
       href: "/products/rotating-machines",
       imageHeight: "h-56",
-      objectPosition: "50% 50%",
+      objectPosition: "50% 30%",
       zoomClass: "group-hover:scale-110",
     },
     {
