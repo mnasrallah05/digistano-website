@@ -80,10 +80,10 @@ export default function ProductsLandingPage() {
     },
     {
       title: "Switchgear Testing",
-      image: "/images/switchgear-testing.jpg",
+      image: "/images/Switchgear.jpg",
       href: "/products/switchgear",
-      imageHeight: "h-56",
-      objectPosition: "50% 50%",
+      imageHeight: "h-72",
+      objectPosition: "50% 18%",
       zoomClass: "group-hover:scale-110",
     },
     {
