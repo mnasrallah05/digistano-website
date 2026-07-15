@@ -39,6 +39,40 @@ const initialForm: RentalFormState = {
   formStartedAt: "",
 };
 
+const rentalEquipmentPages = [
+  { name: "CMC 356", href: "/products/relays/cmc-356", use: "Protection relay testing" },
+  { name: "CMC 500", href: "/services/rental/cmc-500", use: "Protection relay and IEC 61850 testing" },
+  { name: "CMGPS 588", use: "Time synchronization for protection testing" },
+  { name: "ARC256", use: "Arc-flash and protection testing support" },
+  { name: "CPC 100", href: "/products/ct-vt/cpc-100", use: "Primary injection and substation testing" },
+  { name: "CP TD12", href: "/products/transformers/cp-td12-15", use: "Capacitance and dissipation-factor testing" },
+  { name: "CP TD15", href: "/products/transformers/cp-td12-15", use: "15 kV capacitance and dissipation-factor testing" },
+  { name: "CP CR600", href: "/products/rotating-machines/cp-cr600", use: "Rotating-machine insulation testing" },
+  { name: "CP CB2", href: "/services/rental/cp-cb2", use: "High-current amplification for CPC 100" },
+  { name: "COMPANO 100", href: "/products/ct-vt/compano-100", use: "Portable electrical testing" },
+  { name: "CT Analyzer", href: "/products/ct-vt/ct-analyzer", use: "Current-transformer testing" },
+  { name: "TESTRANO 600", href: "/products/transformers/testrano-600", use: "Three-phase transformer testing" },
+  { name: "CIBANO 500", href: "/products/switchgear/cibano-500", use: "Circuit-breaker testing" },
+  { name: "CB TN3", use: "Specialized electrical testing applications" },
+  { name: "MPD 600", use: "Partial-discharge measurement" },
+  { name: "MPD 800", href: "/products/switchgear/mpd-800", use: "Partial-discharge measurement and analysis" },
+  { name: "CAL 542", use: "Partial-discharge calibration" },
+  { name: "MCC210L", use: "Specialized electrical testing applications" },
+  { name: "HFCT", use: "High-frequency partial-discharge measurement" },
+  { name: "UVS610", use: "Specialized electrical testing applications" },
+  { name: "MONTESTO 200", href: "/products/switchgear/montesto-200", use: "Temporary online partial-discharge monitoring" },
+  { name: "FRANEO 800", href: "/products/transformers/franeo-800", use: "SFRA transformer diagnostics" },
+  { name: "DIRANA", href: "/products/transformers/dirana", use: "Dielectric-response and insulation diagnostics" },
+  { name: "HVA45TD", href: "/products/hv-cables/hva45-hva45td", use: "VLF and Tan Delta cable testing" },
+  { name: "HVA60", href: "/products/hv-cables/hva60", use: "VLF cable testing" },
+  { name: "HVA68-2", use: "Extra-power VLF cable testing" },
+  { name: "ILG G2Pro", use: "Specialized cable testing applications" },
+  { name: "Ariadna CI", use: "Cable identification" },
+  { name: "MRT700", use: "Specialized electrical testing applications" },
+  { name: "Megger test equipment", href: "/services/rental/megger", use: "Megger equipment rental enquiries" },
+  { name: "b2 electronics equipment", href: "/services/rental/b2-electronics", use: "VLF and cable-diagnostic equipment" },
+];
+
 export default function RentalClient() {
   const [form, setForm] = useState<RentalFormState>(initialForm);
 
@@ -62,6 +96,7 @@ export default function RentalClient() {
 
   const allEquipment = [
     "CMC 356",
+    "CMC 500",
     "CMGPS 588",
     "ARC256",
     "CPC 100",
@@ -360,6 +395,44 @@ export default function RentalClient() {
                 </div>
                 <p className="leading-7 text-slate-700">{item}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INDEXABLE RENTAL EQUIPMENT LINKS */}
+      <section className="border-t border-slate-200 bg-white py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
+              Available Rental Equipment
+            </p>
+            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">
+              Browse popular electrical test equipment for rent
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              Review equipment capabilities and submit a request for current
+              availability, rental duration, delivery, and technical support.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {rentalEquipmentPages.map((item) => (
+              <a
+                key={item.name}
+                href={item.href ?? "#rental-form"}
+                className="group rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-blue-300 hover:bg-white hover:shadow-lg"
+              >
+                <h3 className="text-xl font-bold text-slate-900 transition group-hover:text-blue-600">
+                  Rent {item.name}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  {item.use}
+                </p>
+                <span className="mt-4 inline-flex text-sm font-semibold text-blue-600">
+                  {item.href ? "View equipment details" : "Request availability"} →
+                </span>
+              </a>
             ))}
           </div>
         </div>

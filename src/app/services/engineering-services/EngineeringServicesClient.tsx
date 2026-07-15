@@ -50,20 +50,20 @@ export default function EngineeringServicesClient() {
   });
 
   const capabilityItems = [
-    "Rotating Machines Testing solutions",
-    "HV/MV Cables Testing Solutions",
-    "HV/MV Switchgear Testing Solutions including GIS",
-    "Power/Distribution Transformers Testing Solutions",
-    "Power System Protection System Testing solutions",
-    "IEC61850 systems Testing solutions",
-    "Cyber Security Testing Solutions",
-    "Offline and Online Partial Discharge Measurement",
-    "Online Partial Discharge Monitoring Systems",
-    "Asset Management Systems solutions",
-    "Energy Meters Testing solution",
-    "CT/VT Testing Solutions",
-    "Transmission Lines Testing solutions",
-    "Substation Grounding, Step & Touch Voltage Testing solutions",
+    { label: "Rotating Machines Testing solutions" },
+    { label: "HV/MV Cables Testing Solutions", href: "/services/engineering-services/mv-cable-vlf-testing" },
+    { label: "HV/MV Switchgear Testing Solutions including GIS", href: "/services/engineering-services/partial-discharge-testing" },
+    { label: "Power/Distribution Transformers Testing Solutions" },
+    { label: "Power System Protection System Testing solutions" },
+    { label: "IEC61850 systems Testing solutions" },
+    { label: "Cyber Security Testing Solutions" },
+    { label: "Offline and Online Partial Discharge Measurement", href: "/services/engineering-services/partial-discharge-testing" },
+    { label: "Online Partial Discharge Monitoring Systems", href: "/services/engineering-services/partial-discharge-testing" },
+    { label: "Asset Management Systems solutions" },
+    { label: "Energy Meters Testing solution" },
+    { label: "CT/VT Testing Solutions" },
+    { label: "Transmission Lines Testing solutions" },
+    { label: "Substation Grounding, Step & Touch Voltage Testing solutions" },
   ];
 
   const pdItems = [
@@ -315,11 +315,23 @@ export default function EngineeringServicesClient() {
           <div className="grid gap-x-12 gap-y-4 md:grid-cols-2">
             {capabilityItems.map((item) => (
               <div
-                key={item}
+                key={item.label}
                 className="flex items-start gap-4 border-b border-slate-200 py-4"
               >
                 <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-600" />
-                <p className="text-base leading-7 text-slate-700">{item}</p>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="group text-base font-medium leading-7 text-slate-700 transition hover:text-blue-600"
+                  >
+                    {item.label}
+                    <span className="ml-2 text-blue-600 transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </a>
+                ) : (
+                  <p className="text-base leading-7 text-slate-700">{item.label}</p>
+                )}
               </div>
             ))}
           </div>
@@ -341,6 +353,12 @@ export default function EngineeringServicesClient() {
               for critical power assets, helping clients improve diagnostics,
               maintenance planning, and equipment reliability.
             </p>
+            <a
+              href="/services/engineering-services/partial-discharge-testing"
+              className="mt-8 inline-flex rounded-xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-700"
+            >
+              Explore Partial Discharge Testing
+            </a>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">

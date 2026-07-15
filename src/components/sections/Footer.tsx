@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Footer() {
   const [showTop, setShowTop] = useState(false);
@@ -33,13 +34,13 @@ export default function Footer() {
           
           {/* LOGO + DESCRIPTION */}
           <div>
-            <a href="/" className="inline-block">
+            <Link href="/" className="inline-block">
               <img
                 src="/images/digistano-logo.png"
                 alt="DigiStano"
                 className="mb-6 w-40 brightness-0 invert"
               />
-            </a>
+            </Link>
 
             <p className="max-w-md text-sm leading-8 text-gray-400">
               DigiStano delivers advanced technology solutions, engineering
@@ -99,11 +100,11 @@ export default function Footer() {
             </h3>
 
             <ul className="space-y-3 text-sm">
-              <li><a href="/" className="hover:text-white">Home</a></li>
-              <li><a href="/about" className="hover:text-white">About Us</a></li>
-              <li><a href="/services" className="hover:text-white">Services</a></li>
-              <li><a href="/products" className="hover:text-white">Products</a></li>
-              <li><a href="/contact" className="hover:text-white">Contact</a></li>
+              <li><Link href="/" className="hover:text-white">Home</Link></li>
+              <li><Link href="/about" className="hover:text-white">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-white">Services</Link></li>
+              <li><Link href="/products" className="hover:text-white">Products</Link></li>
+              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
             </ul>
           </div>
 

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title:
     "Engineering Services | Electrical Testing & Field Support | DigiStano",
   description:
-    "DigiStano provides onsite engineering services including electrical testing, commissioning support, diagnostics, and field engineering solutions across the UAE and GCC.",
+    "DigiStano provides onsite engineering services including electrical testing, commissioning, partial discharge diagnostics, MV cable testing, and field support across Saudi Arabia, UAE, Qatar, and Oman.",
   keywords: [
     "Engineering Services UAE",
     "Electrical Testing Services",
@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "Partial Discharge Testing",
     "Field Engineering GCC",
   ],
+  alternates: {
+    canonical: "https://www.digistano.com/services/engineering-services",
+  },
   openGraph: {
     title:
       "Engineering Services | Electrical Testing & Field Support | DigiStano",

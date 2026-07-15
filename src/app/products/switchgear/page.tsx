@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.digistano.com/products/switchgear" },
   title:
     "Switchgear Testing Solutions | Circuit Breaker & CT/VT Diagnostics | DigiStano",
   description:

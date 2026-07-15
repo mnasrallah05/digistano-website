@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.digistano.com/products/iec-testing" },
   title:
     "IEC 61850 & SCADA Testing Solutions | Digital Substation Tools | DigiStano",
   description:

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.digistano.com/products/relays" },
   title:
     "Relays, Meters & Secondary Injection Testing | DigiStano",
   description:

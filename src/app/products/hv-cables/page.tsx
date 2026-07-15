@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.digistano.com/products/hv-cables" },
   title:
     "MV & HV Cables Testing Solutions | Cable Diagnostics Equipment | DigiStano",
   description:

@@ -1,29 +1,49 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { canonicalProductRoutes } from "./products/_seo";
+
+const baseUrl = "https://www.digistano.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.digistano.com";
-
-  return [
-    // Core
-    { url: `${baseUrl}`, lastModified: new Date() },
-    { url: `${baseUrl}/about`, lastModified: new Date() },
-    { url: `${baseUrl}/contact`, lastModified: new Date() },
-
-    // Services
-    { url: `${baseUrl}/services`, lastModified: new Date() },
-    { url: `${baseUrl}/services/engineering-services`, lastModified: new Date() },
-    { url: `${baseUrl}/services/rental`, lastModified: new Date() },
-    { url: `${baseUrl}/services/training`, lastModified: new Date() },
-    { url: `${baseUrl}/services/repair-calibration`, lastModified: new Date() },
-
-    // Products
-    { url: `${baseUrl}/products`, lastModified: new Date() },
-    { url: `${baseUrl}/products/hv-cables`, lastModified: new Date() },
-    { url: `${baseUrl}/products/iec-testing`, lastModified: new Date() },
-    { url: `${baseUrl}/products/relays`, lastModified: new Date() },
-    { url: `${baseUrl}/products/rotating-machines`, lastModified: new Date() },
-    { url: `${baseUrl}/products/switchgear`, lastModified: new Date() },
-    { url: `${baseUrl}/products/transformers`, lastModified: new Date() },
-    { url: `${baseUrl}/products/ct-vt`, lastModified: new Date() },
+  const coreRoutes = [
+    "",
+    "/about",
+    "/contact",
+    "/services",
+    "/services/engineering-services",
+    "/services/engineering-services/partial-discharge-testing",
+    "/services/engineering-services/mv-cable-vlf-testing",
+    "/services/rental",
+    "/services/rental/cmc-500",
+    "/services/rental/cp-cb2",
+    "/services/rental/megger",
+    "/services/rental/b2-electronics",
+    "/services/training",
+    "/services/repair-calibration",
+    "/products",
+    "/products/hv-cables",
+    "/products/iec-testing",
+    "/products/relays",
+    "/products/rotating-machines",
+    "/products/switchgear",
+    "/products/transformers",
+    "/products/ct-vt",
   ];
+
+  const corePages: MetadataRoute.Sitemap = coreRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : route === "/services/rental" ? 0.9 : 0.8,
+  }));
+
+  const productPages: MetadataRoute.Sitemap = canonicalProductRoutes.map(
+    (route) => ({
+      url: `${baseUrl}/products/${route}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    })
+  );
+
+  return [...corePages, ...productPages];
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.digistano.com/products/rotating-machines" },
   title:
     "Rotating Machines Testing Solutions | Motor & Generator Diagnostics | DigiStano",
   description:

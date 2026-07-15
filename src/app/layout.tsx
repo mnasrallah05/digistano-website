@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
   title: {
     default: "DigiStano | Electrical Testing & Engineering Solutions",
-    template: "%s | DigiStano",
+    template: "%s",
   },
 
   description:
@@ -42,6 +42,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 
   icons: {
@@ -54,9 +61,51 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.digistano.com/#organization",
+        name: "DigiStano Energy L.L.C",
+        alternateName: "DigiStano",
+        url: "https://www.digistano.com",
+        logo: "https://www.digistano.com/images/digistano-logo.png",
+        email: "sales@digistano.ae",
+        telephone: "+97143373764",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "SIT Tower, 7th Floor, Dubai Silicon Oasis",
+          addressLocality: "Dubai",
+          addressCountry: "AE",
+        },
+        areaServed: [
+          { "@type": "Country", name: "United Arab Emirates" },
+          { "@type": "Country", name: "Saudi Arabia" },
+          { "@type": "Country", name: "Bahrain" },
+        ],
+        sameAs: ["https://www.linkedin.com/company/digistano/"],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.digistano.com/#website",
+        url: "https://www.digistano.com",
+        name: "DigiStano",
+        publisher: { "@id": "https://www.digistano.com/#organization" },
+        inLanguage: "en",
+      },
+    ],
+  };
+
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c"),
+          }}
+        />
         <Navbar />
         {children}
         <Footer />
