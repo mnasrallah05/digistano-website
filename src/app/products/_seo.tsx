@@ -72,15 +72,16 @@ export const canonicalProductRoutes = Array.from(
 
 export function createProductMetadata(route: string): Metadata {
   const { category, slug, product } = getProduct(route);
+  const rentalAvailable = product.rental !== false;
   const categoryName = categoryNames[category] ?? "Electrical Testing";
   const canonicalUrl = `${BASE_URL}/products/${product.canonical}`;
   const brandAndName = product.brand
     ? `${product.brand} ${product.name}`
     : product.name;
-  const title = product.rental
+  const title = rentalAvailable
     ? `${brandAndName} Rental UAE & KSA | DigiStano`
     : `${brandAndName} Testing Solution UAE | DigiStano`;
-  const description = product.rental
+  const description = rentalAvailable
     ? `Rent ${brandAndName} from DigiStano for ${categoryName.toLowerCase()} projects in the UAE and Saudi Arabia. Request availability, flexible rental terms, calibration support, and technical assistance.`
     : `Explore ${brandAndName} for ${categoryName.toLowerCase()} applications. DigiStano provides equipment solutions, engineering expertise, and technical support across the UAE and GCC.`;
   const image = `${BASE_URL}/images/products/${slug}.png`;
@@ -89,7 +90,7 @@ export function createProductMetadata(route: string): Metadata {
     title: { absolute: title },
     description,
     keywords: [
-      `${brandAndName} ${product.rental ? "rental" : "testing"}`,
+      `${brandAndName} ${rentalAvailable ? "rental" : "testing"}`,
       `${product.name} UAE`,
       `${product.name} Saudi Arabia`,
       `${categoryName} equipment`,
@@ -124,6 +125,7 @@ export function ProductSeoLayout({
   children: ReactNode;
 }) {
   const { category, slug, product } = getProduct(route);
+  const rentalAvailable = product.rental !== false;
   const categoryName = categoryNames[category] ?? "Electrical Testing";
   const currentUrl = `${BASE_URL}/products/${route}`;
   const canonicalUrl = `${BASE_URL}/products/${product.canonical}`;
@@ -131,25 +133,31 @@ export function ProductSeoLayout({
   const brandAndName = product.brand
     ? `${product.brand} ${product.name}`
     : product.name;
-  const description = product.rental
+  const description = rentalAvailable
     ? `${brandAndName} equipment rental for ${categoryName.toLowerCase()} projects in the UAE and Saudi Arabia.`
     : `${brandAndName} equipment solution for ${categoryName.toLowerCase()} applications across the UAE and GCC.`;
 
   const graph: Record<string, unknown>[] = [
     {
-      "@type": "Product",
-      "@id": `${canonicalUrl}#product`,
-      name: brandAndName,
+      "@type": "Service",
+      "@id": `${canonicalUrl}#service`,
+      name: rentalAvailable
+        ? `${brandAndName} Rental`
+        : `${brandAndName} Equipment Solution`,
       description,
       image,
       url: canonicalUrl,
       category: categoryName,
-      brand: product.brand
-        ? { "@type": "Brand", name: product.brand }
-        : undefined,
-      manufacturer: product.brand
-        ? { "@type": "Organization", name: product.brand }
-        : undefined,
+      serviceType: rentalAvailable
+        ? "Electrical testing equipment rental"
+        : `${categoryName} equipment solution`,
+      provider: { "@id": `${BASE_URL}/#organization` },
+      areaServed: [
+        { "@type": "Country", name: "Saudi Arabia" },
+        { "@type": "Country", name: "United Arab Emirates" },
+        { "@type": "Country", name: "Qatar" },
+        { "@type": "Country", name: "Oman" },
+      ],
     },
     {
       "@type": "BreadcrumbList",
@@ -162,23 +170,6 @@ export function ProductSeoLayout({
       ],
     },
   ];
-
-  if (product.rental) {
-    graph.push({
-      "@type": "Service",
-      "@id": `${canonicalUrl}#rental-service`,
-      name: `${brandAndName} Rental`,
-      description,
-      serviceType: "Electrical testing equipment rental",
-      provider: { "@id": `${BASE_URL}/#organization` },
-      areaServed: [
-        { "@type": "Country", name: "United Arab Emirates" },
-        { "@type": "Country", name: "Saudi Arabia" },
-      ],
-      url: canonicalUrl,
-      mainEntityOfPage: { "@id": `${canonicalUrl}#product` },
-    });
-  }
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -197,8 +188,11 @@ export function ProductSeoLayout({
         }}
       />
       {children}
-      {product.rental ? (
-        <section className="border-t border-slate-200 bg-slate-950 py-16 text-white">
+      {rentalAvailable ? (
+        <section
+          id="rental-quote"
+          className="scroll-mt-24 border-t border-slate-200 bg-slate-950 py-16 text-white"
+        >
           <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 lg:flex-row lg:items-center">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-400">

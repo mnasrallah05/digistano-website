@@ -76,6 +76,13 @@ export default function CIBANO500Page() {
                 </a>
 
                 <a
+                  href="#rental-quote"
+                  className="rounded-xl border border-blue-400/60 bg-blue-500/10 px-6 py-4 text-center font-semibold text-blue-100 transition hover:bg-blue-600 hover:text-white"
+                >
+                  Request Rental
+                </a>
+
+                <a
                   href="/brochures/CIBANO-500-Brochure-ENU-1.pdf"
                   target="_blank"
                   rel="noopener noreferrer"

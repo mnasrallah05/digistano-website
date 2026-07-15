@@ -91,6 +91,13 @@ export default function HVA45HVA45TDPage() {
                 </a>
 
                 <a
+                  href="#rental-quote"
+                  className="rounded-xl border border-blue-400/60 bg-blue-500/10 px-6 py-4 text-center font-semibold text-blue-100 transition hover:bg-blue-600 hover:text-white"
+                >
+                  Request Rental
+                </a>
+
+                <a
                   href="/brochures/DHV1453_HVA45_HVA45TD_datasheet_EN_Rev00.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
