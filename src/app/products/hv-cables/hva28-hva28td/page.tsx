@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 
-export default function HVA28HVA28TDPage() {
+export default function HVA341HVA34TD1Page() {
   const [activeTab, setActiveTab] = useState<"description" | "attachment">(
     "description"
   );
 
   const highlights = [
     "Compact and portable VLF test sets for medium voltage cables",
-    "HVA28TD includes integrated Tan Delta diagnostics",
-    "HVA28 can be extended with the TD diagnostics unit",
+    "HVA34TD-1 includes integrated Tan Delta diagnostics",
+    "HVA34TD-1 features TD leakage current correction (guard terminal)",
+    "HVA34-1 can be extended with the TD diagnostics unit",
     "Performs VLF and DC testing",
     "Supports sheath testing with sheath fault location mode",
-    "Continuous operation without thermal limitation",
   ];
 
   const features = [
@@ -27,15 +27,15 @@ export default function HVA28HVA28TDPage() {
     },
     {
       title: "Safety first",
-      text: "Two independent earthing devices (electronic and mechanical discharging) and an integrated 12 kV transient protection system protect both operator and device.",
+      text: "The test sets have two independent earthing devices (electronic and mechanical discharging) and an integrated 12 kV transient protection system (at 50 Hz) to protect both the operator and the device.",
     },
     {
       title: "Field use",
-      text: "A watertight and very rugged case with protection class IP67 (with closed lid) makes additional transport solutions unnecessary.",
+      text: "A watertight and very rugged case with protection class of IP67 (with closed lid) makes no need for additional transport solutions.",
     },
     {
       title: "Connectivity",
-      text: "On site, no external PC is needed. Results can later be downloaded via USB or Bluetooth for investigation and easy reporting.",
+      text: "On site, no external PC is needed. All results can later be downloaded via USB or Bluetooth for further investigation and easy reporting via software tool.",
     },
     {
       title: "Service and maintenance",
@@ -43,14 +43,14 @@ export default function HVA28HVA28TDPage() {
     },
     {
       title: "MWT",
-      text: "HVA28TD offers a Monitored Withstand Test, combining withstand testing and Tan Delta diagnostics in compliance with IEEE 400.2-2013.",
+      text: "In addition, HVA34TD-1 offers a Monitored Withstand Test, a combination of withstand testing and Tan Delta diagnostics in compliance with the guide IEEE 400.2-2013.",
     },
   ];
 
   const specs = [
-    { label: "Output voltage", value: "max. 29 kVpeak, 21 kVrms" },
-    { label: "Output load", value: "0.5 μF @ 0.1 Hz @ 20 kVrms" },
-    { label: "Weight", value: "14 kg / 31 lbs" },
+    { label: "Output voltage", value: "max. 34 kVpeak, 24 kVrms" },
+    { label: "Output load", value: "1.5 μF @ 0.1 Hz @ 24 kVrms" },
+    { label: "Weight", value: "39 kg / 86 lbs" },
   ];
 
   return (
@@ -67,16 +67,16 @@ export default function HVA28HVA28TDPage() {
               </p>
 
               <h1 className="mb-5 text-4xl font-bold md:text-6xl">
-                HVA28 & HVA28TD
+                HVA34-1 & HVA34TD-1
               </h1>
 
               <p className="mb-6 text-xl text-slate-300">
-                Compact and portable VLF cable test sets with optional integrated
-                Tan Delta diagnostics
+                Compact and portable VLF cable test sets with integrated Tan Delta
+                diagnostics option
               </p>
 
               <p className="text-lg leading-8 text-slate-400">
-                The HVA28 and HVA28TD are compact VLF test sets for determining
+                The HVA34-1 and HVA34TD-1 are compact VLF test sets for determining
                 the condition of medium voltage cables. They perform VLF and DC
                 testing, as well as sheath testing with sheath fault location mode.
               </p>
@@ -90,7 +90,7 @@ export default function HVA28HVA28TDPage() {
                 </a>
 
                 <a
-                  href="/brochures/DHV1439_HVA28_HVA28TD_datasheet_EN_Rev00_02-1.pdf"
+                  href="/brochures/DHV1452_HVA34-1_HVA34TD-1_datasheet_EN_Rev00_01.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-xl border border-white/30 px-6 py-4 font-semibold text-white hover:bg-white/10"
@@ -106,8 +106,8 @@ export default function HVA28HVA28TDPage() {
 
                 <div className="relative overflow-hidden rounded-3xl bg-white/5 p-6 shadow-2xl">
                   <img
-                    src="/images/products/hva28-hva28td.png"
-                    alt="HVA28 & HVA28TD"
+                    src="/images/products/hva34-1-hva34td-1.png"
+                    alt="HVA34-1 & HVA34TD-1"
                     className="mx-auto h-auto w-full max-w-xl object-contain transition duration-700 group-hover:scale-110"
                   />
                 </div>
@@ -125,12 +125,12 @@ export default function HVA28HVA28TDPage() {
               Product Highlights
             </p>
             <h2 className="mb-4 text-3xl font-bold text-slate-900 md:text-4xl">
-              Compact VLF testing with flexible diagnostics capability
+              Portable VLF testing with advanced Tan Delta diagnostics support
             </h2>
             <p className="text-lg text-slate-600">
-              HVA28 and HVA28TD combine portability, VLF/DC testing capability,
-              sheath testing, and optional advanced Tan Delta diagnostics in a
-              rugged field-ready design.
+              HVA34-1 and HVA34TD-1 combine compact field-ready design, VLF/DC
+              testing capability, sheath testing, and advanced diagnostics features
+              for medium voltage cable assessment.
             </p>
           </div>
 
@@ -191,15 +191,16 @@ export default function HVA28HVA28TDPage() {
 
                   <div className="space-y-6 text-lg leading-9 text-slate-700">
                     <p>
-                      The HVA28 and HVA28TD are truly compact and portable VLF
+                      The HVA34-1 and HVA34TD-1 are truly compact and portable VLF
                       test sets which determine the condition of medium voltage
                       cables.
                     </p>
 
                     <p>
-                      The HVA28TD device includes integrated Tan Delta
-                      diagnostics capabilities, in comparison to HVA28 device,
-                      which can be extended with the TD diagnostics unit.
+                      HVA34TD-1 device includes integrated Tan Delta diagnostics
+                      capabilities and features TD leakage current correction (guard
+                      terminal), in comparison to HVA34-1 device, which can be
+                      with the TD diagnostics unit extended.
                     </p>
 
                     <p>
@@ -269,12 +270,12 @@ export default function HVA28HVA28TDPage() {
                     Attachment
                   </p>
                   <h2 className="text-2xl font-bold text-slate-900">
-                    DHV1439_HVA28_HVA28TD_datasheet_EN_Rev00_02-1.pdf
+                    DHV1452_HVA34-1_HVA34TD-1_datasheet_EN_Rev00_01.pdf
                   </h2>
                 </div>
 
                 <a
-                  href="/brochures/DHV1439_HVA28_HVA28TD_datasheet_EN_Rev00_02-1.pdf"
+                  href="/brochures/DHV1452_HVA34-1_HVA34TD-1_datasheet_EN_Rev00_01.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-700"

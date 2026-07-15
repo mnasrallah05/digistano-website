@@ -137,25 +137,19 @@ export function ProductSeoLayout({
 
   const graph: Record<string, unknown>[] = [
     {
-      "@type": "Service",
-      "@id": `${canonicalUrl}#service`,
-      name: product.rental
-        ? `${brandAndName} Rental`
-        : `${brandAndName} Equipment Solution`,
+      "@type": "Product",
+      "@id": `${canonicalUrl}#product`,
+      name: brandAndName,
       description,
       image,
       url: canonicalUrl,
       category: categoryName,
-      serviceType: product.rental
-        ? "Electrical testing equipment rental"
-        : `${categoryName} equipment solution`,
-      provider: { "@id": `${BASE_URL}/#organization` },
-      areaServed: [
-        { "@type": "Country", name: "Saudi Arabia" },
-        { "@type": "Country", name: "United Arab Emirates" },
-        { "@type": "Country", name: "Qatar" },
-        { "@type": "Country", name: "Oman" },
-      ],
+      brand: product.brand
+        ? { "@type": "Brand", name: product.brand }
+        : undefined,
+      manufacturer: product.brand
+        ? { "@type": "Organization", name: product.brand }
+        : undefined,
     },
     {
       "@type": "BreadcrumbList",
@@ -168,6 +162,23 @@ export function ProductSeoLayout({
       ],
     },
   ];
+
+  if (product.rental) {
+    graph.push({
+      "@type": "Service",
+      "@id": `${canonicalUrl}#rental-service`,
+      name: `${brandAndName} Rental`,
+      description,
+      serviceType: "Electrical testing equipment rental",
+      provider: { "@id": `${BASE_URL}/#organization` },
+      areaServed: [
+        { "@type": "Country", name: "United Arab Emirates" },
+        { "@type": "Country", name: "Saudi Arabia" },
+      ],
+      url: canonicalUrl,
+      mainEntityOfPage: { "@id": `${canonicalUrl}#product` },
+    });
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
