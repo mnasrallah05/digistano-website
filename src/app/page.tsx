@@ -334,6 +334,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PARTIAL DISCHARGE SERVICE SPOTLIGHT */}
+      <section className="border-y border-slate-800 bg-slate-950 py-20 text-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <FadeUpSection>
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div className="max-w-4xl">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-400">
+                  Specialist Engineering Service
+                </p>
+                <h2 className="text-3xl font-bold md:text-4xl">
+                  Partial discharge testing across the GCC
+                </h2>
+                <p className="mt-5 text-lg leading-8 text-slate-300">
+                  Explore DigiStano&apos;s onsite partial discharge testing,
+                  diagnostics, and monitoring support for GIS, switchgear,
+                  transformers, motors, generators, and MV/HV cable systems in
+                  Saudi Arabia, the UAE, Qatar, and Oman.
+                </p>
+              </div>
+
+              <a
+                href="/services/engineering-services/partial-discharge-testing"
+                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
+              >
+                Explore PD Testing Services →
+              </a>
+            </div>
+          </FadeUpSection>
+        </div>
+      </section>
+
       {/* WHY CHOOSE US / WHO WE ARE */}
       <section className="bg-white py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">

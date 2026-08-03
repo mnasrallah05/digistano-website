@@ -296,6 +296,31 @@ export default function RotatingMachinesPage() {
           </div>
         </div>
       </section>
+
+      {/* RELATED ENGINEERING SERVICE */}
+      <section className="border-y border-slate-800 bg-slate-950 py-16 text-white">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-400">
+              Related Engineering Service
+            </p>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+              Motor and generator partial discharge testing
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-300">
+              Explore offline and online PD measurement support for motors,
+              generators, and rotating-machine insulation systems across Saudi
+              Arabia, the UAE, Qatar, and Oman.
+            </p>
+          </div>
+          <a
+            href="/services/engineering-services/partial-discharge-testing"
+            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
+          >
+            Explore Rotating Machine PD Testing →
+          </a>
+        </div>
+      </section>
     </main>
   );
 }

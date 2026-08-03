@@ -157,6 +157,34 @@ export default function ServicesLandingPage() {
         </div>
       </section>
 
+      {/* SPECIALIST ENGINEERING SERVICE */}
+      <section className="border-y border-slate-800 bg-slate-950 py-20 text-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="max-w-4xl">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-400">
+                Specialist Engineering Service
+              </p>
+              <h2 className="text-3xl font-bold md:text-4xl">
+                Partial discharge testing in KSA, UAE, Qatar and Oman
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-slate-300">
+                DigiStano provides onsite PD measurement, diagnostics, and
+                monitoring support for GIS, switchgear, transformers, rotating
+                machines, and MV/HV cable systems.
+              </p>
+            </div>
+
+            <a
+              href="/services/engineering-services/partial-discharge-testing"
+              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
+            >
+              View Partial Discharge Services →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-white py-24">
         <div className="mx-auto max-w-4xl px-6 text-center">

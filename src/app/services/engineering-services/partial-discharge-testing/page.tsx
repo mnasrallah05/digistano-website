@@ -190,6 +190,43 @@ export default function PartialDischargeTestingPage() {
         </div>
       </section>
 
+      <section className="border-y border-slate-200 bg-slate-50 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
+              Related Solution Areas
+            </p>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+              Explore equipment for each PD testing application
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              Review the relevant product categories for cable, switchgear,
+              transformer, motor, and generator testing applications.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "MV & HV Cable Testing", href: "/products/hv-cables" },
+              { label: "Switchgear & GIS Testing", href: "/products/switchgear" },
+              { label: "Transformer Testing", href: "/products/transformers" },
+              { label: "Motor & Generator Testing", href: "/products/rotating-machines" },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group rounded-2xl border border-slate-200 bg-white p-6 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:text-blue-600 hover:shadow-lg"
+              >
+                {item.label}
+                <span className="ml-2 text-blue-600 transition group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="rounded-3xl bg-blue-600 p-8 text-white md:p-12">
