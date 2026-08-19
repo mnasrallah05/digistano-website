@@ -31,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const corePages: MetadataRoute.Sitemap = coreRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : route === "/services/rental" ? 0.9 : 0.8,
   }));
@@ -39,7 +38,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const productPages: MetadataRoute.Sitemap = canonicalProductRoutes.map(
     (route) => ({
       url: `${baseUrl}/products/${route}`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     })

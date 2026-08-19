@@ -213,7 +213,7 @@ export default function CPTD1215Page() {
                 </p>
 
                 <a
-                  href="/products/mv-hv-cables"
+                  href="/products/hv-cables"
                   className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-700"
                 >
                   Back to Category

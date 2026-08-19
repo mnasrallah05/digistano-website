@@ -93,6 +93,14 @@ export default function Navbar() {
                   </li>
                   <li>
                     <Link
+                      href="/services/engineering-services/partial-discharge-testing"
+                      className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
+                    >
+                      Partial Discharge Testing
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="/services/rental"
                       className="block rounded-xl px-4 py-3 transition hover:bg-white/5 hover:text-blue-400"
                     >
@@ -297,6 +305,13 @@ export default function Navbar() {
                   className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
                 >
                   Engineering Services
+                </Link>
+                <Link
+                  href="/services/engineering-services/partial-discharge-testing"
+                  onClick={closeAllMenus}
+                  className="block rounded-xl px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/5 hover:text-blue-400"
+                >
+                  Partial Discharge Testing
                 </Link>
                 <Link
                   href="/services/rental"
