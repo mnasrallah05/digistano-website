@@ -157,6 +157,7 @@ export function ProductSeoLayout({
         { "@type": "Country", name: "United Arab Emirates" },
         { "@type": "Country", name: "Qatar" },
         { "@type": "Country", name: "Oman" },
+        { "@type": "Country", name: "Bahrain" },
       ],
     },
     {

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title:
     "Equipment Rental Services | Electrical Testing Equipment | DigiStano",
   description:
-    "Rent specialized electrical testing equipment from DigiStano for commissioning, diagnostics, shutdowns, and project requirements across Saudi Arabia, UAE, Qatar, and Oman.",
+    "Rent specialized electrical testing equipment from DigiStano for commissioning, diagnostics, shutdowns, and project requirements across Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
   keywords: [
     "Equipment Rental UAE",
     "Electrical Testing Equipment Rental",
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "Test Equipment Rental Saudi Arabia",
     "Test Equipment Rental Qatar",
     "Test Equipment Rental Oman",
+    "Test Equipment Rental Bahrain",
   ],
   alternates: {
     canonical: "https://www.digistano.com/services/rental",
@@ -61,6 +62,8 @@ export default function Page() {
     areaServed: [
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "Saudi Arabia" },
+      { "@type": "Country", name: "Qatar" },
+      { "@type": "Country", name: "Oman" },
       { "@type": "Country", name: "Bahrain" },
     ],
   };

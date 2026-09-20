@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title:
     "Engineering Services | Electrical Testing & Field Support | DigiStano",
   description:
-    "DigiStano provides onsite engineering services including electrical testing, commissioning, partial discharge diagnostics, MV cable testing, and field support across Saudi Arabia, UAE, Qatar, and Oman.",
+    "DigiStano provides onsite engineering services including electrical testing, commissioning, partial discharge diagnostics, MV cable testing, and field support across Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
   keywords: [
     "Engineering Services UAE",
     "Electrical Testing Services",

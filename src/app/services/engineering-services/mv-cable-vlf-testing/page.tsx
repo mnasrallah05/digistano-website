@@ -6,7 +6,7 @@ const url =
 export const metadata: Metadata = {
   title: "MV Cable, VLF & VLF-PD Testing GCC | DigiStano",
   description:
-    "DigiStano provides MV cable testing, VLF withstand testing, VLF-PD diagnostics, Tan Delta assessment, and cable testing support across Saudi Arabia, UAE, Qatar, and Oman.",
+    "DigiStano provides MV cable testing, VLF withstand testing, VLF-PD diagnostics, Tan Delta assessment, and cable testing support across Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
   keywords: [
     "MV cable testing",
     "VLF testing",
@@ -17,13 +17,14 @@ export const metadata: Metadata = {
     "MV cable testing UAE",
     "cable testing Qatar",
     "cable testing Oman",
+    "cable testing Bahrain",
     "Tan Delta cable testing",
   ],
   alternates: { canonical: url },
   openGraph: {
     title: "MV Cable, VLF and VLF-PD Testing | DigiStano",
     description:
-      "Onsite MV cable testing and diagnostic support across Saudi Arabia, UAE, Qatar, and Oman.",
+      "Onsite MV cable testing and diagnostic support across Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
     url,
     siteName: "DigiStano",
     type: "website",
@@ -72,6 +73,7 @@ export default function MvCableVlfTestingPage() {
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "Qatar" },
       { "@type": "Country", name: "Oman" },
+      { "@type": "Country", name: "Bahrain" },
     ],
   };
 
@@ -104,7 +106,7 @@ export default function MvCableVlfTestingPage() {
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
               DigiStano supports cable commissioning, withstand testing,
               diagnostic assessment, and partial discharge measurement projects
-              in Saudi Arabia, UAE, Qatar, and Oman.
+              in Saudi Arabia, UAE, Qatar, Oman, and Bahrain.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
@@ -160,11 +162,11 @@ export default function MvCableVlfTestingPage() {
               Regional Delivery
             </p>
             <h2 className="text-3xl font-bold md:text-4xl">
-              Site-ready support across four key markets
+              Site-ready support across five key markets
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2">
-            {["Saudi Arabia", "United Arab Emirates", "Qatar", "Oman"].map(
+            {["Saudi Arabia", "United Arab Emirates", "Qatar", "Oman", "Bahrain"].map(
               (country) => (
                 <div
                   key={country}

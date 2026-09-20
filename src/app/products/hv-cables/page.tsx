@@ -357,7 +357,7 @@ export default function MVHVCablesPage() {
             <p className="mt-4 text-lg leading-8 text-slate-300">
               Learn about DigiStano&apos;s onsite PD measurement, diagnostics,
               and monitoring support for cable systems and accessories across
-              Saudi Arabia, the UAE, Qatar, and Oman.
+              Saudi Arabia, the UAE, Qatar, Oman, and Bahrain.
             </p>
           </div>
           <a

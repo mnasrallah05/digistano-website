@@ -6,10 +6,10 @@ const canonicalUrl = "https://www.digistano.com/services/rental/b2-electronics";
 export const metadata: Metadata = {
   title: "b2 electronics VLF Equipment Rental GCC | DigiStano",
   description:
-    "Rent b2 electronics HVA VLF and cable-diagnostic equipment for MV cable testing projects in Saudi Arabia, UAE, Qatar, and Oman through DigiStano.",
-  keywords: ["B2 rental", "b2 electronics rental", "HVA rental KSA", "VLF equipment rental", "cable test equipment rental GCC"],
+    "Rent b2 electronics HVA VLF and cable-diagnostic equipment for MV cable testing projects in Saudi Arabia, UAE, Qatar, Oman, and Bahrain through DigiStano.",
+  keywords: ["B2 rental", "b2 electronics rental", "HVA rental KSA", "VLF equipment rental", "cable test equipment rental GCC", "VLF equipment rental Bahrain"],
   alternates: { canonical: canonicalUrl },
-  openGraph: { title: "b2 electronics Equipment Rental | DigiStano", description: "HVA VLF and cable-diagnostic equipment rental across KSA, UAE, Qatar, and Oman.", url: canonicalUrl, siteName: "DigiStano", type: "website" },
+  openGraph: { title: "b2 electronics Equipment Rental | DigiStano", description: "HVA VLF and cable-diagnostic equipment rental across KSA, UAE, Qatar, Oman, and Bahrain.", url: canonicalUrl, siteName: "DigiStano", type: "website" },
 };
 
 export default function B2RentalPage() {

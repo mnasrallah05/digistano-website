@@ -9,7 +9,13 @@ type RentalLandingPageProps = {
   imageAlt?: string;
 };
 
-const countries = ["Saudi Arabia", "United Arab Emirates", "Qatar", "Oman"];
+const countries = [
+  "Saudi Arabia",
+  "United Arab Emirates",
+  "Qatar",
+  "Oman",
+  "Bahrain",
+];
 
 export default function RentalLandingPage({
   name,
@@ -62,7 +68,7 @@ export default function RentalLandingPage({
                 {eyebrow}
               </p>
               <h1 className="text-4xl font-bold leading-tight md:text-6xl">
-                {name} rental in KSA, UAE, Qatar and Oman
+                {name} rental across key GCC markets
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
                 {summary}
@@ -145,7 +151,7 @@ export default function RentalLandingPage({
           <p className="text-center text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
             Regional Rental Coverage
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {countries.map((country) => (
               <div
                 key={country}

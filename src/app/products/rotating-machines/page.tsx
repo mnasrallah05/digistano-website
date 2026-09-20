@@ -310,7 +310,7 @@ export default function RotatingMachinesPage() {
             <p className="mt-4 text-lg leading-8 text-slate-300">
               Explore offline and online PD measurement support for motors,
               generators, and rotating-machine insulation systems across Saudi
-              Arabia, the UAE, Qatar, and Oman.
+              Arabia, the UAE, Qatar, Oman, and Bahrain.
             </p>
           </div>
           <a

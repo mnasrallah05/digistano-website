@@ -12,7 +12,7 @@ const clients = [
   { name: "ADNOC", logo: "/images/clients/adnoc.png" },
   { name: "ABB", logo: "/images/clients/abb.png" },
   { name: "SIEMENS", logo: "/images/clients/siemens.png" },
-  { name: "EMIRATES Elictrical Engineering", logo: "/images/clients/eee.png"}
+  { name: "EMIRATES Electrical Engineering", logo: "/images/clients/eee.png"}
 ];
 
 const repeatedClients = [...clients, ...clients];

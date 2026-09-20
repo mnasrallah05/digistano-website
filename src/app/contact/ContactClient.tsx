@@ -197,7 +197,7 @@ export default function ContactClient() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
                   <p className="text-sm text-slate-400">Coverage</p>
                   <p className="mt-2 text-xl font-semibold text-white">
-                    UAE & Region
+                    Five GCC Markets
                   </p>
                 </div>
 
@@ -253,7 +253,7 @@ export default function ContactClient() {
                   </h3>
                   <div className="space-y-2 text-lg leading-8 text-slate-600">
                     <p>Dubai Office : +971 4 3373764</p>
-                    <p>Abu Dhabi Office : +9712 551314</p>
+                    <p>Abu Dhabi Headquarters : +971 2 5513114</p>
                     <p>
                       <a
                         href="mailto:sales@digistano.com"

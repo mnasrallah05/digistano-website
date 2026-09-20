@@ -4,9 +4,9 @@ const url =
   "https://www.digistano.com/services/engineering-services/partial-discharge-testing";
 
 export const metadata: Metadata = {
-  title: "Partial Discharge Testing KSA, UAE, Qatar & Oman | DigiStano",
+  title: "Partial Discharge Testing Across Key GCC Markets | DigiStano",
   description:
-    "DigiStano provides onsite partial discharge testing, PD measurement, diagnostics, and monitoring for GIS, switchgear, transformers, motors, generators, and MV/HV cables across Saudi Arabia, UAE, Qatar, and Oman.",
+    "DigiStano provides onsite partial discharge testing, PD measurement, diagnostics, and monitoring for GIS, switchgear, transformers, motors, generators, and MV/HV cables across Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
   keywords: [
     "PD testing",
     "partial discharge testing Saudi Arabia",
@@ -20,12 +20,13 @@ export const metadata: Metadata = {
     "partial discharge testing UAE",
     "partial discharge testing Qatar",
     "partial discharge testing Oman",
+    "partial discharge testing Bahrain",
   ],
   alternates: { canonical: url },
   openGraph: {
     title: "Partial Discharge Testing Services | DigiStano",
     description:
-      "Onsite PD measurement and monitoring for critical power assets across Saudi Arabia, UAE, Qatar, and Oman.",
+      "Onsite PD measurement and monitoring for critical power assets across Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
     url,
     siteName: "DigiStano",
     type: "website",
@@ -81,6 +82,7 @@ export default function PartialDischargeTestingPage() {
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "Qatar" },
       { "@type": "Country", name: "Oman" },
+      { "@type": "Country", name: "Bahrain" },
     ],
   };
 
@@ -108,12 +110,13 @@ export default function PartialDischargeTestingPage() {
               Specialist Engineering Service
             </p>
             <h1 className="text-4xl font-bold leading-tight md:text-6xl">
-              Partial discharge testing in Saudi Arabia, UAE, Qatar and Oman
+              Partial discharge testing across key GCC markets
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
               DigiStano provides field-focused PD testing, measurement,
               diagnostics, and monitoring support for critical electrical assets
-              across utilities, industry, infrastructure, and power projects.
+              across utilities, industry, infrastructure, and power projects in
+              Saudi Arabia, the UAE, Qatar, Oman, and Bahrain.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a

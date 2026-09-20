@@ -45,7 +45,7 @@ export default function Footer() {
             <p className="max-w-md text-sm leading-8 text-gray-400">
               DigiStano delivers advanced technology solutions, engineering
               services, testing equipment, training, and technical support
-              across the electrical power industry in the UAE and GCC region.
+              across the electrical power industry in key GCC markets.
             </p>
 
             {/* SOCIAL */}
@@ -118,6 +118,7 @@ export default function Footer() {
               <div className="flex gap-3">
                 <span>📍</span>
                 <p>
+                  Dubai Office:<br />
                   SIT Tower, 7th Floor,<br />
                   Dubai Silicon Oasis, Dubai, UAE
                 </p>
@@ -134,8 +135,8 @@ export default function Footer() {
               <div className="flex gap-3">
                 <span>✉️</span>
                 <p>
-                  <a href="mailto:sales@digistano.ae" className="hover:text-white">
-                    sales@digistano.ae
+                  <a href="mailto:sales@digistano.com" className="hover:text-white">
+                    sales@digistano.com
                   </a>
                   <br />
                   <a href="https://www.digistano.com" className="hover:text-white">

@@ -6,10 +6,10 @@ const canonicalUrl = "https://www.digistano.com/services/rental/megger";
 export const metadata: Metadata = {
   title: "Megger Test Equipment Rental GCC | DigiStano",
   description:
-    "Request Megger electrical test equipment rental for cable, relay, transformer, insulation, and substation testing projects in Saudi Arabia, UAE, Qatar, and Oman.",
-  keywords: ["Megger rental", "Megger equipment rental KSA", "Megger rental UAE", "electrical test equipment rental Qatar", "Megger test equipment Oman"],
+    "Request Megger electrical test equipment rental for cable, relay, transformer, insulation, and substation testing projects in Saudi Arabia, UAE, Qatar, Oman, and Bahrain.",
+  keywords: ["Megger rental", "Megger equipment rental KSA", "Megger rental UAE", "electrical test equipment rental Qatar", "Megger test equipment Oman", "Megger rental Bahrain"],
   alternates: { canonical: canonicalUrl },
-  openGraph: { title: "Megger Test Equipment Rental | DigiStano", description: "Megger rental enquiries across KSA, UAE, Qatar, and Oman.", url: canonicalUrl, siteName: "DigiStano", type: "website" },
+  openGraph: { title: "Megger Test Equipment Rental | DigiStano", description: "Megger rental enquiries across KSA, UAE, Qatar, Oman, and Bahrain.", url: canonicalUrl, siteName: "DigiStano", type: "website" },
 };
 
 export default function MeggerRentalPage() {

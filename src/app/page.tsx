@@ -350,7 +350,7 @@ export default function Home() {
                   Explore DigiStano&apos;s onsite partial discharge testing,
                   diagnostics, and monitoring support for GIS, switchgear,
                   transformers, motors, generators, and MV/HV cable systems in
-                  Saudi Arabia, the UAE, Qatar, and Oman.
+                  Saudi Arabia, the UAE, Qatar, Oman, and Bahrain.
                 </p>
               </div>
 
@@ -385,9 +385,9 @@ export default function Home() {
               </p>
 
               <p className="mb-5 text-lg leading-8 text-gray-600">
-                We operate across the UAE, Bahrain, Saudi Arabia, and Oman,
-                delivering strong regional expertise and a deep understanding of the
-                energy industry’s operational and technical requirements.
+                We maintain offices in the UAE, Saudi Arabia, and Bahrain and
+                provide services across the UAE, Saudi Arabia, Oman, Qatar, and
+                Bahrain.
               </p>
 
               <p className="mb-5 text-lg leading-8 text-gray-600">
@@ -402,7 +402,7 @@ export default function Home() {
                     Regional Coverage
                   </h3>
                   <p className="text-gray-600">
-                    UAE, Bahrain, Saudi Arabia, and Qatar.
+                    UAE, Saudi Arabia, Oman, Qatar, and Bahrain.
                   </p>
                 </div>
 
@@ -456,7 +456,7 @@ export default function Home() {
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 text-2xl text-blue-600">
                 📍
               </div>
-              <h3 className="mb-4 text-2xl font-semibold">Office Address</h3>
+              <h3 className="mb-4 text-2xl font-semibold">Dubai Office</h3>
               <p className="leading-8 text-gray-600">
                 SIT Tower, 7th Floor, Dubai Silicon Oasis, Dubai, UAE
               </p>

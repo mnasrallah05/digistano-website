@@ -166,7 +166,7 @@ export default function ServicesLandingPage() {
                 Specialist Engineering Service
               </p>
               <h2 className="text-3xl font-bold md:text-4xl">
-                Partial discharge testing in KSA, UAE, Qatar and Oman
+                Partial discharge testing in KSA, UAE, Qatar, Oman and Bahrain
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-300">
                 DigiStano provides onsite PD measurement, diagnostics, and

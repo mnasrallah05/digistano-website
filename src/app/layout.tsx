@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "DigiStano Energy L.L.C provides electrical testing, engineering services, and equipment rental solutions across the GCC region.",
+    "DigiStano Energy L.L.C provides electrical testing, engineering services, and equipment rental solutions across key GCC markets.",
 
   keywords: [
     "DigiStano",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "DigiStano | Electrical Testing & Engineering Solutions",
     description:
-      "Professional electrical testing, engineering services, and equipment rental solutions across the GCC.",
+      "Professional electrical testing, engineering services, and equipment rental solutions across key GCC markets.",
     url: "https://www.digistano.com",
     siteName: "DigiStano",
     locale: "en_US",
@@ -71,8 +71,10 @@ export default function RootLayout({
         alternateName: "DigiStano",
         url: "https://www.digistano.com",
         logo: "https://www.digistano.com/images/digistano-logo.png",
-        email: "sales@digistano.ae",
-        telephone: "+97143373764",
+        description:
+          "DigiStano is headquartered in Abu Dhabi, with offices in the UAE, Saudi Arabia, and Bahrain, serving key GCC markets.",
+        email: "sales@digistano.com",
+        telephone: "+97125513114",
         address: {
           "@type": "PostalAddress",
           streetAddress: "SIT Tower, 7th Floor, Dubai Silicon Oasis",
@@ -83,6 +85,61 @@ export default function RootLayout({
           { "@type": "Country", name: "United Arab Emirates" },
           { "@type": "Country", name: "Saudi Arabia" },
           { "@type": "Country", name: "Bahrain" },
+          { "@type": "Country", name: "Oman" },
+          { "@type": "Country", name: "Qatar" },
+        ],
+        location: [
+          {
+            "@type": "Place",
+            name: "DigiStano Headquarters",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Abu Dhabi",
+              addressCountry: "AE",
+            },
+          },
+          {
+            "@type": "Place",
+            name: "DigiStano Dubai Office",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "SIT Tower, 7th Floor, Dubai Silicon Oasis",
+              addressLocality: "Dubai",
+              addressCountry: "AE",
+            },
+          },
+          {
+            "@type": "Place",
+            name: "DigiStano Saudi Arabia Office",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Al Khobar",
+              addressCountry: "SA",
+            },
+          },
+          {
+            "@type": "Place",
+            name: "DigiStano Bahrain Office",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Manama",
+              addressCountry: "BH",
+            },
+          },
+        ],
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "headquarters",
+            telephone: "+97125513114",
+            email: "sales@digistano.com",
+          },
+          {
+            "@type": "ContactPoint",
+            contactType: "Dubai office",
+            telephone: "+97143373764",
+            email: "sales@digistano.com",
+          },
         ],
         sameAs: ["https://www.linkedin.com/company/digistano/"],
       },

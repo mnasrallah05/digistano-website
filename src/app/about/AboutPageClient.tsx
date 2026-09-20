@@ -232,6 +232,13 @@ export default function AboutPageClient() {
 
                 <div className="space-y-6 text-lg leading-8 text-slate-600">
                   <p>
+                    DigiStano is headquartered in Abu Dhabi, UAE, and operates
+                    through locally registered entities in the UAE, Saudi
+                    Arabia, and Bahrain. Our engineering and technical services
+                    cover the UAE, Saudi Arabia, Oman, Qatar, and Bahrain.
+                  </p>
+
+                  <p>
                     DigiStano is established to serve the electrical power
                     industry with innovative and advanced technology solutions,
                     in addition to providing professional representation for

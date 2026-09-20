@@ -304,7 +304,7 @@ export default function SwitchgearPage() {
             <p className="mt-4 text-lg leading-8 text-slate-300">
               Explore onsite PD measurement and condition-assessment support
               for gas-insulated and medium-voltage switchgear across Saudi
-              Arabia, the UAE, Qatar, and Oman.
+              Arabia, the UAE, Qatar, Oman, and Bahrain.
             </p>
           </div>
           <a

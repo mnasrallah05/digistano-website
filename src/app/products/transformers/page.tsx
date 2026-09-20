@@ -319,7 +319,7 @@ export default function TransformersPage() {
             <p className="mt-4 text-lg leading-8 text-slate-300">
               Learn about DigiStano&apos;s diagnostic PD measurement and
               monitoring support for power and distribution transformers across
-              Saudi Arabia, the UAE, Qatar, and Oman.
+              Saudi Arabia, the UAE, Qatar, Oman, and Bahrain.
             </p>
           </div>
           <a
