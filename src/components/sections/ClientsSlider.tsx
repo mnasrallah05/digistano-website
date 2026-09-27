@@ -1,4 +1,5 @@
-"use client";
+import Image from "next/image";
+import { SectionHead } from "@/components/site/Elements";
 
 const clients = [
   { name: "DEWA", logo: "/images/clients/dewa.png" },
@@ -12,37 +13,32 @@ const clients = [
   { name: "ADNOC", logo: "/images/clients/adnoc.png" },
   { name: "ABB", logo: "/images/clients/abb.png" },
   { name: "SIEMENS", logo: "/images/clients/siemens.png" },
-  { name: "EMIRATES Electrical Engineering", logo: "/images/clients/eee.png"}
+  { name: "EMIRATES Electrical Engineering", logo: "/images/clients/eee.png" },
+  { name: "Alkhorayef", logo: "/images/clients/alkhorayef.png" },
+  { name: "Aramco", logo: "/images/clients/aramco.png" },
+  { name: "Emirates Global Aluminium", logo: "/images/clients/ega.png" },
+  { name: "GCC Lab", logo: "/images/clients/gcc-lab.png" },
+  { name: "Innomotics", logo: "/images/clients/innomotics.jpg" },
+  { name: "Kahramaa", logo: "/images/clients/kahramaa.png" },
+  { name: "NMDC Group", logo: "/images/clients/nmdc-group.webp" },
+  { name: "Rightway", logo: "/images/clients/rightway.jpg" },
+  { name: "RTA", logo: "/images/clients/rta.png" },
+  { name: "SABIC", logo: "/images/clients/sabic.png" },
+  { name: "Saudi Electricity Company", logo: "/images/clients/saudi-electricity-company.png" },
 ];
 
-const repeatedClients = [...clients, ...clients];
+const track = [...clients, ...clients];
 
 export default function ClientsSlider() {
   return (
-    <section className="bg-gray-50 py-24 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-14 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-            Our Clients
-          </p>
-
-          <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
-            Trusted by leading organizations
-          </h2>
-        </div>
-
-        <div className="relative">
-          <div className="clients-slider-track flex w-max gap-6">
-            {repeatedClients.map((client, index) => (
-              <div
-                key={`${client.name}-${index}`}
-                className="flex h-40 w-[220px] shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
-              >
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-h-20 max-w-full object-contain"
-                />
+    <section className="ds-section ds-section-tint">
+      <div className="ds-container">
+        <SectionHead label="Our clients" title="Trusted by leading utilities and industrial operators." />
+        <div className="ds-logo-strip">
+          <div className="ds-logo-strip-track">
+            {track.map((client, index) => (
+              <div className="ds-logo-strip-item" key={`${client.name}-${index}`}>
+                <Image src={client.logo} alt={client.name} width={130} height={46} style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }} />
               </div>
             ))}
           </div>

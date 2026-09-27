@@ -1,544 +1,106 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import IsoSlider from "@/components/sections/IsoSlider";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ApplicationCards,
+  Arrow,
+  Button,
+  Coverage,
+  CTA,
+  Eyebrow,
+  FAQ,
+  IconGrid,
+  SectionHead,
+  ServiceCards,
+  ServiceSchema,
+} from "@/components/site/Elements";
 import ClientsSlider from "@/components/sections/ClientsSlider";
+import { ENQUIRY_PATH, PD_PATH, pageMetadata, pdFaqs } from "@/lib/site";
 
-function useInView<T extends HTMLElement>() {
-  const ref = useRef<T | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+export const metadata = pageMetadata(
+  "Partial Discharge Testing & Electrical Diagnostics",
+  "DigiStano specialises in onsite partial discharge testing and electrical diagnostics in the UAE, Saudi Arabia, Oman, Qatar and Bahrain. Equipment rental supports our engineering services.",
+  "/",
+);
 
-  useEffect(() => {
-    if (!ref.current) return;
+export default function HomePage() {
+  return <main className="ds-page">
+    <ServiceSchema name="Partial discharge testing and electrical diagnostic services" description="Onsite PD testing for GIS, switchgear, cables, transformers, motors and generators across five GCC markets." path="/" />
 
-    const element = ref.current;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -80px 0px",
-      }
-    );
-
-    observer.observe(element);
-
-    return () => observer.unobserve(element);
-  }, []);
-
-  return { ref, isVisible };
-}
-
-function FadeUpSection({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const { ref, isVisible } = useInView<HTMLDivElement>();
-
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 700ms ease, transform 700ms ease`,
-        transitionDelay: `${delay}ms`,
-        willChange: "opacity, transform",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-type SolutionCard = {
-  title: string;
-  image: string;
-  href: string;
-  imageHeight: string;
-  objectPosition: string;
-  zoomClass?: string;
-};
-
-export default function Home() {
-  const services = [
-    {
-      title: "Engineering Services",
-      icon: "⚙️",
-      description:
-        "Specialized engineering support for testing, commissioning, diagnostics, and field operations.",
-      href: "/services/engineering-services",
-    },
-    {
-      title: "Rental",
-      icon: "📦",
-      description:
-        "Reliable rental solutions for high-end testing equipment to support short-term and project-based needs.",
-      href: "/services/rental",
-    },
-    {
-      title: "Training",
-      icon: "🎓",
-      description:
-        "Practical technical training programs designed to improve operational knowledge and equipment handling.",
-      href: "/services/training",
-    },
-    {
-      title: "Repair & Calibration",
-      icon: "🛠️",
-      description:
-        "Professional repair and calibration services to maintain performance, compliance, and measurement accuracy.",
-      href: "/services/repair-calibration",
-    },
-  ];
-
-  const solutions: SolutionCard[] = [
-    {
-      title: "MV & HV Cables Testing",
-      image: "/images/cables1.jpg",
-      href: "/products/hv-cables",
-      imageHeight: "h-72",
-      objectPosition: "50% 18%",
-      zoomClass: "group-hover:scale-105",
-    },
-    {
-      title: "Relays & Meters Testing",
-      image: "/images/Relays.jpg",
-      href: "/products/relays",
-      imageHeight: "h-72",
-      objectPosition: "50% 18%",
-      zoomClass: "group-hover:scale-110",
-    },
-    {
-      title: "Rotating Machines Testing",
-      image: "/images/RotatingMachines.jpg",
-      href: "/products/rotating-machines",
-      imageHeight: "h-72",
-      objectPosition: "50% 18%",
-      zoomClass: "group-hover:scale-110",
-    },
-    {
-      title: "Switchgear Testing",
-      image: "/images/Switchgear.jpg",
-      href: "/products/switchgear",
-      imageHeight: "h-72",
-      objectPosition: "50% 18%",
-      zoomClass: "group-hover:scale-110",
-    },
-    {
-      title: "Transformer Testing",
-      image: "/images/transformers1.jpg",
-      href: "/products/transformers",
-      imageHeight: "h-72",
-      objectPosition: "50% 58%",
-      zoomClass: "group-hover:scale-105",
-    },
-    {
-      title: "Instrument Transformers (CT/VT) Testing",
-      image: "/images/ct-vt.png",
-      href: "/products/ct-vt",
-      imageHeight: "h-72",
-      objectPosition: "50% 18%",
-      zoomClass: "group-hover:scale-110",
-    },
-  ];
-
-  const locations = [
-    {
-      title: "Dubai, UAE",
-      company: "DigiStano Electric",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17780.40516567187!2d55.39063!3d25.117876!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f65feed514db1%3A0xabb3ace642f1d5d0!2sDigiStano%20Electric!5e1!3m2!1sen!2sae!4v1774865428602!5m2!1sen!2sae",
-      mapLink:
-        "https://www.google.com/maps/place/DigiStano+Electric/@25.117876,55.39063,17z",
-    },
-    {
-      title: "Abu Dhabi, UAE",
-      company: "DigiStano Energy Trading & Services LLC",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1145045.1435203312!2d54.533967!3d24.344265!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e4123dc89bfdb%3A0xeed0f5dc1c9699b3!2sDigiStano%20Energy%20Trading%20and%20Services%20LLC!5e1!3m2!1sen!2sae!4v1774865500699!5m2!1sen!2sae",
-      mapLink:
-        "https://www.google.com/maps/place/DigiStano+Energy+Trading+and+Services+LLC/",
-    },
-    {
-      title: "Manama, Bahrain",
-      company: "Digistano Services Co. W.L.L",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d35232.81217750475!2d50.575738!3d26.222485!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDEzJzIxLjAiTiA1MMKwMzUnMDUuMyJF!5e1!3m2!1sen!2sae!4v1774865568773!5m2!1sen!2sae",
-      mapLink:
-        "https://www.google.com/maps/search/?api=1&query=26.222485,50.575738",
-    },
-    {
-      title: "Al Khobar, KSA",
-      company: "Digistano Contracting LLC",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4401.115145935907!2d50.16965367607958!3d26.301253986099084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e9007f30e8ff%3A0xd29f559b713895e7!2sDigistano%20Contracting%20LLC!5e1!3m2!1sen!2sae!4v1774865639570!5m2!1sen!2sae",
-      mapLink:
-        "https://www.google.com/maps/place/Digistano+Contracting+LLC/",
-    },
-  ];
-
-  return (
-    <main>
-      {/* HERO */}
-      <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden text-white">
-        <div className="absolute inset-0">
-          <img
-            src="/images/hero.jpg"
-            alt="DigiStano hero"
-            className="h-full w-full object-cover"
-          />
+    <section className="ds-home-hero">
+      <div className="ds-home-hero-media"><Image src="/images/field/home-hero-v2.webp" alt="DigiStano engineer performing electrical diagnostic testing in a high-voltage installation" fill priority sizes="100vw" /></div>
+      <div className="ds-home-hero-overlay" />
+      <div className="ds-home-hero-grid" aria-hidden="true" />
+      <div className="ds-container ds-home-hero-inner">
+        <div className="ds-home-hero-copy" data-reveal>
+          <Eyebrow>Specialist diagnostics across the GCC</Eyebrow>
+          <h1>Partial discharge testing.<br /><em>Clearer decisions.</em></h1>
+          <p className="ds-lead">Field measurements, diagnostic interpretation and practical engineering support for critical electrical assets.</p>
+          <div className="ds-actions"><Button href={ENQUIRY_PATH}>Discuss your PD project</Button><Button href="/services" secondary>Explore all services</Button></div>
         </div>
+        <aside className="ds-hero-insight" data-reveal>
+          <span>01 / LEAD EXPERTISE</span>
+          <h2>From signal to engineering insight.</h2>
+          <p>Online and offline PD assessment for GIS, switchgear, MV/HV cables, transformers, motors and generators.</p>
+          <Link href={PD_PATH}>Explore PD testing <Arrow /></Link>
+        </aside>
+      </div>
+      <div className="ds-container ds-hero-locations" data-reveal><span>Service coverage</span><strong>UAE</strong><strong>Saudi Arabia</strong><strong>Oman</strong><strong>Qatar</strong><strong>Bahrain</strong></div>
+    </section>
 
-        <div className="absolute inset-0 bg-black/60" />
+    <section className="ds-proof-strip"><div className="ds-container">
+      <div data-reveal><strong>PD specialist</strong><span>Testing · diagnostics · monitoring</span></div>
+      <div data-reveal><strong>Abu Dhabi</strong><span>Group headquarters</span></div>
+      <div data-reveal><strong>3 office countries</strong><span>UAE · Saudi Arabia · Bahrain</span></div>
+      <div data-reveal><strong>5 service markets</strong><span>Cross-GCC field support</span></div>
+    </div></section>
 
-        <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-          <h2 className="mb-6 text-lg font-semibold uppercase tracking-[0.6em] text-blue-400 drop-shadow-md md:text-2xl lg:text-3xl">
-            DIGISTANO
-          </h2>
+    <ClientsSlider />
 
-          <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight md:text-6xl lg:text-7xl">
-            High-End Testing Equipment
-          </h1>
+    <section className="ds-section ds-services-showcase"><div className="ds-container">
+      <SectionHead label="Our services" title="Specialist support for the electrical asset lifecycle." text="Five connected service lines. One team focused on safe, reliable and well-understood electrical assets."><Link href="/services" className="ds-text-link">View the complete portfolio <Arrow /></Link></SectionHead>
+      <ServiceCards />
+    </div></section>
 
-          <p className="mx-auto mb-8 max-w-3xl text-base text-gray-300 md:text-xl">
-            Cutting-edge technology for precise and reliable electrical testing
-            solutions across power, commissioning, diagnostics, and field
-            applications.
-          </p>
+    <section className="ds-section ds-section-tint"><div className="ds-container">
+      <SectionHead label="Asset-specific PD testing" title="The asset defines the measurement." text="Testing scope, access and interpretation are planned around the installation—not forced into a generic package."><Link href={PD_PATH} className="ds-text-link">Our PD approach <Arrow /></Link></SectionHead>
+      <ApplicationCards />
+    </div></section>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="/products"
-              className="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
-            >
-              Explore Products
-            </a>
+    <section className="ds-section"><div className="ds-container">
+      <SectionHead label="Why choose DigiStano" title="Field expertise, backed by the right instruments and standards." text="A specialist team, principal-authorised equipment and certified management systems, applied consistently across every market we serve." />
+      <IconGrid items={[
+        { icon: "compass", title: "Regional reach", text: "Headquartered in Abu Dhabi with offices across the UAE, Saudi Arabia and Bahrain, reaching five GCC markets." },
+        { icon: "gauge", title: "Principal-authorised instruments", text: "OMICRON and Megger test equipment, calibrated and maintained to manufacturer standards." },
+        { icon: "cpu", title: "Engineering-led interpretation", text: "Every measurement is reviewed by engineers who explain the findings, limitations and practical next steps." },
+        { icon: "shield", title: "ISO-certified management", text: "Certified to ISO 9001, ISO 14001 and ISO 45001 for quality, environmental and safety management." },
+        { icon: "bolt", title: "Fast field response", text: "Local teams based in Sharjah, Dubai and Abu Dhabi, ready to mobilise on short notice." },
+        { icon: "wrench", title: "Full lifecycle support", text: "Testing, equipment rental, training and repair & calibration under one team, not separate vendors." },
+      ]} />
+      <div className="ds-iso-badges" data-reveal>
+        <Image src="/images/iso-9001.png" alt="ISO 9001 certified" width={72} height={72} />
+        <Image src="/images/iso-14001.png" alt="ISO 14001 certified" width={72} height={72} />
+        <Image src="/images/iso-45001.png" alt="ISO 45001 certified" width={72} height={72} />
+      </div>
+    </div></section>
 
-            <a
-              href="/contact"
-              className="rounded-lg border border-white px-6 py-3 font-medium text-white transition hover:bg-white hover:text-black"
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
+    <section className="ds-section ds-dark-section"><div className="ds-container ds-split" data-reveal>
+      <div><Eyebrow>Measurement with purpose</Eyebrow><h2>Data is the beginning. Engineering insight is the value.</h2><p>DigiStano brings together onsite measurements, diagnostic review and technical discussion to explain the observations, their limitations and practical next steps.</p><div className="ds-actions"><Button href="/services" light>Explore engineering services</Button></div></div>
+      <ol className="ds-process"><li><div><h3>Define the question</h3><p>Commissioning, condition assessment or a specific concern.</p></div></li><li><div><h3>Plan the measurement</h3><p>Review access, operating conditions and suitable test approaches.</p></div></li><li><div><h3>Review the findings</h3><p>Interpret the measurements in context and discuss follow-up.</p></div></li></ol>
+    </div></section>
 
-      {/* SERVICES */}
-      <section className="bg-gray-50 py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeUpSection className="mb-14 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Our Services
-            </p>
+    <section className="ds-section ds-rental-section"><div className="ds-container"><div className="ds-rental-band" data-reveal>
+      <div className="ds-rental-image"><Image src="/images/rental-equipment.jpg" alt="Specialised electrical testing instruments available for rental" fill sizes="(max-width:800px) 100vw,50vw" /></div>
+      <div><Eyebrow>Supporting equipment access</Eyebrow><h2>The right instrument for the project ahead.</h2><p>When your team is carrying out the testing, our equipment rental service can support the project. Share the application and dates to confirm instruments and availability.</p><Link href="/services/rental" className="ds-text-link">Explore equipment rental <Arrow /></Link></div>
+    </div></div></section>
 
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-              Comprehensive technical services for power and testing applications
-            </h2>
+    <Coverage />
 
-            <p className="text-lg text-gray-600">
-              DigiStano delivers specialized support across engineering, equipment
-              rental, technical training, and repair & calibration services.
-            </p>
-          </FadeUpSection>
+    <section className="ds-section ds-section-tint"><div className="ds-container">
+      <SectionHead label="Knowledge centre" title="Make an informed testing decision."><Link href="/knowledge" className="ds-text-link">Explore the guides <Arrow /></Link></SectionHead>
+      <div className="ds-article-list"><Link href="/knowledge/online-vs-offline-pd-testing" className="ds-article-card" data-reveal><p className="ds-overline">Testing approaches</p><h3>Online or offline PD testing?</h3><p>Understand operating conditions, access and the questions to ask before a survey.</p><span className="ds-text-link">Read the guide <Arrow /></span></Link><Link href="/knowledge/pd-testing-project-checklist" className="ds-article-card" data-reveal><p className="ds-overline">Project preparation</p><h3>A better brief. A clearer testing scope.</h3><p>The asset and site details that help define a PD assessment.</p><span className="ds-text-link">View the checklist <Arrow /></span></Link></div>
+    </div></section>
 
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {services.map((service, index) => (
-              <FadeUpSection key={service.title} delay={index * 120}>
-                <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-xl text-blue-600">
-                    {service.icon}
-                  </div>
-
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                    {service.title}
-                  </h3>
-
-                  <p className="mb-5 leading-7 text-gray-600">
-                    {service.description}
-                  </p>
-
-                  <a
-                    href={service.href}
-                    className="font-medium text-blue-600 hover:text-blue-700"
-                  >
-                    Learn more →
-                  </a>
-                </div>
-              </FadeUpSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* OUR SOLUTIONS */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeUpSection className="mb-14">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Our Solutions
-            </p>
-
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-              Power System Testing Solutions
-            </h2>
-
-            <p className="max-w-3xl text-lg text-gray-600">
-              Explore our solution areas designed to support testing, diagnostics,
-              maintenance, and commissioning across electrical power systems.
-            </p>
-          </FadeUpSection>
-
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {solutions.map((solution, index) => (
-              <FadeUpSection key={solution.title} delay={index * 120}>
-                <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                  <div
-                    className={`${solution.imageHeight} overflow-hidden bg-slate-100`}
-                  >
-                    <img
-                      src={solution.image}
-                      alt={solution.title}
-                      className={`h-full w-full object-cover transition duration-500 ${
-                        solution.zoomClass ?? "group-hover:scale-105"
-                      }`}
-                      style={{ objectPosition: solution.objectPosition }}
-                    />
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="mb-4 text-xl font-semibold text-slate-900">
-                      {solution.title}
-                    </h3>
-
-                    <a
-                      href={solution.href}
-                      className="font-medium text-blue-600 hover:text-blue-700"
-                    >
-                      View Products →
-                    </a>
-                  </div>
-                </div>
-              </FadeUpSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PARTIAL DISCHARGE SERVICE SPOTLIGHT */}
-      <section className="border-y border-slate-800 bg-slate-950 py-20 text-white">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeUpSection>
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div className="max-w-4xl">
-                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-400">
-                  Specialist Engineering Service
-                </p>
-                <h2 className="text-3xl font-bold md:text-4xl">
-                  Partial discharge testing across the GCC
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Explore DigiStano&apos;s onsite partial discharge testing,
-                  diagnostics, and monitoring support for GIS, switchgear,
-                  transformers, motors, generators, and MV/HV cable systems in
-                  Saudi Arabia, the UAE, Qatar, Oman, and Bahrain.
-                </p>
-              </div>
-
-              <a
-                href="/services/engineering-services/partial-discharge-testing"
-                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
-              >
-                Explore PD Testing Services →
-              </a>
-            </div>
-          </FadeUpSection>
-        </div>
-      </section>
-
-      {/* WHY CHOOSE US / WHO WE ARE */}
-      <section className="bg-white py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
-          <FadeUpSection>
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-                Why Choose Us
-              </p>
-
-              <h2 className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl">
-                Trusted technical partner across the GCC
-              </h2>
-
-              <p className="mb-5 text-lg leading-8 text-gray-600">
-                DigiStano is a reliable, trustworthy, competent, and certified
-                technical services provider serving the energy sector across the GCC
-                region, with headquarters in Abu Dhabi, United Arab Emirates.
-              </p>
-
-              <p className="mb-5 text-lg leading-8 text-gray-600">
-                We maintain offices in the UAE, Saudi Arabia, and Bahrain and
-                provide services across the UAE, Saudi Arabia, Oman, Qatar, and
-                Bahrain.
-              </p>
-
-              <p className="mb-5 text-lg leading-8 text-gray-600">
-                Our goal is to be the trusted partner of choice by providing
-                reliable, sustainable, and high-value solutions across testing,
-                commissioning, maintenance, and evolving technical applications.
-              </p>
-
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-                  <h3 className="mb-2 font-semibold text-gray-900">
-                    Regional Coverage
-                  </h3>
-                  <p className="text-gray-600">
-                    UAE, Saudi Arabia, Oman, Qatar, and Bahrain.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-                  <h3 className="mb-2 font-semibold text-gray-900">
-                    Certified Quality
-                  </h3>
-                  <p className="text-gray-600">
-                    Committed to internationally recognized standards.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </FadeUpSection>
-
-          <FadeUpSection delay={150}>
-            <IsoSlider />
-          </FadeUpSection>
-        </div>
-      </section>
-
-      <FadeUpSection>
-        <ClientsSlider />
-      </FadeUpSection>
-
-      {/* HOME PAGE ONLY CTA */}
-      <section className="border-b border-white/10 bg-[#17175a] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 text-center">
-          <FadeUpSection>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-300">
-              Get In Touch
-            </p>
-
-            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-              Let’s discuss your requirements
-            </h2>
-
-            <p className="mx-auto max-w-3xl text-base text-gray-200 md:text-lg">
-              We welcome your inquiries, feedback, and project discussions. Our team
-              will respond within our working hours.
-            </p>
-          </FadeUpSection>
-        </div>
-      </section>
-
-      {/* HOME PAGE ONLY CONTACT CARDS */}
-      <section className="bg-white text-gray-900">
-        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-3">
-          <FadeUpSection delay={0}>
-            <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 text-2xl text-blue-600">
-                📍
-              </div>
-              <h3 className="mb-4 text-2xl font-semibold">Dubai Office</h3>
-              <p className="leading-8 text-gray-600">
-                SIT Tower, 7th Floor, Dubai Silicon Oasis, Dubai, UAE
-              </p>
-            </div>
-          </FadeUpSection>
-
-          <FadeUpSection delay={120}>
-            <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-2xl text-emerald-600">
-                ☎️
-              </div>
-              <h3 className="mb-4 text-2xl font-semibold">Phone Number</h3>
-              <p className="leading-8 text-gray-600">
-                Dubai: 04-3373764
-                <br />
-                Abu Dhabi: 02-5513114
-              </p>
-            </div>
-          </FadeUpSection>
-
-          <FadeUpSection delay={240}>
-            <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-violet-50 text-2xl text-violet-600">
-                ✉️
-              </div>
-              <h3 className="mb-4 text-2xl font-semibold">Email Address</h3>
-              <p className="leading-8 text-gray-600">
-                sales@digistano.com
-                <br />
-                www.digistano.com
-              </p>
-            </div>
-          </FadeUpSection>
-        </div>
-      </section>
-
-      {/* HOME PAGE ONLY LOCATIONS */}
-      <section className="bg-[#17175a] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-20">
-          <FadeUpSection className="mb-12">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-300">
-              Locations
-            </p>
-            <h2 className="text-3xl font-bold md:text-4xl">
-              Regional Presence Across GCC
-            </h2>
-          </FadeUpSection>
-
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {locations.map((location, index) => (
-              <FadeUpSection key={location.title} delay={index * 120}>
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                  <div className="h-56 overflow-hidden bg-white">
-                    <iframe
-                      src={location.mapEmbed}
-                      className="h-full w-full border-0"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      allowFullScreen
-                      title={location.title}
-                    />
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="mb-2 text-xl font-semibold">{location.title}</h3>
-                    <p className="mb-4 font-medium text-blue-200">{location.company}</p>
-
-                    <a
-                      href={location.mapLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center rounded-lg border border-blue-300/30 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white hover:text-[#17175a]"
-                    >
-                      Open in Google Maps
-                    </a>
-                  </div>
-                </div>
-              </FadeUpSection>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+    <section className="ds-section"><div className="ds-container ds-split"><div data-reveal><Eyebrow>Before your assessment</Eyebrow><h2>Your questions, answered clearly.</h2></div><FAQ items={[pdFaqs[0], pdFaqs[2], pdFaqs[3]]} /></div></section>
+    <CTA />
+  </main>;
 }

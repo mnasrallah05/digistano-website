@@ -16,11 +16,11 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "img-src 'self' https: data: blob:",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
-      "connect-src 'self' https://maps.googleapis.com https://maps.gstatic.com",
-      "frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps",
+      "connect-src 'self' https://maps.googleapis.com https://maps.gstatic.com https://www.google.com/recaptcha/",
+      "frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps https://recaptcha.google.com/recaptcha/",
     ].join("; "),
   },
 ];

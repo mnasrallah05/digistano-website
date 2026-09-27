@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Button, IconGrid, PageHero, SectionHead } from "@/components/site/Elements";
 
 declare global {
   interface Window {
@@ -199,433 +200,142 @@ export default function EngineeringServicesClient() {
   }
 
   return (
-    <main className="bg-white text-slate-900">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-slate-950 text-white">
-        <div className="absolute inset-0">
-          <img
-            src="/images/EngineeringServices.jpg"
-            alt="Engineering Services"
-            className="h-full w-full object-cover opacity-30"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-900/70" />
+    <main className="ds-page">
+      <PageHero
+        label="Engineering services"
+        title="Electrical testing and diagnostic support for critical power assets"
+        text="DigiStano provides partial discharge diagnostics, cable testing, commissioning, training, and field engineering support across the UAE, Saudi Arabia, Oman, Qatar, and Bahrain."
+        image="/images/EngineeringServices.jpg"
+        stats={[
+          { label: "Coverage", value: "Across GCC" },
+          { label: "Focus", value: "Testing & Support" },
+          { label: "Approach", value: "Reliable & Practical" },
+        ]}
+      >
+        <Button href="#appointment">Book an appointment</Button>
+        <Button href="#capabilities" secondary>Explore capabilities</Button>
+      </PageHero>
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
-          <div className="max-w-3xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-blue-400">
-              Engineering Services
-            </p>
-
-            <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
-              Onsite technical support for critical power system applications
-            </h1>
-
-            <p className="mb-8 max-w-2xl text-lg leading-8 text-slate-300">
-              DigiStano provides local sales support, product demonstration,
-              testing, training, and field engineering services across electrical
-              power systems in the GCC.
-            </p>
-
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#appointment"
-                className="rounded-xl bg-blue-600 px-6 py-4 text-center font-semibold text-white transition hover:bg-blue-700"
-              >
-                Book an Appointment
-              </a>
-
-              <a
-                href="#capabilities"
-                className="rounded-xl border border-white/20 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white hover:text-slate-950"
-              >
-                Explore Capabilities
-              </a>
-            </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                <p className="text-sm text-slate-300">Coverage</p>
-                <p className="mt-1 text-lg font-semibold">Across GCC</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                <p className="text-sm text-slate-300">Focus</p>
-                <p className="mt-1 text-lg font-semibold">Testing & Support</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                <p className="text-sm text-slate-300">Approach</p>
-                <p className="mt-1 text-lg font-semibold">Reliable & Practical</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* INTRO */}
-      <section className="py-20">
-        <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="overflow-hidden rounded-3xl border border-slate-200 shadow-sm">
-            <img
-              src="/images/EngineeringServices.jpg"
-              alt="DigiStano engineering team"
-              className="h-full w-full object-cover"
-            />
-          </div>
-
+      <section className="ds-section">
+        <div className="ds-container ds-split" data-reveal>
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Why DigiStano
-            </p>
-
-            <h2 className="mb-6 text-3xl font-bold leading-tight text-slate-900 md:text-5xl">
-              Engineering expertise backed by field understanding
-            </h2>
-
-            <p className="mb-6 text-lg leading-8 text-slate-600">
-              Our engineering team supports clients with local sales assistance,
-              onsite technical services, product demonstrations, training, and
-              testing activities tailored to real project conditions.
-            </p>
-
-            <p className="text-lg leading-8 text-slate-600">
-              We focus on practical execution, fast support response, and technical
-              reliability to help clients achieve efficient testing,
-              commissioning, and diagnostics across power system assets.
-            </p>
+            <p className="ds-eyebrow"><span />Why DigiStano</p>
+            <h2 style={{ fontSize: 34, marginBottom: 20 }}>Engineering expertise backed by field understanding</h2>
+          </div>
+          <div style={{ display: "grid", gap: 16 }}>
+            <p className="ds-body-copy">Our engineering team supports clients with testing, diagnostics, commissioning, training, and field engineering services tailored to real project conditions.</p>
+            <p className="ds-body-copy">We focus on practical execution, fast support response, and technical reliability to help clients achieve efficient testing, commissioning, and diagnostics across power system assets.</p>
           </div>
         </div>
       </section>
 
-      {/* CAPABILITIES */}
-      <section id="capabilities" className="bg-slate-50 py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Capabilities
-            </p>
-            <h2 className="mb-4 text-3xl font-bold text-slate-900 md:text-4xl">
-              Technical support across major testing disciplines
-            </h2>
-            <p className="text-lg text-slate-600">
-              Our team supports a wide range of power system testing and diagnostic
-              applications with practical, site-ready engineering services.
-            </p>
-          </div>
-
-          <div className="grid gap-x-12 gap-y-4 md:grid-cols-2">
-            {capabilityItems.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-start gap-4 border-b border-slate-200 py-4"
-              >
-                <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-600" />
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    className="group text-base font-medium leading-7 text-slate-700 transition hover:text-blue-600"
-                  >
-                    {item.label}
-                    <span className="ml-2 text-blue-600 transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  </a>
-                ) : (
-                  <p className="text-base leading-7 text-slate-700">{item.label}</p>
-                )}
-              </div>
-            ))}
+      <section id="capabilities" className="ds-section ds-section-tint">
+        <div className="ds-container">
+          <SectionHead label="Capabilities" title="Technical support across major testing disciplines." text="Our team supports a wide range of power system testing and diagnostic applications with practical, site-ready engineering services." />
+          <div className="ds-capability-list">
+            {capabilityItems.map((item) =>
+              item.href
+                ? <a key={item.label} href={item.href}>{item.label} <span aria-hidden="true">→</span></a>
+                : <p key={item.label}>{item.label}</p>
+            )}
           </div>
         </div>
       </section>
 
-      {/* SPECIALIST STRIP */}
-      <section className="bg-slate-950 py-20 text-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <section className="ds-section ds-dark-section">
+        <div className="ds-container ds-split" data-reveal>
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-400">
-              Specialist Focus
-            </p>
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">
-              Partial discharge measurement and monitoring support
-            </h2>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              DigiStano supports portable and online partial discharge monitoring
-              for critical power assets, helping clients improve diagnostics,
-              maintenance planning, and equipment reliability.
-            </p>
-            <a
-              href="/services/engineering-services/partial-discharge-testing"
-              className="mt-8 inline-flex rounded-xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-700"
-            >
-              Explore Partial Discharge Testing
-            </a>
+            <p className="ds-eyebrow"><span />Specialist focus</p>
+            <h2 style={{ fontSize: 32, marginBottom: 20 }}>Partial discharge measurement and monitoring support</h2>
+            <p style={{ maxWidth: 520 }}>DigiStano supports portable and online partial discharge monitoring for critical power assets, helping clients improve diagnostics, maintenance planning, and equipment reliability.</p>
+            <div className="ds-actions"><Button href="/services/engineering-services/partial-discharge-testing" light>Explore partial discharge testing</Button></div>
           </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
-            <h3 className="mb-6 text-2xl font-semibold">
-              Common applications
-            </h3>
-
-            <div className="space-y-4">
-              {pdItems.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-4 border-b border-white/10 pb-4"
-                >
-                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-400" />
-                  <p className="text-slate-200">{item}</p>
-                </div>
-              ))}
-            </div>
+          <div className="ds-dark-card">
+            <h3>Common applications</h3>
+            <ul>{pdItems.map((item) => <li key={item}><p>{item}</p></li>)}</ul>
           </div>
         </div>
       </section>
 
-      {/* TRUST BAR */}
-      <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-3">
-          <div className="rounded-2xl bg-slate-50 p-6">
-            <p className="text-sm text-slate-500">Regional Presence</p>
-            <p className="mt-2 text-xl font-semibold text-slate-900">
-              UAE, Bahrain, Saudi Arabia, Oman, Qatar
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-slate-50 p-6">
-            <p className="text-sm text-slate-500">Service Value</p>
-            <p className="mt-2 text-xl font-semibold text-slate-900">
-              Demonstration, testing, training, and support
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-slate-50 p-6">
-            <p className="text-sm text-slate-500">Technical Strength</p>
-            <p className="mt-2 text-xl font-semibold text-slate-900">
-              Field-focused engineering execution
-            </p>
-          </div>
+      <section className="ds-section">
+        <div className="ds-container">
+          <IconGrid items={[
+            { icon: "compass", title: "Regional presence", text: "UAE, Bahrain, Saudi Arabia, Oman and Qatar." },
+            { icon: "spark", title: "Service value", text: "Demonstration, testing, training, and support." },
+            { icon: "gauge", title: "Technical strength", text: "Field-focused engineering execution." },
+          ]} />
         </div>
       </section>
 
-      {/* APPOINTMENT */}
-      <section id="appointment" className="bg-slate-50 py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Appointment
-            </p>
-            <h2 className="mb-4 text-3xl font-bold text-slate-900 md:text-5xl">
-              Request a consultation with our engineering team
-            </h2>
-            <p className="text-lg leading-8 text-slate-600">
-              Share your requirements and preferred timing. Our team will review
-              your request and contact you to confirm the appointment.
-            </p>
-          </div>
-
-          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-            <div className="rounded-3xl bg-slate-950 p-8 text-white">
-              <h3 className="mb-6 text-2xl font-semibold">
-                What happens next?
-              </h3>
-
-              <div className="space-y-6">
-                <div>
-                  <p className="font-semibold">1. Submit your request</p>
-                  <p className="mt-2 text-slate-300">
-                    Provide your preferred date, time, and purpose of the appointment.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-semibold">2. We review it quickly</p>
-                  <p className="mt-2 text-slate-300">
-                    Our team checks availability and aligns the request with the
-                    relevant engineering support scope.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-semibold">3. We confirm with you</p>
-                  <p className="mt-2 text-slate-300">
-                    You’ll receive confirmation by email, and we will coordinate the
-                    next steps directly.
-                  </p>
-                </div>
-              </div>
+      <section id="appointment" className="ds-section ds-section-tint">
+        <div className="ds-container">
+          <SectionHead label="Appointment" title="Request a consultation with our engineering team." text="Share your requirements and preferred timing. Our team will review your request and contact you to confirm the appointment." />
+          <div className="ds-split" data-reveal>
+            <div className="ds-dark-card">
+              <h3>What happens next?</h3>
+              <ol>
+                <li><p>1. Submit your request</p><p>Provide your preferred date, time, and purpose of the appointment.</p></li>
+                <li><p>2. We review it quickly</p><p>Our team checks availability and aligns the request with the relevant engineering support scope.</p></li>
+                <li><p>3. We confirm with you</p><p>You&rsquo;ll receive confirmation by email, and we will coordinate the next steps directly.</p></li>
+              </ol>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10"
-            >
-              {/* Honeypot */}
-              <div className="hidden" aria-hidden="true">
+            <form onSubmit={handleSubmit} className="ds-form">
+              <div style={{ display: "none" }} aria-hidden="true">
                 <label htmlFor="website">Website</label>
-                <input
-                  id="website"
-                  name="website"
-                  type="text"
-                  value={form.website}
-                  onChange={handleChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
+                <input id="website" name="website" type="text" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+              </div>
+              <input type="hidden" name="formStartedAt" value={form.formStartedAt} readOnly />
+
+              <div className="ds-field">
+                <label htmlFor="full_name">Full name *</label>
+                <input id="full_name" name="full_name" type="text" value={form.full_name} onChange={handleChange} required maxLength={120} placeholder="Your full name" />
               </div>
 
-              {/* Timing */}
-              <input
-                type="hidden"
-                name="formStartedAt"
-                value={form.formStartedAt}
-                readOnly
-              />
+              <div className="ds-field">
+                <label htmlFor="email">Email *</label>
+                <input id="email" name="email" type="email" value={form.email} onChange={handleChange} required maxLength={160} placeholder="Your email" />
+              </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="md:col-span-1">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Full name *
-                  </label>
-                  <input
-                    name="full_name"
-                    type="text"
-                    value={form.full_name}
-                    onChange={handleChange}
-                    required
-                    maxLength={120}
-                    placeholder="Your full name"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              <div className="ds-field">
+                <label htmlFor="appointment_date">Appointment date *</label>
+                <input id="appointment_date" name="appointment_date" type="date" value={form.appointment_date} onChange={handleChange} required />
+              </div>
 
-                <div className="md:col-span-1">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Email *
-                  </label>
-                  <input
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    maxLength={160}
-                    placeholder="Your email"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              <div className="ds-field">
+                <label htmlFor="phone">Phone number *</label>
+                <input id="phone" name="phone" type="tel" value={form.phone} onChange={handleChange} required maxLength={40} placeholder="Your phone number" />
+              </div>
 
-                <div className="md:col-span-1">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Appointment date *
-                  </label>
-                  <input
-                    name="appointment_date"
-                    type="date"
-                    value={form.appointment_date}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              <div className="ds-field">
+                <label htmlFor="time_slot">Preferred time slot *</label>
+                <select id="time_slot" name="time_slot" value={form.time_slot} onChange={handleChange}>
+                  {timeSlots.map((slot) => <option key={slot} value={slot}>{slot}</option>)}
+                </select>
+              </div>
 
-                <div className="md:col-span-1">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Phone number *
-                  </label>
-                  <input
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                    required
-                    maxLength={40}
-                    placeholder="Your phone number"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              <div className="ds-field">
+                <label htmlFor="meeting_type">Meeting type *</label>
+                <select id="meeting_type" name="meeting_type" value={form.meeting_type} onChange={handleChange}>
+                  <option value="Online">Online</option>
+                  <option value="Office">Office</option>
+                </select>
+              </div>
 
-                <div className="md:col-span-1">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Preferred time slot *
-                  </label>
-                  <select
-                    name="time_slot"
-                    value={form.time_slot}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  >
-                    {timeSlots.map((slot) => (
-                      <option key={slot} value={slot}>
-                        {slot}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="ds-field ds-field-full">
+                <label htmlFor="purpose">Purpose of appointment *</label>
+                <textarea id="purpose" name="purpose" rows={6} value={form.purpose} onChange={handleChange} required maxLength={3000} placeholder="Tell us what you need regarding engineering services" />
+              </div>
 
-                <div className="md:col-span-1">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Meeting type *
-                  </label>
-                  <select
-                    name="meeting_type"
-                    value={form.meeting_type}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  >
-                    <option value="Online">Online</option>
-                    <option value="Office">Office</option>
-                  </select>
-                </div>
+              <p className="ds-form-note">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
 
-                <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Purpose of appointment *
-                  </label>
-                  <textarea
-                    name="purpose"
-                    rows={6}
-                    value={form.purpose}
-                    onChange={handleChange}
-                    required
-                    maxLength={3000}
-                    placeholder="Tell us what you need regarding engineering services"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              {message.text ? (
+                <div className={`ds-form-banner ${message.type === "success" ? "ds-form-banner-success" : "ds-form-banner-error"}`}>{message.text}</div>
+              ) : null}
 
-                <div className="md:col-span-2">
-                  <p className="text-xs leading-6 text-slate-500">
-                    This site is protected by reCAPTCHA and the Google Privacy
-                    Policy and Terms of Service apply.
-                  </p>
-                </div>
-
-                {message.text ? (
-                  <div
-                    className={`md:col-span-2 rounded-xl px-4 py-4 text-sm font-medium ${
-                      message.type === "success"
-                        ? "border border-green-200 bg-green-50 text-green-700"
-                        : "border border-red-200 bg-red-50 text-red-700"
-                    }`}
-                  >
-                    {message.text}
-                  </div>
-                ) : null}
-
-                <div className="md:col-span-2 flex items-center justify-between gap-4 pt-2">
-                  <p className="max-w-xl text-sm leading-6 text-slate-500">
-                    By submitting this form, you allow DigiStano to contact you
-                    regarding your appointment request.
-                  </p>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="shrink-0 rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {submitting ? "Submitting..." : "Submit Request"}
-                  </button>
-                </div>
+              <div className="ds-form-actions">
+                <p>By submitting this form, you allow DigiStano to contact you regarding your appointment request.</p>
+                <button type="submit" disabled={submitting} className="ds-form-submit">{submitting ? "Submitting..." : "Submit Request"}</button>
               </div>
             </form>
           </div>

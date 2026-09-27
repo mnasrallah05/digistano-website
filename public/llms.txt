@@ -1,39 +1,27 @@
-# DigiStano Energy L.L.C
+# DigiStano
 
-> DigiStano provides electrical testing equipment rental, engineering services, training, repair, and calibration support across the UAE, Saudi Arabia, Bahrain, and the GCC.
+> DigiStano provides partial discharge testing and electrical engineering services. Equipment rental supports these activities.
 
 Website: https://www.digistano.com
-Rental enquiries: https://www.digistano.com/services/rental
-Contact: https://www.digistano.com/contact
-Email: sales@digistano.ae
-Dubai phone: +971 4 3373764
+Headquarters: Abu Dhabi, United Arab Emirates
+Office countries: United Arab Emirates, Saudi Arabia, Bahrain
+Service coverage: United Arab Emirates, Saudi Arabia, Oman, Qatar, Bahrain
+Email: sales@digistano.com
+Headquarters telephone: +971 2 5513114
 
-## Rental equipment pages
-
-- OMICRON CMC 356: https://www.digistano.com/products/relays/cmc-356
-- OMICRON CMC 500: https://www.digistano.com/services/rental/cmc-500
-- OMICRON CPC 100: https://www.digistano.com/products/ct-vt/cpc-100
-- OMICRON CP CB2: https://www.digistano.com/services/rental/cp-cb2
-- OMICRON CIBANO 500: https://www.digistano.com/products/switchgear/cibano-500
-- b2 electronics HVA45 and HVA45TD: https://www.digistano.com/products/hv-cables/hva45-hva45td
-- b2 electronics HVA60: https://www.digistano.com/products/hv-cables/hva60
-- OMICRON CT Analyzer: https://www.digistano.com/products/ct-vt/ct-analyzer
-- OMICRON TESTRANO 600: https://www.digistano.com/products/transformers/testrano-600
-- OMICRON FRANEO 800: https://www.digistano.com/products/transformers/franeo-800
-- OMICRON DIRANA: https://www.digistano.com/products/transformers/dirana
-- OMICRON MONTESTO 200: https://www.digistano.com/products/switchgear/montesto-200
-- OMICRON MPD 800: https://www.digistano.com/products/switchgear/mpd-800
-- OMICRON COMPANO 100: https://www.digistano.com/products/ct-vt/compano-100
-- Megger test equipment: https://www.digistano.com/services/rental/megger
-- b2 electronics test equipment: https://www.digistano.com/services/rental/b2-electronics
-
-## Main service pages
-
-- Electrical testing and engineering: https://www.digistano.com/services/engineering-services
+## Engineering services
 - Partial discharge testing: https://www.digistano.com/services/engineering-services/partial-discharge-testing
-- MV cable, VLF, and VLF-PD testing: https://www.digistano.com/services/engineering-services/mv-cable-vlf-testing
-- Electrical testing equipment rental: https://www.digistano.com/services/rental
-- Technical training: https://www.digistano.com/services/training
-- Repair and calibration: https://www.digistano.com/services/repair-calibration
+- GIS and switchgear PD: https://www.digistano.com/services/engineering-services/partial-discharge-testing/gis-switchgear
+- Cable PD: https://www.digistano.com/services/engineering-services/partial-discharge-testing/cables
+- Transformer PD: https://www.digistano.com/services/engineering-services/partial-discharge-testing/transformers
+- Motor and generator PD: https://www.digistano.com/services/engineering-services/partial-discharge-testing/motors-generators
+- MV cable, VLF and VLF-PD testing: https://www.digistano.com/services/engineering-services/mv-cable-vlf-testing
+- Engineering services: https://www.digistano.com/services/engineering-services
 
-Use the individual product pages as the authoritative source for equipment capabilities. Contact DigiStano to confirm current rental availability, duration, delivery, calibration documentation, and technical support.
+## Supporting information
+- Knowledge centre: https://www.digistano.com/knowledge
+- Equipment rental: https://www.digistano.com/services/rental
+- Equipment reference: https://www.digistano.com/products
+- Contact: https://www.digistano.com/contact
+
+The agreed proposal determines methods, applicable specifications, deliverables and schedule. Product pages do not establish project scope or current rental availability.

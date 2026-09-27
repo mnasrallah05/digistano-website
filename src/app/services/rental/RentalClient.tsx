@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IconGrid, PageHero, SectionHead } from "@/components/site/Elements";
 
 declare global {
   interface Window {
@@ -85,46 +86,12 @@ export default function RentalClient() {
     text: "",
   });
 
-  const benefits = [
-    "Fast equipment availability for urgent project requirements",
-    "Access to specialized testing equipment without capital investment",
-    "Support for shutdowns, commissioning, and temporary site needs",
-    "Flexible rental durations based on project scope",
-    "Reduced downtime through rapid equipment access",
-    "Technical support available when required",
-  ];
-
   const allEquipment = [
-    "CMC 356",
-    "CMC 500",
-    "CMGPS 588",
-    "ARC256",
-    "CPC 100",
-    "CPTD12",
-    "CPTD15",
-    "CP CR600",
-    "CP CB2",
-    "COMPANO 100",
-    "CT Analyzer",
-    "TESTRANO 600",
-    "CIBANO 500",
-    "CB TN3",
-    "MPD 600",
-    "MPD 800",
-    "CAL 542",
-    "MCC210L",
-    "HFCT",
-    "UVS610",
-    "MONTESTO 200",
-    "FRANEO 800",
-    "DIRANA",
-    "HVA45TD",
-    "HVA60",
-    "HVA68-2",
-    "ILG G2Pro",
-    "Ariadna CI",
-    "MRT700",
-    "Other",
+    "CMC 356", "CMC 500", "CMGPS 588", "ARC256", "CPC 100", "CPTD12", "CPTD15",
+    "CP CR600", "CP CB2", "COMPANO 100", "CT Analyzer", "TESTRANO 600", "CIBANO 500",
+    "CB TN3", "MPD 600", "MPD 800", "CAL 542", "MCC210L", "HFCT", "UVS610",
+    "MONTESTO 200", "FRANEO 800", "DIRANA", "HVA45TD", "HVA60", "HVA68-2",
+    "ILG G2Pro", "Ariadna CI", "MRT700", "Other",
   ];
 
   useEffect(() => {
@@ -263,428 +230,126 @@ export default function RentalClient() {
   }
 
   return (
-    <main className="bg-white text-slate-900">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-slate-950 text-white">
-        <div className="absolute inset-0">
-          <img
-            src="/images/rental.jpg"
-            alt="Rental Services"
-            className="h-full w-full object-cover opacity-30"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-900/70" />
+    <main className="ds-page">
+      <PageHero
+        label="Rental services"
+        title="Flexible rental solutions for specialized testing equipment"
+        text="DigiStano provides cost-effective rental solutions for high-end testing equipment to support short-term requirements, project needs, shutdowns, and commissioning activities."
+        image="/images/rental.jpg"
+        stats={[
+          { label: "Availability", value: "Fast Response" },
+          { label: "Scope", value: "Project Based" },
+          { label: "Support", value: "Technical Assistance" },
+        ]}
+      >
+        <a href="#rental-form" className="ds-button">Request equipment <span aria-hidden="true">→</span></a>
+      </PageHero>
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
-          <div className="max-w-3xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-blue-400">
-              Rental Services
-            </p>
-
-            <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
-              Flexible rental solutions for specialized testing equipment
-            </h1>
-
-            <p className="mb-8 max-w-2xl text-lg leading-8 text-slate-300">
-              DigiStano provides cost-effective rental solutions for high-end
-              testing equipment to support short-term requirements, project
-              needs, shutdowns, and commissioning activities.
-            </p>
-
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#rental-form"
-                className="rounded-xl bg-blue-600 px-6 py-4 text-center font-semibold text-white transition hover:bg-blue-700"
-              >
-                Request Equipment
-              </a>
-
-              <a
-                href="#rental-form"
-                className="rounded-xl border border-white/20 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white hover:text-slate-950"
-              >
-                Start Rental Request
-              </a>
-            </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                <p className="text-sm text-slate-300">Availability</p>
-                <p className="mt-1 text-lg font-semibold">Fast Response</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                <p className="text-sm text-slate-300">Scope</p>
-                <p className="mt-1 text-lg font-semibold">Project Based</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                <p className="text-sm text-slate-300">Support</p>
-                <p className="mt-1 text-lg font-semibold">Technical Assistance</p>
-              </div>
-            </div>
-          </div>
+      <section className="ds-section">
+        <div className="ds-container">
+          <SectionHead label="Why rent from DigiStano" title="Practical equipment access tailored to your project timeline." text="Our rental model is designed for speed, flexibility, and technical value in demanding power system environments." />
+          <IconGrid items={[
+            { icon: "bolt", title: "Fast availability", text: "Fast equipment availability for urgent project requirements." },
+            { icon: "gauge", title: "No capital outlay", text: "Access to specialized testing equipment without capital investment." },
+            { icon: "wrench", title: "Shutdown support", text: "Support for shutdowns, commissioning, and temporary site needs." },
+            { icon: "calendar", title: "Flexible durations", text: "Flexible rental durations based on project scope." },
+            { icon: "truck", title: "Reduced downtime", text: "Reduced downtime through rapid equipment access." },
+            { icon: "shield", title: "Technical support", text: "Technical support available when required." },
+          ]} />
         </div>
       </section>
 
-      {/* INTRO */}
-      <section className="py-20">
-        <div className="mx-auto max-w-[1600px] px-6">
-          <div className="grid items-center gap-12 xl:gap-16 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <div className="relative group w-full">
-                <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-blue-600/20 to-indigo-600/20 blur-2xl transition duration-500 group-hover:from-blue-600/30 group-hover:to-indigo-600/30" />
-
-                <div className="relative w-full overflow-hidden rounded-3xl shadow-2xl">
-                  <img
-                    src="/images/rental.jpg"
-                    alt="Rental equipment"
-                    className="block h-[520px] w-full object-cover object-center transition duration-700 group-hover:scale-105 xl:h-[580px]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-                Rental Solutions
-              </p>
-
-              <h2 className="mb-6 text-4xl font-bold leading-tight text-slate-900 xl:text-5xl">
-                Access critical test equipment without ownership overhead
-              </h2>
-
-              <p className="mb-6 text-lg leading-9 text-slate-600">
-                DigiStano offers rental equipment services to support individuals,
-                contractors, utilities, and industrial clients with specialized
-                testing needs on short notice and flexible durations.
-              </p>
-
-              <p className="text-lg leading-9 text-slate-600">
-                Whether for site commissioning, diagnostics, planned shutdowns, or
-                temporary replacement needs, our rental solutions provide a
-                practical and cost-effective way to access advanced equipment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BENEFITS */}
-      <section className="bg-slate-50 py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Why Rent From DigiStano
-            </p>
-            <h2 className="mb-4 text-3xl font-bold text-slate-900 md:text-4xl">
-              Practical equipment access tailored to your project timeline
-            </h2>
-            <p className="text-lg text-slate-600">
-              Our rental model is designed for speed, flexibility, and technical
-              value in demanding power system environments.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {benefits.map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-xl text-blue-600">
-                  ⚡
-                </div>
-                <p className="leading-7 text-slate-700">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* INDEXABLE RENTAL EQUIPMENT LINKS */}
-      <section className="border-t border-slate-200 bg-white py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Available Rental Equipment
-            </p>
-            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">
-              Browse popular electrical test equipment for rent
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Review equipment capabilities and submit a request for current
-              availability, rental duration, delivery, and technical support.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="ds-section ds-section-tint">
+        <div className="ds-container">
+          <SectionHead label="Available rental equipment" title="Browse popular electrical test equipment for rent." text="Review equipment capabilities and submit a request for current availability, rental duration, delivery, and technical support." />
+          <div className="ds-equipment-list">
             {rentalEquipmentPages.map((item) => (
-              <a
-                key={item.name}
-                href={item.href ?? "#rental-form"}
-                className="group rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-blue-300 hover:bg-white hover:shadow-lg"
-              >
-                <h3 className="text-xl font-bold text-slate-900 transition group-hover:text-blue-600">
-                  Rent {item.name}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {item.use}
-                </p>
-                <span className="mt-4 inline-flex text-sm font-semibold text-blue-600">
-                  {item.href ? "View equipment details" : "Request availability"} →
-                </span>
+              <a key={item.name} href={item.href ?? "#rental-form"} data-reveal>
+                <h3>Rent {item.name}</h3>
+                <p>{item.use}</p>
+                <span className="ds-text-link">{item.href ? "View equipment details" : "Request availability"} <span aria-hidden="true">→</span></span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* RENTAL FORM */}
-      <section id="rental-form" className="bg-slate-50 py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
-              Equipment Rent Form
-            </p>
-            <h2 className="mb-4 text-3xl font-bold text-slate-900 md:text-5xl">
-              Submit your rental request
-            </h2>
-            <p className="text-lg leading-8 text-slate-600">
-              Tell us what equipment you need and the expected rental period. Our
-              team will review availability and contact you with the next steps.
-            </p>
-          </div>
-
-          <div className="grid items-start gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-            <div className="self-start rounded-3xl bg-slate-950 p-8 text-white">
-              <h3 className="mb-6 text-2xl font-semibold">
-                Rental request process
-              </h3>
-
-              <div className="space-y-6">
-                <div>
-                  <p className="font-semibold">1. Select the required equipment</p>
-                  <p className="mt-2 text-slate-300">
-                    Choose one or more devices based on your testing scope or
-                    site requirement.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-semibold">2. Share your project dates</p>
-                  <p className="mt-2 text-slate-300">
-                    Provide the expected rental start and end dates so we can
-                    check availability.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-semibold">3. We contact you</p>
-                  <p className="mt-2 text-slate-300">
-                    Our team reviews your request and responds with confirmation,
-                    availability, and rental coordination details.
-                  </p>
-                </div>
-              </div>
+      <section id="rental-form" className="ds-section">
+        <div className="ds-container">
+          <SectionHead label="Equipment rent form" title="Submit your rental request." text="Tell us what equipment you need and the expected rental period. Our team will review availability and contact you with the next steps." />
+          <div className="ds-split" data-reveal>
+            <div className="ds-dark-card">
+              <h3>Rental request process</h3>
+              <ol>
+                <li><p>1. Select the required equipment</p><p>Choose one or more devices based on your testing scope or site requirement.</p></li>
+                <li><p>2. Share your project dates</p><p>Provide the expected rental start and end dates so we can check availability.</p></li>
+                <li><p>3. We contact you</p><p>Our team reviews your request and responds with confirmation, availability, and rental coordination details.</p></li>
+              </ol>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10"
-            >
-              {/* Honeypot */}
-              <div className="hidden" aria-hidden="true">
+            <form onSubmit={handleSubmit} className="ds-form">
+              <div style={{ display: "none" }} aria-hidden="true">
                 <label htmlFor="website">Website</label>
-                <input
-                  id="website"
-                  name="website"
-                  type="text"
-                  value={form.website}
-                  onChange={handleChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
+                <input id="website" name="website" type="text" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+              </div>
+              <input type="hidden" name="formStartedAt" value={form.formStartedAt} readOnly />
+
+              <div className="ds-field">
+                <label htmlFor="full_name">Full name *</label>
+                <input id="full_name" name="full_name" type="text" value={form.full_name} onChange={handleChange} required maxLength={120} placeholder="Your full name" />
               </div>
 
-              {/* Timing */}
-              <input
-                type="hidden"
-                name="formStartedAt"
-                value={form.formStartedAt}
-                readOnly
-              />
+              <div className="ds-field">
+                <label htmlFor="company">Company</label>
+                <input id="company" name="company" type="text" value={form.company} onChange={handleChange} maxLength={160} placeholder="Company name" />
+              </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Full name *
-                  </label>
-                  <input
-                    name="full_name"
-                    type="text"
-                    value={form.full_name}
-                    onChange={handleChange}
-                    required
-                    maxLength={120}
-                    placeholder="Your full name"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
+              <div className="ds-field">
+                <label htmlFor="email">Email *</label>
+                <input id="email" name="email" type="email" value={form.email} onChange={handleChange} required maxLength={160} placeholder="Your email" />
+              </div>
+
+              <div className="ds-field">
+                <label htmlFor="phone">Phone number *</label>
+                <input id="phone" name="phone" type="tel" value={form.phone} onChange={handleChange} required maxLength={40} placeholder="Your phone number" />
+              </div>
+
+              <div className="ds-field">
+                <label htmlFor="rental_start_date">Rental start date *</label>
+                <input id="rental_start_date" name="rental_start_date" type="date" value={form.rental_start_date} onChange={handleChange} required />
+              </div>
+
+              <div className="ds-field">
+                <label htmlFor="rental_end_date">Rental end date *</label>
+                <input id="rental_end_date" name="rental_end_date" type="date" value={form.rental_end_date} onChange={handleChange} required />
+              </div>
+
+              <div className="ds-field ds-field-full">
+                <label htmlFor="purpose">Purpose of rental *</label>
+                <textarea id="purpose" name="purpose" rows={5} value={form.purpose} onChange={handleChange} required maxLength={3000} placeholder="Please tell us what the equipment is needed for" />
+              </div>
+
+              <div className="ds-field-full">
+                <label style={{ display: "block", marginBottom: 10, fontSize: 12, fontWeight: 650 }}>Please select equipment *</label>
+                <div className="ds-checkbox-grid">
+                  {allEquipment.map((item) => (
+                    <label key={item}>
+                      <input type="checkbox" checked={form.selected_equipment.includes(item)} onChange={() => handleEquipmentToggle(item)} />
+                      {item}
+                    </label>
+                  ))}
                 </div>
+              </div>
 
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Company
-                  </label>
-                  <input
-                    name="company"
-                    type="text"
-                    value={form.company}
-                    onChange={handleChange}
-                    maxLength={160}
-                    placeholder="Company name"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              <p className="ds-form-note">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
 
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Email *
-                  </label>
-                  <input
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    maxLength={160}
-                    placeholder="Your email"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
+              {message.text ? (
+                <div className={`ds-form-banner ${message.type === "success" ? "ds-form-banner-success" : "ds-form-banner-error"}`}>{message.text}</div>
+              ) : null}
 
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Phone number *
-                  </label>
-                  <input
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                    required
-                    maxLength={40}
-                    placeholder="Your phone number"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Rental start date *
-                  </label>
-                  <input
-                    name="rental_start_date"
-                    type="date"
-                    value={form.rental_start_date}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Rental end date *
-                  </label>
-                  <input
-                    name="rental_end_date"
-                    type="date"
-                    value={form.rental_end_date}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm font-semibold text-slate-900">
-                    Purpose of rental *
-                  </label>
-                  <textarea
-                    name="purpose"
-                    rows={5}
-                    value={form.purpose}
-                    onChange={handleChange}
-                    required
-                    maxLength={3000}
-                    placeholder="Please tell us what the equipment is needed for"
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-blue-600"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="mb-4 block text-sm font-semibold text-slate-900">
-                    Please select equipment *
-                  </label>
-
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {allEquipment.map((item) => {
-                      const checked = form.selected_equipment.includes(item);
-
-                      return (
-                        <label
-                          key={item}
-                          className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-4 transition ${
-                            checked
-                              ? "border-blue-600 bg-blue-50"
-                              : "border-slate-300 bg-white"
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={() => handleEquipmentToggle(item)}
-                            className="h-4 w-4"
-                          />
-                          <span className="text-slate-800">{item}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="md:col-span-2">
-                  <p className="text-xs leading-6 text-slate-500">
-                    This site is protected by reCAPTCHA and the Google Privacy
-                    Policy and Terms of Service apply.
-                  </p>
-                </div>
-
-                {message.text ? (
-                  <div
-                    className={`md:col-span-2 rounded-xl px-4 py-4 text-sm font-medium ${
-                      message.type === "success"
-                        ? "border border-green-200 bg-green-50 text-green-700"
-                        : "border border-red-200 bg-red-50 text-red-700"
-                    }`}
-                  >
-                    {message.text}
-                  </div>
-                ) : null}
-
-                <div className="md:col-span-2 flex items-center justify-between gap-4 pt-2">
-                  <p className="max-w-xl text-sm leading-6 text-slate-500">
-                    By submitting this form, you allow DigiStano to contact you
-                    regarding your rental request and equipment availability.
-                  </p>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="shrink-0 rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {submitting ? "Submitting..." : "Submit Rental Request"}
-                  </button>
-                </div>
+              <div className="ds-form-actions">
+                <p>By submitting this form, you allow DigiStano to contact you regarding your rental request and equipment availability.</p>
+                <button type="submit" disabled={submitting} className="ds-form-submit">{submitting ? "Submitting..." : "Submit Rental Request"}</button>
               </div>
             </form>
           </div>
