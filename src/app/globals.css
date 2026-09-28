@@ -353,8 +353,8 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 .ds-logo-strip { overflow: hidden; }
 .ds-logo-strip-track { display: flex; width: max-content; gap: 20px; animation: ds-marquee 34s linear infinite; }
 .ds-logo-strip:hover .ds-logo-strip-track { animation-play-state: paused; }
-.ds-logo-strip-item { display: flex; height: 96px; width: 190px; flex-shrink: 0; align-items: center; justify-content: center; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-md); background: white; }
-.ds-logo-strip-item img { max-height: 46px; max-width: 100%; object-fit: contain; filter: grayscale(1) opacity(.7); transition: filter .25s; }
+.ds-logo-strip-item { display: flex; height: 132px; width: 230px; flex-shrink: 0; align-items: center; justify-content: center; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: white; }
+.ds-logo-strip-item img { max-height: 84px; max-width: 100%; object-fit: contain; filter: grayscale(1) opacity(.7); transition: filter .25s; }
 .ds-logo-strip-item:hover img { filter: grayscale(0) opacity(1); }
 @keyframes ds-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -448,6 +448,8 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
   .ds-page-hero-stats { max-width: 100%; }
   .ds-quote-panel { padding: 50px 30px; }
   .ds-iso-badges { gap: 34px; }
+  .ds-logo-strip-item { height: 108px; width: 190px; padding: 18px; }
+  .ds-logo-strip-item img { max-height: 66px; }
   .ds-iso-badges img { width: 92px; }
   .ds-callout-band { padding-block: 52px; }
   .ds-inline-callout { flex-direction: column; align-items: start; }

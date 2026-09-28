@@ -38,7 +38,7 @@ export default function ClientsSlider() {
           <div className="ds-logo-strip-track">
             {track.map((client, index) => (
               <div className="ds-logo-strip-item" key={`${client.name}-${index}`}>
-                <Image src={client.logo} alt={client.name} width={130} height={46} style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }} />
+                <Image src={client.logo} alt={client.name} width={200} height={84} style={{ width: "auto", height: "auto" }} />
               </div>
             ))}
           </div>

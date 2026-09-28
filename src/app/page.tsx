@@ -8,6 +8,7 @@ import {
   CTA,
   Eyebrow,
   FAQ,
+  FAQSchema,
   Icon,
   IconGrid,
   SectionHead,
@@ -26,6 +27,7 @@ export const metadata = pageMetadata(
 export default function HomePage() {
   return <main className="ds-page">
     <ServiceSchema name="Partial discharge testing and electrical diagnostic services" description="Onsite PD testing for GIS, switchgear, cables, transformers, motors and generators across five GCC markets." path="/" />
+    <FAQSchema items={[pdFaqs[0], pdFaqs[2], pdFaqs[3]]} />
 
     <section className="ds-home-hero">
       <div className="ds-home-hero-media"><Image src="/images/field/home-hero-v2.webp" alt="DigiStano engineer performing electrical diagnostic testing in a high-voltage installation" fill priority sizes="100vw" /></div>
