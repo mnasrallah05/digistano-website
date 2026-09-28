@@ -10,7 +10,6 @@ import {
   FAQ,
   Icon,
   IconGrid,
-  IconTile,
   SectionHead,
   ServiceCards,
   ServiceSchema,
@@ -51,13 +50,6 @@ export default function HomePage() {
         {["UAE", "Saudi Arabia", "Oman", "Qatar", "Bahrain"].map((country) => <span className="ds-location-pill" key={country}><Icon name="pin" />{country}</span>)}
       </div>
     </section>
-
-    <section className="ds-proof-strip"><div className="ds-container">
-      <div data-reveal><IconTile name="gauge" /><div><strong>PD specialist</strong><span>Testing · diagnostics · monitoring</span></div></div>
-      <div data-reveal><IconTile name="pin" /><div><strong>Abu Dhabi</strong><span>Group headquarters</span></div></div>
-      <div data-reveal><IconTile name="compass" /><div><strong>3 office countries</strong><span>UAE · Saudi Arabia · Bahrain</span></div></div>
-      <div data-reveal><IconTile name="spark" /><div><strong>5 service markets</strong><span>Cross-GCC field support</span></div></div>
-    </div></section>
 
     <ClientsSlider />
 

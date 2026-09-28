@@ -100,12 +100,12 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 .ds-services-dropdown-grid small { display: -webkit-box; overflow: hidden; margin-top: 4px; color: var(--muted); font-size: 10px; font-weight: 450; line-height: 1.35; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 
 /* Homepage hero */
-.ds-home-hero { position: relative; min-height: 720px; overflow: hidden; background: var(--navy-deep); color: white; }
+.ds-home-hero { position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 100vh; min-height: 100svh; overflow: hidden; background: var(--navy-deep); color: white; }
 .ds-home-hero-media, .ds-home-hero-overlay, .ds-home-hero-grid { position: absolute; inset: 0; }
 .ds-home-hero-media img { object-fit: cover; object-position: center; transform: scale(1.015); animation: ds-hero-zoom 14s ease-out both; }
 .ds-home-hero-overlay { z-index: 1; background: linear-gradient(90deg, #030d16fa 0%, #071a2af0 42%, #071a2a9c 68%, #071a2a55 100%), linear-gradient(0deg, #040f19d2 0%, transparent 42%), radial-gradient(ellipse 900px 500px at 82% 8%, #1c5be638, transparent 70%); }
 .ds-home-hero-grid, .ds-page-hero-grid { z-index: 2; opacity: .12; background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 90px 90px; mask-image: linear-gradient(90deg, black, transparent 75%); }
-.ds-home-hero-inner { position: relative; z-index: 3; display: grid; min-height: 720px; grid-template-columns: minmax(0, 1fr) 330px; align-items: center; gap: 70px; padding: 100px 0 145px; }
+.ds-home-hero-inner { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) 330px; align-items: center; gap: 70px; padding: 140px 0 56px; }
 .ds-home-hero-copy { max-width: 790px; }
 .ds-home-hero .ds-eyebrow { color: #8fdcf2 !important; }
 .ds-home-hero h1 { font-size: clamp(58px, 6.2vw, 92px); line-height: .98; text-wrap: balance; }
@@ -118,7 +118,7 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 .ds-hero-insight h2 { margin-top: 22px; font-size: 29px; line-height: 1.12; }
 .ds-hero-insight p { margin: 16px 0 22px; color: #b9ccd7; font-size: 13px; line-height: 1.75; }
 .ds-hero-insight a { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid #ffffff28; color: white; font-size: 12px; font-weight: 700; }
-.ds-hero-locations { position: absolute; right: 0; bottom: 34px; left: 0; z-index: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.ds-hero-locations { position: relative; z-index: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-bottom: 52px; }
 .ds-hero-locations-label { display: flex; align-items: center; gap: 9px; margin-right: 4px; color: #9fb7c4; font: 600 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
 .ds-hero-locations-label span { width: 16px; height: 1px; background: currentColor; }
 .ds-location-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid #ffffff28; border-radius: 999px; background: #ffffff14; backdrop-filter: blur(10px); color: white; font-size: 12.5px; font-weight: 600; transition: background .2s, border-color .2s, transform .2s; }
@@ -132,13 +132,6 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 .ds-section-head { display: flex; align-items: end; justify-content: space-between; gap: 50px; margin-bottom: 50px; }
 .ds-section-head h2 { max-width: 820px; font-size: clamp(38px, 4vw, 58px); line-height: 1.05; text-wrap: balance; }
 .ds-section-head p:not(.ds-eyebrow) { max-width: 680px; margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.85; }
-.ds-proof-strip { padding-block: 56px; background: var(--paper); }
-.ds-proof-strip .ds-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.ds-proof-strip .ds-container > div { display: flex; align-items: flex-start; gap: 16px; padding: 24px 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: white; box-shadow: var(--shadow-sm); transition: transform .25s, box-shadow .25s; }
-.ds-proof-strip .ds-container > div:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.ds-proof-strip strong, .ds-proof-strip span { display: block; }
-.ds-proof-strip strong { font-size: 17px; font-family: var(--font-display); }
-.ds-proof-strip span { margin-top: 7px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
 /* Service showcase */
 .ds-services-showcase { overflow: hidden; background: #fff; }
@@ -423,15 +416,12 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
   .ds-mobile-subnav a { display: grid; grid-template-columns: 28px 1fr; gap: 8px; padding: 11px 14px; border-bottom: 0; color: #c5d5df; font-size: 12px; }
   .ds-mobile-subnav a span { color: #7eb1f7; font: 10px "Courier New", monospace; }
   .ds-mobile-cta { margin-top: 14px; padding: 16px !important; background: var(--blue); }
-  .ds-home-hero { min-height: 760px; }
   .ds-home-hero-overlay { background: linear-gradient(90deg, #041725f3, #061b2bad), linear-gradient(0deg, #061b2be8, transparent 55%); }
-  .ds-home-hero-inner { min-height: 690px; grid-template-columns: 1fr; align-content: center; gap: 30px; padding: 75px 0 150px; }
+  .ds-home-hero-inner { grid-template-columns: 1fr; align-content: center; gap: 30px; padding: 110px 0 32px; }
   .ds-home-hero h1 { font-size: clamp(48px, 12vw, 68px); }
   .ds-hero-insight { display: none; }
-  .ds-hero-locations { position: static; margin-top: 28px; }
+  .ds-hero-locations { padding-bottom: 40px; }
   .ds-hero-locations-label { width: 100%; margin-right: 0; margin-bottom: 2px; }
-  .ds-proof-strip { padding-block: 40px; }
-  .ds-proof-strip .ds-container { grid-template-columns: 1fr 1fr; }
   .ds-section { padding-block: 72px; }
   .ds-section-head { flex-direction: column; align-items: start; gap: 24px; }
   .ds-service-card:first-child { min-height: 430px; }
@@ -467,12 +457,10 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 @media (max-width: 560px) {
   .ds-container { width: calc(100% - 30px); }
   .ds-brand img { width: 145px; }
-  .ds-home-hero { min-height: 720px; }
-  .ds-home-hero-inner { min-height: 650px; padding-top: 55px; }
+  .ds-home-hero-inner { padding-top: 96px; }
   .ds-home-hero h1 { font-size: 47px; }
   .ds-home-hero .ds-lead { font-size: 16px; }
   .ds-actions .ds-button { width: 100%; }
-  .ds-proof-strip .ds-container { grid-template-columns: 1fr; }
   .ds-service-cards { grid-template-columns: 1fr; }
   .ds-service-card:first-child { grid-column: auto; min-height: 410px; }
   .ds-service-card { min-height: 340px; }
