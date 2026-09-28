@@ -8,7 +8,9 @@ import {
   CTA,
   Eyebrow,
   FAQ,
+  Icon,
   IconGrid,
+  IconTile,
   SectionHead,
   ServiceCards,
   ServiceSchema,
@@ -44,14 +46,17 @@ export default function HomePage() {
           <Link href={PD_PATH}>Explore PD testing <Arrow /></Link>
         </aside>
       </div>
-      <div className="ds-container ds-hero-locations" data-reveal><span>Service coverage</span><strong>UAE</strong><strong>Saudi Arabia</strong><strong>Oman</strong><strong>Qatar</strong><strong>Bahrain</strong></div>
+      <div className="ds-container ds-hero-locations" data-reveal>
+        <span className="ds-hero-locations-label"><span aria-hidden="true" />Service coverage</span>
+        {["UAE", "Saudi Arabia", "Oman", "Qatar", "Bahrain"].map((country) => <span className="ds-location-pill" key={country}><Icon name="pin" />{country}</span>)}
+      </div>
     </section>
 
     <section className="ds-proof-strip"><div className="ds-container">
-      <div data-reveal><strong>PD specialist</strong><span>Testing · diagnostics · monitoring</span></div>
-      <div data-reveal><strong>Abu Dhabi</strong><span>Group headquarters</span></div>
-      <div data-reveal><strong>3 office countries</strong><span>UAE · Saudi Arabia · Bahrain</span></div>
-      <div data-reveal><strong>5 service markets</strong><span>Cross-GCC field support</span></div>
+      <div data-reveal><IconTile name="gauge" /><div><strong>PD specialist</strong><span>Testing · diagnostics · monitoring</span></div></div>
+      <div data-reveal><IconTile name="pin" /><div><strong>Abu Dhabi</strong><span>Group headquarters</span></div></div>
+      <div data-reveal><IconTile name="compass" /><div><strong>3 office countries</strong><span>UAE · Saudi Arabia · Bahrain</span></div></div>
+      <div data-reveal><IconTile name="spark" /><div><strong>5 service markets</strong><span>Cross-GCC field support</span></div></div>
     </div></section>
 
     <ClientsSlider />
@@ -77,9 +82,9 @@ export default function HomePage() {
         { icon: "wrench", title: "Full lifecycle support", text: "Testing, equipment rental, training and repair & calibration under one team, not separate vendors." },
       ]} />
       <div className="ds-iso-badges" data-reveal>
-        <Image src="/images/iso-9001.png" alt="ISO 9001 certified" width={72} height={72} />
-        <Image src="/images/iso-14001.png" alt="ISO 14001 certified" width={72} height={72} />
-        <Image src="/images/iso-45001.png" alt="ISO 45001 certified" width={72} height={72} />
+        <Image src="/images/iso-9001.png" alt="ISO 9001 certified" width={140} height={146} />
+        <Image src="/images/iso-14001.png" alt="ISO 14001 certified" width={140} height={146} />
+        <Image src="/images/iso-45001.png" alt="ISO 45001 certified" width={140} height={146} />
       </div>
     </div></section>
 
