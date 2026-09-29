@@ -20,7 +20,7 @@ function VideoShowcase() {
         </button>
       ) : (
         <video controls autoPlay className="ds-video">
-          <source src="/videos/about.mp4" type="video/mp4" />
+          <source src="/videos/about-v2.mp4" type="video/mp4" />
         </video>
       )}
     </div>

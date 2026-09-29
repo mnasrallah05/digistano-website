@@ -298,7 +298,9 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 .ds-equipment-list h3 { font-size: 23px; }
 .ds-equipment-list p { margin: 14px 0 23px; color: var(--muted); font-size: 13px; line-height: 1.8; }
 .ds-equipment-list .ds-text-link { margin-top: auto; }
-.ds-video { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-lg); overflow: hidden; background: var(--navy); box-shadow: var(--shadow-lg); }
+.ds-video-banner { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--navy); }
+.ds-video-banner video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ds-video-section { background: var(--navy); }
 
 /* Icon tiles & capability grids (About, Rental, Training, Repair, MV-cable) */
 .ds-icon-tile { display: grid; width: 46px; height: 46px; place-items: center; border-radius: var(--radius-sm); background: #eaf1ff; color: var(--blue); flex-shrink: 0; }

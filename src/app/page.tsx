@@ -88,7 +88,7 @@ export default function HomePage() {
     </div></section>
 
     <section className="ds-section ds-rental-section"><div className="ds-container"><div className="ds-rental-band" data-reveal>
-      <div className="ds-rental-image"><Image src="/images/rental-equipment.jpg" alt="Specialised electrical testing instruments available for rental" fill sizes="(max-width:800px) 100vw,50vw" /></div>
+      <div className="ds-rental-image"><Image src="/images/rental-equipment-v2.jpg" alt="Specialised electrical testing instruments available for rental" fill sizes="(max-width:800px) 100vw,50vw" /></div>
       <div><Eyebrow>Supporting equipment access</Eyebrow><h2>The right instrument for the project ahead.</h2><p>When your team is carrying out the testing, our equipment rental service can support the project. Share the application and dates to confirm instruments and availability.</p><Link href="/services/rental" className="ds-text-link">Explore equipment rental <Arrow /></Link></div>
     </div></div></section>
 
