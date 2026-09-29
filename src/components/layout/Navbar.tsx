@@ -36,6 +36,7 @@ export default function Navbar() {
     <div className="ds-container ds-nav-row">
       <Link href="/" className="ds-brand" aria-label="DigiStano home"><Image src="/images/digistano-logo.png" alt="DigiStano" width={190} height={54} priority /></Link>
       <nav className="ds-desktop-nav" aria-label="Primary">
+        <Link href="/" aria-current={path === "/" ? "page" : undefined}>Home</Link>
         <Link href="/services" aria-current={servicesActive ? "page" : undefined}>Services</Link>
         {links.map(([label, href]) => <Link key={href} href={href} aria-current={path === href || path.startsWith(`${href}/`) ? "page" : undefined}>{label}</Link>)}
       </nav>
@@ -43,6 +44,7 @@ export default function Navbar() {
       <button ref={button} type="button" className="ds-menu-toggle" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(value => !value)}><span>Menu</span><span aria-hidden="true">{open ? "×" : "☰"}</span></button>
     </div>
     <nav id="mobile-menu" className="ds-mobile-nav" aria-label="Mobile navigation" hidden={!open}>
+      <Link href="/" aria-current={path === "/" ? "page" : undefined}>Home <Arrow /></Link>
       <div className="ds-mobile-service-group"><Link href="/services" aria-current={servicesActive ? "page" : undefined}>Services <Arrow /></Link><div className="ds-mobile-subnav">{serviceItems.map((service, index) => <Link key={service.href} href={service.href}><span>0{index + 1}</span>{service.menuTitle}</Link>)}</div></div>
       {links.map(([label, href]) => <Link key={href} href={href} aria-current={path === href || path.startsWith(`${href}/`) ? "page" : undefined}>{label}<Arrow /></Link>)}
       <Link className="ds-mobile-cta" href="/services/engineering-services#appointment">Talk to an engineer <Arrow /></Link>
