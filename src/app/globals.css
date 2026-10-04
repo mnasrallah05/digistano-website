@@ -267,6 +267,7 @@ main:not(.ds-page) h1, main:not(.ds-page) h2, main:not(.ds-page) h3 { font-famil
 .ds-check-list li::before { position: absolute; left: 0; color: var(--blue); content: "↗"; }
 .ds-notice { margin-top: 28px; padding: 20px 23px; border-left: 3px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: var(--paper); color: var(--muted); font-size: 13px; line-height: 1.8; }
 .ds-notice a { color: var(--blue); text-decoration: underline; }
+.ds-dark-section .ds-notice { color: #000; font-weight: 500; }
 .ds-callout-band { padding-block: 74px; background: var(--paper); }
 .ds-inline-callout { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
 .ds-inline-callout-body { flex: 1; }
