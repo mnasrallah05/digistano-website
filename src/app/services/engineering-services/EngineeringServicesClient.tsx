@@ -205,7 +205,7 @@ export default function EngineeringServicesClient() {
         label="Engineering services"
         title="Electrical testing and diagnostic support for critical power assets"
         text="DigiStano provides partial discharge diagnostics, cable testing, commissioning, training, and field engineering support across the UAE, Saudi Arabia, Oman, Qatar, and Bahrain."
-        image="/images/EngineeringServices.jpg"
+        image="/images/field/commissioning-service-v3.webp"
         stats={[
           { label: "Coverage", value: "Across GCC" },
           { label: "Focus", value: "Testing & Support" },

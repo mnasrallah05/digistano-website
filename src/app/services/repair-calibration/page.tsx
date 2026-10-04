@@ -58,7 +58,7 @@ export default function RepairAndCalibrationPage() {
         label="Repair & calibration"
         title="Reliable repair and calibration services for your equipment"
         text="Maximize efficiency and performance with DigiStano's reliable repair and calibration services for your equipment."
-        image="/images/repair-calibration.jpg"
+        image="/images/field/repair-calibration-service-v2.webp"
       >
         <Button href="/contact">Contact us</Button>
       </PageHero>

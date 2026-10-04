@@ -69,7 +69,7 @@ export default function MvCableVlfTestingPage() {
         label="Cable testing and diagnostics"
         title="MV cable testing, VLF and VLF-PD services across the GCC"
         text="DigiStano supports cable commissioning, withstand testing, diagnostic assessment, and partial discharge measurement projects in Saudi Arabia, UAE, Qatar, Oman, and Bahrain."
-        image="/images/cables-testing.jpg"
+        image="/images/field/cable-vlf-service-v4.webp"
       >
         <Button href="/services/engineering-services#appointment">Book an engineering consultation</Button>
         <Button href="#cable-services" secondary>Explore cable services</Button>
